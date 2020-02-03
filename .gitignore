@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 render.txt
+placeholder.Rcheck/
+placeholder*.tar.gz
+placeholder*.tgz
