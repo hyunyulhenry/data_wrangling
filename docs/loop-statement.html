@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 List | R을 이용한 데이터 랭글링</title>
-  <meta name="description" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <title>Chapter 14 Loop Statement | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta property="og:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hyunyulhenry/lecture/data_wrangling" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta name="twitter:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vector.html"/>
-<link rel="next" href="matrix.html"/>
+<link rel="prev" href="함수.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,81 +255,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="list" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> List</h1>
-<p>List 형태는 항목(Element) 간 타입이나 길이가 달라도 데이터가 결합할 수 있습니다.</p>
-<div id="리스트-생성하기" class="section level2">
-<h2><span class="header-section-number">7.1</span> 리스트 생성하기</h2>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>))</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p>첫번째 리스트는 정수, 두번째는 문자, 세번째는 논리값, 네번째는 숫자로 이루어져 있습니다.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">list</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)))</a>
-<a class="sourceLine" id="cb196-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 2
-##  $ : int [1:3] 1 2 3
-##  $ :List of 2
-##   ..$ : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<p>또한 리스트 내에 리스트를 생성하는 것 역시 가능합니다.</p>
+<div id="loop-statement" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Loop Statement</h1>
+<p>루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다.</p>
+<div id="기본-제어-구문-if-for-while-등" class="section level2">
+<h2><span class="header-section-number">14.1</span> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)</h2>
+<div id="if-구문" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> <code>if</code> 구문</h3>
+<p>if 구문은 다음과 같이 구성됩니다.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (test_expression) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  statement</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">}</a></code></pre></div>
+<p>괄호 안의 test_expression이 TRUE일 경우에만 statement 코드가 실행됩니다.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">-2</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="cf">if</span>(<span class="kw">any</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)) {</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&#39;x contains negative number&#39;</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">}</a></code></pre></div>
+<pre><code>## [1] &quot;x contains negative number&quot;</code></pre>
+<p>만일 x중 음수가 존재하면 <em>x contains negative number</em>가 출력되는 조건이며, -2가 음수이므로 조건을 만족합니다.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y =<span class="st"> </span><span class="kw">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="cf">if</span> (<span class="kw">any</span> (y <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)) {</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">print</span> (<span class="st">&quot;y contains negative numbers&quot;</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  }</a></code></pre></div>
+<p>y에는 음수가 존재하지 않으므로, 구문이 실행되지 않습니다.</p>
 </div>
-<div id="기존-리스트에-데이터-추가하기" class="section level2">
-<h2><span class="header-section-number">7.2</span> 기존 리스트에 데이터 추가하기</h2>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">l1 =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">str</span>(l1)</a></code></pre></div>
-<pre><code>## List of 3
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">l2 =<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(<span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>)))</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p><code>append()</code> 함수를 이용해 기존 리스트에 추가로 리스트를 붙일 수 있습니다.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">l2<span class="op">$</span>item4 =<span class="st"> &#39;new list item&#39;</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 5
-##  $      : int [1:3] 1 2 3
-##  $      : chr &quot;a&quot;
-##  $      : logi [1:3] TRUE FALSE TRUE
-##  $      : num [1:2] 2.5 4.2
-##  $ item4: chr &quot;new list item&quot;</code></pre>
-<p>또한 기존 리스트에 달러 사인($)을 입력할 경우, 이름과 함께 리스트가 추가됩니다.</p>
+<div id="if...else-구문" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> <code>if...else</code> 구문</h3>
+<p>if 구문만 존재할 시 이를 만족하지 않는 경우 아무런 구문도 실행되지 않습니다. if else 구문의 경우 조건을 만족하지 않을 경우 else에 해당하는 구문이 실행됩니다.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="cf">if</span> (test_expression) {</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  statement <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  statement <span class="dv">2</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">}</a></code></pre></div>
+<p>만일 test_expression 구문이 TRUE이면 statement 1이 실행되며, 그렇지 않을 경우 statement 2가 실행됩니다.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">y =<span class="st"> </span><span class="kw">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="cf">if</span>(<span class="kw">any</span> (y <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)) {</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="kw">print</span> (<span class="st">&quot;y contains negative numbers&quot;</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="kw">print</span> (<span class="st">&quot;y contains all positive numbers&quot;</span>)</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">}</a></code></pre></div>
+<pre><code>## [1] &quot;y contains all positive numbers&quot;</code></pre>
+<p>y에 음수가 존재하는 if구문이 FALSE 이므로, else에 해당하는 메세지가 출력됩니다.</p>
+<p>if…else 구문은 <code>ifelse()</code> 함수로 간단히 나타낼 수도 있습니다.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">x =<span class="st"> </span><span class="kw">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">ifelse</span> (<span class="kw">any</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>), <span class="st">&quot;x contains negative numbers&quot;</span>, <span class="st">&quot;x contains all positive numbers&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;x contains all positive numbers&quot;</code></pre>
+<p>또한 if와 else 사이에 else if 조건을 통해, 여러 조건을 추가할 수도 있습니다.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x =<span class="st"> </span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="cf">if</span>  (x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="kw">print</span> (<span class="st">&quot;x exceeds acceptable tolerance levels&quot;</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span>(x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="kw">print</span> (<span class="st">&quot;x is within acceptable tolerance levels&quot;</span>)</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">  <span class="kw">print</span> (<span class="st">&quot;x is negative&quot;</span>)</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">}</a></code></pre></div>
+<pre><code>## [1] &quot;x is within acceptable tolerance levels&quot;</code></pre>
+<p>위 조건은 다음과 같습니다.</p>
+<ol style="list-style-type: decimal">
+<li>x가 10 이상일 경우 <strong>x exceeds acceptable tolerance levels</strong>을 출력합니다.</li>
+<li>만일 x가 10 이상, 10 미만일경우 <strong>x is within acceptable tolerance levels</strong>을 출력합니다.</li>
+<li>그렇지 않을 경우 <strong>x is negative</strong>을 출력합니다.</li>
+</ol>
+<p>x는 7 이므로 else에 해당하는 내용이 출력됩니다.</p>
 </div>
-<div id="리스트-추출하기" class="section level2">
-<h2><span class="header-section-number">7.3</span> 리스트 추출하기</h2>
-<p>리스트 역시 대괄호를 이용해 데이터를 추추할 수 있습니다.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">l2[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">l2[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3
-## 
-## [[2]]
-## [1]  TRUE FALSE  TRUE</code></pre>
-<p>리스트에 이름이 있을 경우, 이를 이용해 추출도 가능합니다.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">l2[<span class="st">&#39;item4&#39;</span>]</a></code></pre></div>
-<pre><code>## $item4
-## [1] &quot;new list item&quot;</code></pre>
-<p>대괄호를 두번, 혹은 달러 사인을 이용해 데이터를 추출할 경우 결과물의 형태는 단순화되어 나타납니다.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">l2<span class="op">$</span>item4</a></code></pre></div>
-<pre><code>## [1] &quot;new list item&quot;</code></pre>
-<p>특정 리스트에서 항목을 추출하기 위해서는 [[와 [를 함께 사용합니다.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">l2[[<span class="dv">1</span>]][<span class="dv">3</span>]</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+<div id="for-loop" class="section level3">
+<h3><span class="header-section-number">14.1.3</span> <code>for loop</code></h3>
 
+</div>
 </div>
 </div>
             </section>
@@ -337,8 +334,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="함수.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -386,20 +383,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

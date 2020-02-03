@@ -26,7 +26,11 @@ rmd_files: [
   "dataframe.Rmd",
   "missing-value.Rmd",
   
-  "import-data.Rmd"
+  "import-data.Rmd",
+  "export-data.Rmd",
+  
+  "function.Rmd",
+  "loop.Rmd"
 ]
 
 before_chapter_script: "_common.R"

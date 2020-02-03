@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 List | R을 이용한 데이터 랭글링</title>
-  <meta name="description" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <title>Chapter 13 함수 | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 13 함수 | R을 이용한 데이터 랭글링" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta property="og:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hyunyulhenry/lecture/data_wrangling" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta name="twitter:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vector.html"/>
-<link rel="next" href="matrix.html"/>
+<link rel="prev" href="exporting-data.html"/>
+<link rel="next" href="loop-statement.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,80 +255,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="list" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> List</h1>
-<p>List 형태는 항목(Element) 간 타입이나 길이가 달라도 데이터가 결합할 수 있습니다.</p>
-<div id="리스트-생성하기" class="section level2">
-<h2><span class="header-section-number">7.1</span> 리스트 생성하기</h2>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>))</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p>첫번째 리스트는 정수, 두번째는 문자, 세번째는 논리값, 네번째는 숫자로 이루어져 있습니다.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">list</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)))</a>
-<a class="sourceLine" id="cb196-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 2
-##  $ : int [1:3] 1 2 3
-##  $ :List of 2
-##   ..$ : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<p>또한 리스트 내에 리스트를 생성하는 것 역시 가능합니다.</p>
-</div>
-<div id="기존-리스트에-데이터-추가하기" class="section level2">
-<h2><span class="header-section-number">7.2</span> 기존 리스트에 데이터 추가하기</h2>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">l1 =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">str</span>(l1)</a></code></pre></div>
-<pre><code>## List of 3
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">l2 =<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(<span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>)))</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p><code>append()</code> 함수를 이용해 기존 리스트에 추가로 리스트를 붙일 수 있습니다.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">l2<span class="op">$</span>item4 =<span class="st"> &#39;new list item&#39;</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 5
-##  $      : int [1:3] 1 2 3
-##  $      : chr &quot;a&quot;
-##  $      : logi [1:3] TRUE FALSE TRUE
-##  $      : num [1:2] 2.5 4.2
-##  $ item4: chr &quot;new list item&quot;</code></pre>
-<p>또한 기존 리스트에 달러 사인($)을 입력할 경우, 이름과 함께 리스트가 추가됩니다.</p>
-</div>
-<div id="리스트-추출하기" class="section level2">
-<h2><span class="header-section-number">7.3</span> 리스트 추출하기</h2>
-<p>리스트 역시 대괄호를 이용해 데이터를 추추할 수 있습니다.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">l2[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">l2[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3
+<div id="함수" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> 함수</h1>
+<p>반복되는 작업을 매번 복사-붙여넣기 하는 것은 매우 비효율적이며, 함수를 작성하여 사용할 경우 매우 효율적인 작업이 가능합니다.</p>
+<div id="함수의-요소" class="section level2">
+<h2><span class="header-section-number">13.1</span> 함수의 요소</h2>
+<p>R에서 함수는 크게 3가지 요소로 구성됩니다.</p>
+<ul>
+<li><code>body()</code>: 함수 내부의 코드</li>
+<li><code>formals()</code>: 인자(argument) 내역</li>
+<li><code>environment()</code>:</li>
+</ul>
+<p>예를 들어 금융 자산의 현재 가치는 다음과 같이 계산됩니다.</p>
+<p><span class="math display">\[PV = FV / (1+r)^n\]</span></p>
+<ul>
+<li>PV: 현재 가치</li>
+<li>FV: 미래 가치</li>
+<li>r: 할인률</li>
+<li>n: 기간</li>
+</ul>
+<p>이를 함수로 나타내면 다음과 같습니다.</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1">PV =<span class="st"> </span><span class="cf">function</span>(FV, r, n) {</a>
+<a class="sourceLine" id="cb368-2" data-line-number="2">  PV =<span class="st"> </span>FV <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>r)<span class="op">^</span>n</a>
+<a class="sourceLine" id="cb368-3" data-line-number="3">  <span class="kw">round</span>(PV, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb368-4" data-line-number="4">}</a></code></pre></div>
+<p>3가지 요소를 확인해보도록 하겠습니다.</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1"><span class="kw">body</span>(PV)</a></code></pre></div>
+<pre><code>## {
+##     PV = FV/(1 + r)^n
+##     round(PV, 2)
+## }</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1"><span class="kw">formals</span>(PV)</a></code></pre></div>
+<pre><code>## $FV
 ## 
-## [[2]]
-## [1]  TRUE FALSE  TRUE</code></pre>
-<p>리스트에 이름이 있을 경우, 이를 이용해 추출도 가능합니다.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">l2[<span class="st">&#39;item4&#39;</span>]</a></code></pre></div>
-<pre><code>## $item4
-## [1] &quot;new list item&quot;</code></pre>
-<p>대괄호를 두번, 혹은 달러 사인을 이용해 데이터를 추출할 경우 결과물의 형태는 단순화되어 나타납니다.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">l2<span class="op">$</span>item4</a></code></pre></div>
-<pre><code>## [1] &quot;new list item&quot;</code></pre>
-<p>특정 리스트에서 항목을 추출하기 위해서는 [[와 [를 함께 사용합니다.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">l2[[<span class="dv">1</span>]][<span class="dv">3</span>]</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+## 
+## $r
+## 
+## 
+## $n</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1"><span class="kw">environment</span>(PV)</a></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+</div>
+<div id="인자" class="section level2">
+<h2><span class="header-section-number">13.2</span> 인자</h2>
+<p><code>PV()</code> 함수는 여러 방법으로 실행할 수 있습니다.</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" data-line-number="1"><span class="kw">PV</span>(<span class="dt">FV =</span> <span class="dv">1000</span>, <span class="dt">r =</span> <span class="fl">0.08</span>, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 680.6</code></pre>
+<p>모든 인자 리스트와 이에 대응되는 값을 입력합니다.</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" data-line-number="1"><span class="kw">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>, <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 680.6</code></pre>
+<p>인자 리스트를 생략하면, 순서대로 값이 입력됩니다.</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" data-line-number="1"><span class="kw">PV</span>(<span class="dt">r =</span> <span class="fl">0.08</span>, <span class="dt">FV =</span> <span class="dv">1000</span>, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 680.6</code></pre>
+<p>인자 내역을 순서대로 입력하지 않아도 됩니다.</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1"><span class="kw">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</a></code></pre></div>
+<pre><code>## Error in PV(1000, 0.08): argument &quot;n&quot; is missing, with no default</code></pre>
+<p><code>PV()</code> 함수에 필요한 인자는 3개인 반면, 2개만 입력하였으므로 에러가 발생합니다.</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1">PV =<span class="st"> </span><span class="cf">function</span>(<span class="dt">FV =</span> <span class="dv">1000</span>, <span class="dt">r =</span> <span class="fl">.08</span>, <span class="dt">n =</span> <span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb383-2" data-line-number="2">  PV =<span class="st"> </span>FV <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>r)<span class="op">^</span>n</a>
+<a class="sourceLine" id="cb383-3" data-line-number="3">  <span class="kw">round</span>(PV, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb383-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb383-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb383-6" data-line-number="6"><span class="kw">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</a></code></pre></div>
+<pre><code>## [1] 680.6</code></pre>
+<p>만일 함수의 인자에 디폴트 값이 입력되어 있다면, 함수 실행시 이를 생략하여도 디폴트 값이 입력됩니다. 위 예제에서 n값이 디폴트 값인 5가 적용되었습니다.</p>
+</div>
+<div id="다중-결과값-출력" class="section level2">
+<h2><span class="header-section-number">13.3</span> 다중 결과값 출력</h2>
+<p>동일한 함수를 여러값에 적용하기 위해서는 함수 내부에 <code>c()</code> 함수를 적용해야 합니다.</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">bad =<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb385-2" data-line-number="2">  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y       <span class="co"># 1</span></a>
+<a class="sourceLine" id="cb385-3" data-line-number="3">  x <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y       <span class="co"># 2</span></a>
+<a class="sourceLine" id="cb385-4" data-line-number="4">  <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y   <span class="co"># 3  </span></a>
+<a class="sourceLine" id="cb385-5" data-line-number="5">  x <span class="op">/</span><span class="st"> </span>y           <span class="co"># 4</span></a>
+<a class="sourceLine" id="cb385-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb385-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb385-8" data-line-number="8"><span class="kw">bad</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<p>1, 2, 3, 4번 모든 연산에 대한 출력을 원하지만, 맨 마지막 연산값 만이 출력됩니다.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">good =<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb387-2" data-line-number="2">  output1 =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb387-3" data-line-number="3">  output2 =<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb387-4" data-line-number="4">  output3 =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb387-5" data-line-number="5">  output4 =<span class="st"> </span>x <span class="op">/</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb387-6" data-line-number="6">  <span class="kw">c</span>(output1, output2, output3, output4)</a>
+<a class="sourceLine" id="cb387-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb387-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb387-9" data-line-number="9"><span class="kw">good</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 4.0 5.0 6.0 0.5</code></pre>
+<p>모든 결과를 output*에 저장한 후 <code>c()</code> 함수를 통해 이를 묶어주면, 모든 연산값이 출력됩니다.</p>
 
 </div>
 </div>
@@ -337,8 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exporting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loop-statement.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

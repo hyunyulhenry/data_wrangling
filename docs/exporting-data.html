@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 List | R을 이용한 데이터 랭글링</title>
-  <meta name="description" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <title>Chapter 12 Exporting Data | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 12 Exporting Data | R을 이용한 데이터 랭글링" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta property="og:title" content="Chapter 12 Exporting Data | R을 이용한 데이터 랭글링" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hyunyulhenry/lecture/data_wrangling" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 List | R을 이용한 데이터 랭글링" />
+  <meta name="twitter:title" content="Chapter 12 Exporting Data | R을 이용한 데이터 랭글링" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vector.html"/>
-<link rel="next" href="matrix.html"/>
+<link rel="prev" href="import-data.html"/>
+<link rel="next" href="함수.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -255,90 +255,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="list" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> List</h1>
-<p>List 형태는 항목(Element) 간 타입이나 길이가 달라도 데이터가 결합할 수 있습니다.</p>
-<div id="리스트-생성하기" class="section level2">
-<h2><span class="header-section-number">7.1</span> 리스트 생성하기</h2>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>))</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p>첫번째 리스트는 정수, 두번째는 문자, 세번째는 논리값, 네번째는 숫자로 이루어져 있습니다.</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">list</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)))</a>
-<a class="sourceLine" id="cb196-2" data-line-number="2"><span class="kw">str</span>(l)</a></code></pre></div>
-<pre><code>## List of 2
-##  $ : int [1:3] 1 2 3
-##  $ :List of 2
-##   ..$ : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<p>또한 리스트 내에 리스트를 생성하는 것 역시 가능합니다.</p>
+<div id="exporting-data" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Exporting Data</h1>
+<p>작업을 마무리 했으면 csv, excel, rds 등의 형태로 데이터를 저장해야 합니다.</p>
+<div id="텍스트-csv-파일-저장하기" class="section level2">
+<h2><span class="header-section-number">12.1</span> 텍스트, csv 파일 저장하기</h2>
+<p>먼저 R의 기본함수와 <code>readr</code> 패키지를 이용하여 텍스트 파일과 csv 파일로 저장하는 법에 대해 살펴보겠습니다. 먼저 다음과 같이 예제로 사용될 데이터프레임을 만들도록 합니다.</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1">df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb359-2" data-line-number="2">                <span class="dt">var2 =</span> <span class="kw">c</span>(<span class="st">&#39;beer&#39;</span>, <span class="st">&#39;wine&#39;</span>, <span class="st">&#39;cheese&#39;</span>),</a>
+<a class="sourceLine" id="cb359-3" data-line-number="3">                <span class="dt">var3 =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb359-4" data-line-number="4">                <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="st">&#39;billy&#39;</span>, <span class="st">&#39;bob&#39;</span>, <span class="st">&#39;thornton&#39;</span>))</a>
+<a class="sourceLine" id="cb359-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb359-6" data-line-number="6">df</a></code></pre></div>
+<pre><code>##          var1   var2  var3
+## billy      10   beer  TRUE
+## bob        25   wine  TRUE
+## thornton    8 cheese FALSE</code></pre>
+<div id="기본함수-1" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 기본함수</h3>
+<p><code>write.csv()</code> 함수를 통해 csv 파일로 저장할 수 있습니다.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" data-line-number="1"><span class="kw">write.csv</span>(df, <span class="dt">file =</span> <span class="st">&#39;export.csv&#39;</span>)</a></code></pre></div>
+<p><code>write.delim()</code> 함수를 사용하여 텍스트 파일로 저장할 수 있습니다.</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1"><span class="kw">write.table</span>(df, <span class="dt">file =</span> <span class="st">&#39;export.txt&#39;</span>, <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</a></code></pre></div>
+<p>sep를 통해 탭을 구분자로 지정하였습니다.</p>
 </div>
-<div id="기존-리스트에-데이터-추가하기" class="section level2">
-<h2><span class="header-section-number">7.2</span> 기존 리스트에 데이터 추가하기</h2>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">l1 =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;a&#39;</span>, <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">str</span>(l1)</a></code></pre></div>
-<pre><code>## List of 3
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">l2 =<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(<span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">4.2</span>)))</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 4
-##  $ : int [1:3] 1 2 3
-##  $ : chr &quot;a&quot;
-##  $ : logi [1:3] TRUE FALSE TRUE
-##  $ : num [1:2] 2.5 4.2</code></pre>
-<p><code>append()</code> 함수를 이용해 기존 리스트에 추가로 리스트를 붙일 수 있습니다.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">l2<span class="op">$</span>item4 =<span class="st"> &#39;new list item&#39;</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="kw">str</span>(l2)</a></code></pre></div>
-<pre><code>## List of 5
-##  $      : int [1:3] 1 2 3
-##  $      : chr &quot;a&quot;
-##  $      : logi [1:3] TRUE FALSE TRUE
-##  $      : num [1:2] 2.5 4.2
-##  $ item4: chr &quot;new list item&quot;</code></pre>
-<p>또한 기존 리스트에 달러 사인($)을 입력할 경우, 이름과 함께 리스트가 추가됩니다.</p>
+<div id="readr-패키지-1" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> <code>readr</code> 패키지</h3>
+<p><code>readr</code> 패키지의 경우 기본 함수에 비해 2배 이상 빠르며, 행 이름을 저장하지 않습니다.</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb363-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb363-3" data-line-number="3"><span class="kw">write_csv</span>(df, <span class="st">&#39;export2.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1"><span class="kw">write_csv</span>(df, <span class="st">&#39;export3.csv&#39;</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>col_names 인자를 FALSE로 지정할 경우 열 이름 역시 저장되지 않습니다.</p>
 </div>
-<div id="리스트-추출하기" class="section level2">
-<h2><span class="header-section-number">7.3</span> 리스트 추출하기</h2>
-<p>리스트 역시 대괄호를 이용해 데이터를 추추할 수 있습니다.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">l2[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">l2[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</a></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1 2 3
-## 
-## [[2]]
-## [1]  TRUE FALSE  TRUE</code></pre>
-<p>리스트에 이름이 있을 경우, 이를 이용해 추출도 가능합니다.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">l2[<span class="st">&#39;item4&#39;</span>]</a></code></pre></div>
-<pre><code>## $item4
-## [1] &quot;new list item&quot;</code></pre>
-<p>대괄호를 두번, 혹은 달러 사인을 이용해 데이터를 추출할 경우 결과물의 형태는 단순화되어 나타납니다.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">l2<span class="op">$</span>item4</a></code></pre></div>
-<pre><code>## [1] &quot;new list item&quot;</code></pre>
-<p>특정 리스트에서 항목을 추출하기 위해서는 [[와 [를 함께 사용합니다.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">l2[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">l2[[<span class="dv">1</span>]][<span class="dv">3</span>]</a></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+</div>
+<div id="엑셀-저장하기" class="section level2">
+<h2><span class="header-section-number">12.2</span> 엑셀 저장하기</h2>
+<p><code>xlsx</code> 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.</p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1"><span class="kw">library</span>(xlsx)</a>
+<a class="sourceLine" id="cb365-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb365-3" data-line-number="3"><span class="kw">write.xlsx</span>(df, <span class="dt">file =</span> <span class="st">&#39;output_example.xlsx&#39;</span>)</a></code></pre></div>
+<p><code>xlsx</code> 패키지를 이용할 경우 R 내에서 다양한 형식으로 엑셀을 꾸민 후 파일을 저장할 수 있습니다. 자세한 내용은 다음 url을 참조하시기 바랍니다.</p>
+<pre><code>http://www.sthda.com/english/wiki/r-xlsx-package-a-quick-start-guide-to-manipulate-excel-files-in-r</code></pre>
+</div>
+<div id="r-object-file-1" class="section level2">
+<h2><span class="header-section-number">12.3</span> R object File</h2>
+<p><code>saveRDS()</code> 함수를 통해 작업중인 내용을 RDS 파일로 저장할 수 있습니다.</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1"><span class="kw">saveRDS</span>(df, <span class="st">&#39;df.rds&#39;</span>)</a></code></pre></div>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="함수.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

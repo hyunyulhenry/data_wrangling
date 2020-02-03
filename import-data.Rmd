@@ -22,7 +22,7 @@ excel: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.xlsx
 rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds
 ```
 
-먼저 해당 파일들을 다운로드 받도록 합니다.
+먼저 다음 코드를 이용해 해당 파일들을 다운로드 받도록 합니다.
 
 ```{r eval = FALSE}
 download.file('https://raw.githubusercontent.com/hyunyulhenry/data_wrangling/master/mydata.csv', 'mydata.csv')
@@ -119,7 +119,7 @@ read_csv('mydata.csv', n_max = 2)
 
 n_max 인자를 통해 전체 데이터가 아닌 지정한 행까지의 데이터만 불러올 수도 있습니다.
 
-## 텍스트 데이터 불러오기
+## 텍스트 파일 불러오기
 
 `.txt` 파일로 저장된 텍스트 파일 역시 `read.delim()` 혹은 `read.table()` 함수를 이용해 불러올 수 있습니다.
 

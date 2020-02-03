@@ -1,0 +1,89 @@
+
+# Exporting Data
+
+작업을 마무리 했으면 csv, excel, rds 등의 형태로 데이터를 저장해야 합니다.
+
+## 텍스트, csv 파일 저장하기
+
+먼저 R의 기본함수와 `readr` 패키지를 이용하여 텍스트 파일과 csv 파일로 저장하는 법에 대해 살펴보겠습니다. 먼저 다음과 같이 예제로 사용될 데이터프레임을 만들도록 합니다.
+
+
+```r
+df = data.frame(var1 = c(10, 25, 8),
+                var2 = c('beer', 'wine', 'cheese'),
+                var3 = c(TRUE, TRUE, FALSE),
+                row.names = c('billy', 'bob', 'thornton'))
+
+df
+```
+
+```
+##          var1   var2  var3
+## billy      10   beer  TRUE
+## bob        25   wine  TRUE
+## thornton    8 cheese FALSE
+```
+
+### 기본함수
+
+`write.csv()` 함수를 통해 csv 파일로 저장할 수 있습니다.
+
+
+```r
+write.csv(df, file = 'export.csv')
+```
+
+`write.delim()` 함수를 사용하여 텍스트 파일로 저장할 수 있습니다.
+
+
+```r
+write.table(df, file = 'export.txt', sep = '\t')
+```
+
+sep를 통해 탭을 구분자로 지정하였습니다.
+
+### `readr` 패키지
+
+`readr` 패키지의 경우 기본 함수에 비해 2배 이상 빠르며, 행 이름을 저장하지 않습니다.
+
+
+```r
+library(readr)
+
+write_csv(df, 'export2.csv')
+```
+
+
+```r
+write_csv(df, 'export3.csv', col_names = FALSE)
+```
+
+col_names 인자를 FALSE로 지정할 경우 열 이름 역시 저장되지 않습니다.
+
+## 엑셀 저장하기
+
+`xlsx` 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.
+
+
+```r
+library(xlsx)
+
+write.xlsx(df, file = 'output_example.xlsx')
+```
+
+`xlsx` 패키지를 이용할 경우 R 내에서 다양한 형식으로 엑셀을 꾸민 후 파일을 저장할 수 있습니다. 자세한 내용은 다음 url을 참조하시기 바랍니다.
+
+```
+http://www.sthda.com/english/wiki/r-xlsx-package-a-quick-start-guide-to-manipulate-excel-files-in-r
+```
+
+## R object File
+
+`saveRDS()` 함수를 통해 작업중인 내용을 RDS 파일로 저장할 수 있습니다.
+
+
+```r
+saveRDS(df, 'df.rds')
+```
+
+
