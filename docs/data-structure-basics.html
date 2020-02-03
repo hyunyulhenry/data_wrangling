@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,8 +201,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="missing-value.html"><a href="missing-value.html#결측치-대체"><i class="fa fa-check"></i><b>10.3</b> 결측치 대체</a></li>
 </ul></li>
-<li class="part"><span><b>III 데이터 불러오기 및 내보네기</b></span></li>
-<li class="chapter" data-level="11" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>11</b> Import Data</a></li>
+<li class="part"><span><b>III 데이터 불러오기 및 내보내기</b></span></li>
+<li class="chapter" data-level="11" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>11</b> Import Data</a><ul>
+<li class="chapter" data-level="11.1" data-path="import-data.html"><a href="import-data.html#csv-파일-불러오기"><i class="fa fa-check"></i><b>11.1</b> csv 파일 불러오기</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="import-data.html"><a href="import-data.html#기본함수"><i class="fa fa-check"></i><b>11.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="11.1.2" data-path="import-data.html"><a href="import-data.html#readr-패키지"><i class="fa fa-check"></i><b>11.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="import-data.html"><a href="import-data.html#텍스트-데이터-불러오기"><i class="fa fa-check"></i><b>11.2</b> 텍스트 데이터 불러오기</a></li>
+<li class="chapter" data-level="11.3" data-path="import-data.html"><a href="import-data.html#엑셀-파일-불러오기"><i class="fa fa-check"></i><b>11.3</b> 엑셀 파일 불러오기</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="import-data.html"><a href="import-data.html#xlsx-패키지"><i class="fa fa-check"></i><b>11.3.1</b> <code>xlsx</code> 패키지</a></li>
+<li class="chapter" data-level="11.3.2" data-path="import-data.html"><a href="import-data.html#readxl-패키지"><i class="fa fa-check"></i><b>11.3.2</b> <code>readxl</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="import-data.html"><a href="import-data.html#r-object-file"><i class="fa fa-check"></i><b>11.4</b> R object File</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -386,6 +397,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
