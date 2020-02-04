@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="함수.html"/>
-
+<link rel="next" href="pipe-operator.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -243,6 +243,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14.3" data-path="loop-statement.html"><a href="loop-statement.html#기타-함수"><i class="fa fa-check"></i><b>14.3</b> 기타 함수</a></li>
 </ul></li>
+<li class="chapter" data-level="15" data-path="pipe-operator.html"><a href="pipe-operator.html"><i class="fa fa-check"></i><b>15</b> Pipe Operator (<code>%&gt;%</code>)</a><ul>
+<li class="chapter" data-level="15.1" data-path="pipe-operator.html"><a href="pipe-operator.html#pipe-operator-1"><i class="fa fa-check"></i><b>15.1</b> Pipe Operator (<code>%&gt;%</code>)</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="pipe-operator.html"><a href="pipe-operator.html#중첩"><i class="fa fa-check"></i><b>15.1.1</b> 중첩</a></li>
+<li class="chapter" data-level="15.1.2" data-path="pipe-operator.html"><a href="pipe-operator.html#다중-객체"><i class="fa fa-check"></i><b>15.1.2</b> 다중 객체</a></li>
+<li class="chapter" data-level="15.1.3" data-path="pipe-operator.html"><a href="pipe-operator.html#section"><i class="fa fa-check"></i><b>15.1.3</b> <code>%&gt;%</code></a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -398,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="apply" class="section level3">
 <h3><span class="header-section-number">14.2.1</span> <code>apply()</code></h3>
 <p><code>apply()</code> 함수는 매트릭스나 데이터프레임의 행 혹은 열단위 계산에 자주 사용됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
-<pre><code>`apply(x, MARGIN, FUN, ...)`</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" data-line-number="1"><span class="kw">apply</span>(x, MARGIN, FUN, ...)</a></code></pre></div>
 <ul>
 <li>x: 매트릭스, 데이터프레임, 혹은 어레이</li>
 <li>MARGIN: 함수가 적용될 벡. 1은 행을, 2는 열을, c(1, 2)는 행과 열을 의미</li>
@@ -449,7 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lapply" class="section level3">
 <h3><span class="header-section-number">14.2.2</span> <code>lapply()</code></h3>
 <p><code>lapply()</code> 함수는 리스트에 적용되며, 결과 또한 리스트로 반환됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
-<pre><code>`lapply(x, FUN, ...)`</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="kw">lapply</span>(x, FUN, ...)</a></code></pre></div>
 <ul>
 <li>x: 리스트</li>
 <li>FUN: 적용될 함수</li>
@@ -607,8 +614,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="함수.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="함수.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pipe-operator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

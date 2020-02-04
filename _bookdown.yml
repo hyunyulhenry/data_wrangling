@@ -30,7 +30,8 @@ rmd_files: [
   "export-data.Rmd",
   
   "function.Rmd",
-  "loop.Rmd"
+  "loop.Rmd",
+  "pipe.Rmd"
 ]
 
 before_chapter_script: "_common.R"
