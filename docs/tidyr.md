@@ -1,0 +1,356 @@
+
+# (PART) 데이터 구조 변형하기 {-}
+
+# `tidyr`을 이용한 데이터 모양 바꾸기
+
+깔끔한 데이터(tidy data)는 다음과 같이 구성되 있습니다.
+
+1. 각 변수(variable)는 열로 구성됩니다.
+2. 각 관측값(observation)은 행으로 구성됩니다.
+3. 각 타입의 관측치는 테이블을 구성합니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/tidy_data.png" alt="tidy 데이터 요건" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-2)tidy 데이터 요건</p>
+</div>
+
+`tidyr` 패키지는 이러한 깔끔한 데이터를 만드는데 필요한 여러 함수가 있습니다.
+
+## 세로로 긴 데이터 만들기
+
+먼저 가로로 긴(Wide) 데이터를 세로로 길게 만드는데는 `gather()` 함수가 사용됩니다. 이 함수는 여러 열을 key-value 페어로 변형해줍니다.
+
+
+```r
+library (dplyr) 
+
+wide = tbl_df(read.table (header = TRUE, text = "
+  Group Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
+  1 2006 15 16 19 17
+  1 2007 12 13 27 23
+  1 2008 22 22 24 20
+  1 2009 10 14 20 16
+  2 2006 12 13 25 18
+  2 2007 16 14 21 19
+  2 2008 13 11 29 15
+  2 2009 23 20 26 20
+  3 2006 11 12 22 16
+  3 2007 13 11 27 21
+  3 2008 17 12 23 19
+  3 2009 14 9 31 24
+"))
+
+wide
+```
+
+```
+## # A tibble: 12 x 6
+##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
+##    <int> <int> <int> <int> <int> <int>
+##  1     1  2006    15    16    19    17
+##  2     1  2007    12    13    27    23
+##  3     1  2008    22    22    24    20
+##  4     1  2009    10    14    20    16
+##  5     2  2006    12    13    25    18
+##  6     2  2007    16    14    21    19
+##  7     2  2008    13    11    29    15
+##  8     2  2009    23    20    26    20
+##  9     3  2006    11    12    22    16
+## 10     3  2007    13    11    27    21
+## 11     3  2008    17    12    23    19
+## 12     3  2009    14     9    31    24
+```
+
+각 연도 별 분기 자료가 가로로 길게 구성되 있습니다.
+
+
+```r
+library(tidyr)
+
+long = wide %>% gather(Quarter, Revenue, Qtr.1:Qtr.4)
+
+head(long, 15)
+```
+
+```
+## # A tibble: 15 x 4
+##    Group  Year Quarter Revenue
+##    <int> <int> <chr>     <int>
+##  1     1  2006 Qtr.1        15
+##  2     1  2007 Qtr.1        12
+##  3     1  2008 Qtr.1        22
+##  4     1  2009 Qtr.1        10
+##  5     2  2006 Qtr.1        12
+##  6     2  2007 Qtr.1        16
+##  7     2  2008 Qtr.1        13
+##  8     2  2009 Qtr.1        23
+##  9     3  2006 Qtr.1        11
+## 10     3  2007 Qtr.1        13
+## 11     3  2008 Qtr.1        17
+## 12     3  2009 Qtr.1        14
+## 13     1  2006 Qtr.2        16
+## 14     1  2007 Qtr.2        13
+## 15     1  2008 Qtr.2        22
+```
+
+Quarter에는 열 이름에 해당하는 데이터가, Revenue에는 각 Qur.1에서 Qur.4까지의 관측치가 들어오게 되었습니다. 동일한 코드를 각기 다른 형태로 표현할 수도 있습니다.
+
+
+```r
+wide %>% gather (Quarter, Revenue, Qtr.1:Qtr.4)
+wide %>% gather (Quarter, Revenue, -Group, -Year)
+wide %>% gather (Quarter, Revenue, 3:6)
+wide %>% gather (Quarter, Revenue, Qtr.1, Qtr.2, Qtr.3, Qtr.4)
+```
+
+## 가로로 긴 데이터 만들기
+
+`gather()` 함수와 반대로, `spread()` 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 Quarter 열에 있는 항목들을 열 이름으로, Revenue 열에 있는 항목들을 Group, Year, Quarter에 맞춰 가로로 길게 되돌려야 합니다.
+
+
+```r
+back2wide = long %>% spread(Quarter, Revenue)
+
+back2wide
+```
+
+```
+## # A tibble: 12 x 6
+##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
+##    <int> <int> <int> <int> <int> <int>
+##  1     1  2006    15    16    19    17
+##  2     1  2007    12    13    27    23
+##  3     1  2008    22    22    24    20
+##  4     1  2009    10    14    20    16
+##  5     2  2006    12    13    25    18
+##  6     2  2007    16    14    21    19
+##  7     2  2008    13    11    29    15
+##  8     2  2009    23    20    26    20
+##  9     3  2006    11    12    22    16
+## 10     3  2007    13    11    27    21
+## 11     3  2008    17    12    23    19
+## 12     3  2009    14     9    31    24
+```
+
+원래와 동일한 데이터로 되돌아 왔습니다.
+
+## 하나의 열을 여러 열로 나누기
+
+
+```r
+messy_df = tbl_df(read.table (header = TRUE, sep = ",", text = "
+  Grp_Ind,Yr_Mo,City_State,Extra_variable
+  1,1.a,2006_Jan,Dayton (OH),XX01person_1
+  2,1.b,2006_Feb,Grand Forks (ND),XX02person_2
+  3,1.c,2006_Mar,Fargo (ND),XX03person_3
+  4,2.a,2007_Jan,Rochester (MN),XX04person_4
+",
+stringsAsFactors = FALSE))
+
+messy_df
+```
+
+```
+## # A tibble: 4 x 4
+##   Grp_Ind Yr_Mo    City_State       Extra_variable
+##   <chr>   <chr>    <chr>            <chr>         
+## 1 1.a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1.b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1.c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2.a     2007_Jan Rochester (MN)   XX04person_4
+```
+
+Grp_Ind열은 숫자.알파벳 형태로 이루어져 있으며, Yr_Mo 열은 YYYY_mm의 형태로 이루어져 있습니다. 이처럼 두개의 문자가 붙어있는 경우 `separate()` 함수를 통해 분리할 수 있습니다.
+
+
+```r
+messy_df %>% separate(col = Grp_Ind, into = c("Grp", "Ind"))
+```
+
+```
+## # A tibble: 4 x 5
+##   Grp   Ind   Yr_Mo    City_State       Extra_variable
+##   <chr> <chr> <chr>    <chr>            <chr>         
+## 1 1     a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1     b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1     c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2     a     2007_Jan Rochester (MN)   XX04person_4
+```
+
+Grp_Ind 열이 점을 기준으로 Grp와 Ind 열로 분리되었습니다.
+
+
+```r
+messy_df %>% separate(col = Grp_Ind, into = c("Grp", "Ind"), remove = FALSE)
+```
+
+```
+## # A tibble: 4 x 6
+##   Grp_Ind Grp   Ind   Yr_Mo    City_State       Extra_variable
+##   <chr>   <chr> <chr> <chr>    <chr>            <chr>         
+## 1 1.a     1     a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1.b     1     b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1.c     1     c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2.a     2     a     2007_Jan Rochester (MN)   XX04person_4
+```
+
+remove = FALSE를 추가해주면 원래의 열을 유지합니다.
+
+## 여러 열을 하나로 합치기
+
+`separate()` 함수와는 반대로, `unite()` 함수를 이용시 여러 열을 하나로 합칠 수 있습니다.
+
+
+```r
+expenses = tbl_df ( read.table (header = TRUE, text = "
+  Year Month Day Expense
+  2015 01 01 500
+  2015 02 05 90
+  2015 02 22 250
+  2015 03 10 325
+"))
+
+expenses
+```
+
+```
+## # A tibble: 4 x 4
+##    Year Month   Day Expense
+##   <int> <int> <int>   <int>
+## 1  2015     1     1     500
+## 2  2015     2     5      90
+## 3  2015     2    22     250
+## 4  2015     3    10     325
+```
+
+Year, Month, Day를 하나의 열로 합치도록 하겠습니다.
+
+
+```r
+expenses %>% unite(col = "Date", c(Year, Month, Day))
+```
+
+```
+## # A tibble: 4 x 2
+##   Date      Expense
+##   <chr>       <int>
+## 1 2015_1_1      500
+## 2 2015_2_5       90
+## 3 2015_2_22     250
+## 4 2015_3_10     325
+```
+
+Date 열에 지정한 데이터가 합쳐지게 됩니다.
+
+
+```r
+expenses %>% unite(col = "Date", c (Year, Month, Day), sep = "-")
+```
+
+```
+## # A tibble: 4 x 2
+##   Date      Expense
+##   <chr>       <int>
+## 1 2015-1-1      500
+## 2 2015-2-5       90
+## 3 2015-2-22     250
+## 4 2015-3-10     325
+```
+
+sep 인자를 통해 구분자를 선택할 수도 있습니다.
+
+## `tidyr`의 기타 함수
+
+먼저 다음의 예제 데이터를 만들어 줍니다.
+
+```r
+expenses = tbl_df (read.table(header = TRUE, text = "
+  Dept Year Month Day Cost
+  A 2015 01 01 $500.00
+  NA NA 02 05 $90.00
+  NA NA 02 22 $1,250.45
+  NA NA 03 NA $325.10
+  B NA 01 02 $260.00
+  NA NA 02 05 $90.00
+", stringsAsFactors = FALSE))
+
+expenses
+```
+
+```
+## # A tibble: 6 x 5
+##   Dept   Year Month   Day Cost     
+##   <chr> <int> <int> <int> <chr>    
+## 1 A      2015     1     1 $500.00  
+## 2 <NA>     NA     2     5 $90.00   
+## 3 <NA>     NA     2    22 $1,250.45
+## 4 <NA>     NA     3    NA $325.10  
+## 5 B        NA     1     2 $260.00  
+## 6 <NA>     NA     2     5 $90.00
+```
+
+### `fill()`
+
+많은 부분이 결측치로 비어 있으므로, 이를 채워줄 필요가 있습니다.
+
+
+```r
+expenses %>% fill(Dept, Year)
+```
+
+```
+## # A tibble: 6 x 5
+##   Dept   Year Month   Day Cost     
+##   <chr> <int> <int> <int> <chr>    
+## 1 A      2015     1     1 $500.00  
+## 2 A      2015     2     5 $90.00   
+## 3 A      2015     2    22 $1,250.45
+## 4 A      2015     3    NA $325.10  
+## 5 B      2015     1     2 $260.00  
+## 6 B      2015     2     5 $90.00
+```
+
+`fill()` 함수는 결측치가 있을 경우, 각 열의 이전 데이터를 이용해 채워줍니다.
+
+### `replce_na()`
+
+NA 데이터를 특정 값으로 변경하고자 합니다.
+
+
+```r
+expenses %>% replace_na(replace = list (Day = "unknown"))
+```
+
+```
+## # A tibble: 6 x 5
+##   Dept   Year Month Day     Cost     
+##   <chr> <int> <int> <chr>   <chr>    
+## 1 A      2015     1 1       $500.00  
+## 2 <NA>     NA     2 5       $90.00   
+## 3 <NA>     NA     2 22      $1,250.45
+## 4 <NA>     NA     3 unknown $325.10  
+## 5 B        NA     1 2       $260.00  
+## 6 <NA>     NA     2 5       $90.00
+```
+
+`replace_na()` 함수를 이용해 Day 열의 NA 데이터를 **unknown**으로 변경하였습니다.
+
+
+```r
+expenses %>% replace_na(replace = list (Year = 2015, Day = "unknown"))
+```
+
+```
+## # A tibble: 6 x 5
+##   Dept   Year Month Day     Cost     
+##   <chr> <dbl> <int> <chr>   <chr>    
+## 1 A      2015     1 1       $500.00  
+## 2 <NA>   2015     2 5       $90.00   
+## 3 <NA>   2015     2 22      $1,250.45
+## 4 <NA>   2015     3 unknown $325.10  
+## 5 B      2015     1 2       $260.00  
+## 6 <NA>   2015     2 5       $90.00
+```
+
+각 열마다 서로 다른 값으로 변경할 수 있습니다.
+

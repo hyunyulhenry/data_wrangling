@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Pipe Operator (%&gt;%) | R을 이용한 데이터 랭글링</title>
-  <meta name="description" content="Chapter 15 Pipe Operator (%&gt;%) | R을 이용한 데이터 랭글링" />
+  <title>Chapter 16 tidyr을 이용한 데이터 모양 바꾸기 | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 16 tidyr을 이용한 데이터 모양 바꾸기 | R을 이용한 데이터 랭글링" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Pipe Operator (%&gt;%) | R을 이용한 데이터 랭글링" />
+  <meta property="og:title" content="Chapter 16 tidyr을 이용한 데이터 모양 바꾸기 | R을 이용한 데이터 랭글링" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hyunyulhenry/lecture/data_wrangling" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Pipe Operator (%&gt;%) | R을 이용한 데이터 랭글링" />
+  <meta name="twitter:title" content="Chapter 16 tidyr을 이용한 데이터 모양 바꾸기 | R을 이용한 데이터 랭글링" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="loop-statement.html"/>
-<link rel="next" href="tidyr을-이용한-데이터-모양-바꾸기.html"/>
+<link rel="prev" href="pipe-operator.html"/>
+<link rel="next" href="dplyr.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -282,102 +282,263 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pipe-operator" class="section level1">
-<h1><span class="header-section-number">Chapter 15</span> Pipe Operator (<code>%&gt;%</code>)</h1>
-<p><code>magrittr</code> 패키지는 코드의 가독성을 높이는 다양한 오퍼레이터를 제공합니다.</p>
-<div id="pipe-operator-1" class="section level2">
-<h2><span class="header-section-number">15.1</span> Pipe Operator (<code>%&gt;%</code>)</h2>
-<p>파이프 오퍼레이터는 값 혹은 결과물을 다음 함수로 전달하는 역할을 합니다.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1"><span class="kw">filter</span>(data, variable <span class="op">==</span><span class="st"> </span>numeric_value)</a>
-<a class="sourceLine" id="cb438-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb438-3" data-line-number="3">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(variable <span class="op">==</span><span class="st"> </span>numeric_value)</a></code></pre></div>
-<p>위의 두 코드는 동일한 작업을 수행합니다. 적용된 함수가 <code>filter()</code> 하나일 때는 그 효용성을 못느끼지만, 적용 함수가 많아질수록 파이프 오퍼레이터를 사용해야 할 필요성을 느낄 것입니다.</p>
-<p>예제로써 다음 작업을 수행하고자 합니다.</p>
+<div id="tidyr을-이용한-데이터-모양-바꾸기" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> <code>tidyr</code>을 이용한 데이터 모양 바꾸기</h1>
+<p>깔끔한 데이터(tidy data)는 다음과 같이 구성되 있습니다.</p>
 <ol style="list-style-type: decimal">
-<li>필터링</li>
-<li>조건 별 그룹</li>
-<li>요약</li>
-<li>정렬</li>
+<li>각 변수(variable)는 열로 구성됩니다.</li>
+<li>각 관측값(observation)은 행으로 구성됩니다.</li>
+<li>각 타입의 관측치는 테이블을 구성합니다.</li>
 </ol>
-<p>위 작업을 수행하는 3가지 방식의 코드에 대해 알아보며, 사용되는 <code>dplyr</code> 패키지 관련 함수는 다음 장에서 확인할 수 있습니다.</p>
-<div id="중첩" class="section level3">
-<h3><span class="header-section-number">15.1.1</span> 중첩</h3>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb439-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb439-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb439-4" data-line-number="4"><span class="kw">arrange</span>(</a>
-<a class="sourceLine" id="cb439-5" data-line-number="5">  <span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb439-6" data-line-number="6">    <span class="kw">group_by</span>(</a>
-<a class="sourceLine" id="cb439-7" data-line-number="7">      <span class="kw">filter</span>(mtcars, carb <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb439-8" data-line-number="8">      cyl</a>
-<a class="sourceLine" id="cb439-9" data-line-number="9">    ),</a>
-<a class="sourceLine" id="cb439-10" data-line-number="10">    <span class="dt">Avg_mpg =</span> <span class="kw">mean</span>(mpg)</a>
-<a class="sourceLine" id="cb439-11" data-line-number="11">  ),</a>
-<a class="sourceLine" id="cb439-12" data-line-number="12">  <span class="kw">desc</span>(Avg_mpg)</a>
-<a class="sourceLine" id="cb439-13" data-line-number="13">)</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 2
-##     cyl Avg_mpg
-##   &lt;dbl&gt;   &lt;dbl&gt;
-## 1     4    25.9
-## 2     6    19.7
-## 3     8    15.1</code></pre>
-<p>계산된 결과를 괄호를 통해 감싸나가는 방법으로써, 가독성이 매우 떨어집니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="images/tidy_data.png" alt="tidy 데이터 요건" width="70%" />
+<p class="caption">
+그림 16.1: tidy 데이터 요건
+</p>
 </div>
-<div id="다중-객체" class="section level3">
-<h3><span class="header-section-number">15.1.2</span> 다중 객체</h3>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1">a =<span class="st"> </span><span class="kw">filter</span>(mtcars, carb <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb441-2" data-line-number="2">b =<span class="st"> </span><span class="kw">group_by</span>(a, cyl)</a>
-<a class="sourceLine" id="cb441-3" data-line-number="3">c =<span class="st"> </span><span class="kw">summarize</span>(b, <span class="dt">Avg_mpg =</span> <span class="kw">mean</span>(mpg))</a>
-<a class="sourceLine" id="cb441-4" data-line-number="4">d =<span class="st"> </span><span class="kw">arrange</span>(c, <span class="kw">desc</span>(Avg_mpg))</a>
-<a class="sourceLine" id="cb441-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb441-6" data-line-number="6"><span class="kw">print</span>(d)</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 2
-##     cyl Avg_mpg
-##   &lt;dbl&gt;   &lt;dbl&gt;
-## 1     4    25.9
-## 2     6    19.7
-## 3     8    15.1</code></pre>
-<p>각각의 계산과정을 저장하는 방법으로써, 불필요한 복사가 일어나게 됩니다.</p>
+<p><code>tidyr</code> 패키지는 이러한 깔끔한 데이터를 만드는데 필요한 여러 함수가 있습니다.</p>
+<div id="세로로-긴-데이터-만들기" class="section level2">
+<h2><span class="header-section-number">16.1</span> 세로로 긴 데이터 만들기</h2>
+<p>먼저 가로로 긴(Wide) 데이터를 세로로 길게 만드는데는 <code>gather()</code> 함수가 사용됩니다. 이 함수는 여러 열을 key-value 페어로 변형해줍니다.</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">library</span> (dplyr) </a>
+<a class="sourceLine" id="cb447-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb447-3" data-line-number="3">wide =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb447-4" data-line-number="4"><span class="st">  Group Year Qtr.1 Qtr.2 Qtr.3 Qtr.4</span></a>
+<a class="sourceLine" id="cb447-5" data-line-number="5"><span class="st">  1 2006 15 16 19 17</span></a>
+<a class="sourceLine" id="cb447-6" data-line-number="6"><span class="st">  1 2007 12 13 27 23</span></a>
+<a class="sourceLine" id="cb447-7" data-line-number="7"><span class="st">  1 2008 22 22 24 20</span></a>
+<a class="sourceLine" id="cb447-8" data-line-number="8"><span class="st">  1 2009 10 14 20 16</span></a>
+<a class="sourceLine" id="cb447-9" data-line-number="9"><span class="st">  2 2006 12 13 25 18</span></a>
+<a class="sourceLine" id="cb447-10" data-line-number="10"><span class="st">  2 2007 16 14 21 19</span></a>
+<a class="sourceLine" id="cb447-11" data-line-number="11"><span class="st">  2 2008 13 11 29 15</span></a>
+<a class="sourceLine" id="cb447-12" data-line-number="12"><span class="st">  2 2009 23 20 26 20</span></a>
+<a class="sourceLine" id="cb447-13" data-line-number="13"><span class="st">  3 2006 11 12 22 16</span></a>
+<a class="sourceLine" id="cb447-14" data-line-number="14"><span class="st">  3 2007 13 11 27 21</span></a>
+<a class="sourceLine" id="cb447-15" data-line-number="15"><span class="st">  3 2008 17 12 23 19</span></a>
+<a class="sourceLine" id="cb447-16" data-line-number="16"><span class="st">  3 2009 14 9 31 24</span></a>
+<a class="sourceLine" id="cb447-17" data-line-number="17"><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb447-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb447-19" data-line-number="19">wide</a></code></pre></div>
+<pre><code>## # A tibble: 12 x 6
+##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1     1  2006    15    16    19    17
+##  2     1  2007    12    13    27    23
+##  3     1  2008    22    22    24    20
+##  4     1  2009    10    14    20    16
+##  5     2  2006    12    13    25    18
+##  6     2  2007    16    14    21    19
+##  7     2  2008    13    11    29    15
+##  8     2  2009    23    20    26    20
+##  9     3  2006    11    12    22    16
+## 10     3  2007    13    11    27    21
+## 11     3  2008    17    12    23    19
+## 12     3  2009    14     9    31    24</code></pre>
+<p>각 연도 별 분기 자료가 가로로 길게 구성되 있습니다.</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb449-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb449-3" data-line-number="3">long =<span class="st"> </span>wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Quarter, Revenue, Qtr<span class="fl">.1</span><span class="op">:</span>Qtr<span class="fl">.4</span>)</a>
+<a class="sourceLine" id="cb449-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb449-5" data-line-number="5"><span class="kw">head</span>(long, <span class="dv">15</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 15 x 4
+##    Group  Year Quarter Revenue
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;int&gt;
+##  1     1  2006 Qtr.1        15
+##  2     1  2007 Qtr.1        12
+##  3     1  2008 Qtr.1        22
+##  4     1  2009 Qtr.1        10
+##  5     2  2006 Qtr.1        12
+##  6     2  2007 Qtr.1        16
+##  7     2  2008 Qtr.1        13
+##  8     2  2009 Qtr.1        23
+##  9     3  2006 Qtr.1        11
+## 10     3  2007 Qtr.1        13
+## 11     3  2008 Qtr.1        17
+## 12     3  2009 Qtr.1        14
+## 13     1  2006 Qtr.2        16
+## 14     1  2007 Qtr.2        13
+## 15     1  2008 Qtr.2        22</code></pre>
+<p>Quarter에는 열 이름에 해당하는 데이터가, Revenue에는 각 Qur.1에서 Qur.4까지의 관측치가 들어오게 되었습니다. 동일한 코드를 각기 다른 형태로 표현할 수도 있습니다.</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, Qtr<span class="fl">.1</span><span class="op">:</span>Qtr<span class="fl">.4</span>)</a>
+<a class="sourceLine" id="cb451-2" data-line-number="2">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, <span class="op">-</span>Group, <span class="op">-</span>Year)</a>
+<a class="sourceLine" id="cb451-3" data-line-number="3">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb451-4" data-line-number="4">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, Qtr<span class="fl">.1</span>, Qtr<span class="fl">.2</span>, Qtr<span class="fl">.3</span>, Qtr<span class="fl">.4</span>)</a></code></pre></div>
 </div>
-<div id="section" class="section level3">
-<h3><span class="header-section-number">15.1.3</span> <code>%&gt;%</code></h3>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb443-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(carb <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb443-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb443-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Avg_mpg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb443-5" data-line-number="5"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Avg_mpg))</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 2
-##     cyl Avg_mpg
-##   &lt;dbl&gt;   &lt;dbl&gt;
-## 1     4    25.9
-## 2     6    19.7
-## 3     8    15.1</code></pre>
-<p>파이프 오퍼레이터(<code>%&gt;%</code>)를 사용할 경우 코드가 매우 효율적이고 읽기 쉬워집니다. [mtcars → 필터 → 그룹 → 요약 → 정렬]의 계산과정과 동일하게 코드가 전개됩니다.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb445-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(carb <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb445-3" data-line-number="3"><span class="st">  </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>hp, <span class="dt">data =</span> .) </a></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ cyl + hp, data = .)
-## 
-## Coefficients:
-## (Intercept)          cyl           hp  
-##     35.6765      -2.2201      -0.0141</code></pre>
-<p>파이프 오퍼레이터에서 마침표(.)는 이전 단계까지 계산된 결과를 의미합니다.</p>
+<div id="가로로-긴-데이터-만들기" class="section level2">
+<h2><span class="header-section-number">16.2</span> 가로로 긴 데이터 만들기</h2>
+<p><code>gather()</code> 함수와 반대로, <code>spread()</code> 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 Quarter 열에 있는 항목들을 열 이름으로, Revenue 열에 있는 항목들을 Group, Year, Quarter에 맞춰 가로로 길게 되돌려야 합니다.</p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1">back2wide =<span class="st"> </span>long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Quarter, Revenue)</a>
+<a class="sourceLine" id="cb452-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb452-3" data-line-number="3">back2wide</a></code></pre></div>
+<pre><code>## # A tibble: 12 x 6
+##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1     1  2006    15    16    19    17
+##  2     1  2007    12    13    27    23
+##  3     1  2008    22    22    24    20
+##  4     1  2009    10    14    20    16
+##  5     2  2006    12    13    25    18
+##  6     2  2007    16    14    21    19
+##  7     2  2008    13    11    29    15
+##  8     2  2009    23    20    26    20
+##  9     3  2006    11    12    22    16
+## 10     3  2007    13    11    27    21
+## 11     3  2008    17    12    23    19
+## 12     3  2009    14     9    31    24</code></pre>
+<p>원래와 동일한 데이터로 되돌아 왔습니다.</p>
+</div>
+<div id="하나의-열을-여러-열로-나누기" class="section level2">
+<h2><span class="header-section-number">16.3</span> 하나의 열을 여러 열로 나누기</h2>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1">messy_df =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb454-2" data-line-number="2"><span class="st">  Grp_Ind,Yr_Mo,City_State,Extra_variable</span></a>
+<a class="sourceLine" id="cb454-3" data-line-number="3"><span class="st">  1,1.a,2006_Jan,Dayton (OH),XX01person_1</span></a>
+<a class="sourceLine" id="cb454-4" data-line-number="4"><span class="st">  2,1.b,2006_Feb,Grand Forks (ND),XX02person_2</span></a>
+<a class="sourceLine" id="cb454-5" data-line-number="5"><span class="st">  3,1.c,2006_Mar,Fargo (ND),XX03person_3</span></a>
+<a class="sourceLine" id="cb454-6" data-line-number="6"><span class="st">  4,2.a,2007_Jan,Rochester (MN),XX04person_4</span></a>
+<a class="sourceLine" id="cb454-7" data-line-number="7"><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb454-8" data-line-number="8"><span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb454-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb454-10" data-line-number="10">messy_df</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 4
+##   Grp_Ind Yr_Mo    City_State       Extra_variable
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
+## 1 1.a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1.b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1.c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2.a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
+<p>Grp_Ind열은 숫자.알파벳 형태로 이루어져 있으며, Yr_Mo 열은 YYYY_mm의 형태로 이루어져 있습니다. 이처럼 두개의 문자가 붙어있는 경우 <code>separate()</code> 함수를 통해 분리할 수 있습니다.</p>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1">messy_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> Grp_Ind, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Grp&quot;</span>, <span class="st">&quot;Ind&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 5
+##   Grp   Ind   Yr_Mo    City_State       Extra_variable
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
+## 1 1     a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1     b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1     c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2     a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
+<p>Grp_Ind 열이 점을 기준으로 Grp와 Ind 열로 분리되었습니다.</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1">messy_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> Grp_Ind, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Grp&quot;</span>, <span class="st">&quot;Ind&quot;</span>), <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 6
+##   Grp_Ind Grp   Ind   Yr_Mo    City_State       Extra_variable
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
+## 1 1.a     1     a     2006_Jan Dayton (OH)      XX01person_1  
+## 2 1.b     1     b     2006_Feb Grand Forks (ND) XX02person_2  
+## 3 1.c     1     c     2006_Mar Fargo (ND)       XX03person_3  
+## 4 2.a     2     a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
+<p>remove = FALSE를 추가해주면 원래의 열을 유지합니다.</p>
+</div>
+<div id="여러-열을-하나로-합치기" class="section level2">
+<h2><span class="header-section-number">16.4</span> 여러 열을 하나로 합치기</h2>
+<p><code>separate()</code> 함수와는 반대로, <code>unite()</code> 함수를 이용시 여러 열을 하나로 합칠 수 있습니다.</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1">expenses =<span class="st"> </span><span class="kw">tbl_df</span> ( <span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb460-2" data-line-number="2"><span class="st">  Year Month Day Expense</span></a>
+<a class="sourceLine" id="cb460-3" data-line-number="3"><span class="st">  2015 01 01 500</span></a>
+<a class="sourceLine" id="cb460-4" data-line-number="4"><span class="st">  2015 02 05 90</span></a>
+<a class="sourceLine" id="cb460-5" data-line-number="5"><span class="st">  2015 02 22 250</span></a>
+<a class="sourceLine" id="cb460-6" data-line-number="6"><span class="st">  2015 03 10 325</span></a>
+<a class="sourceLine" id="cb460-7" data-line-number="7"><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb460-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb460-9" data-line-number="9">expenses</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 4
+##    Year Month   Day Expense
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+## 1  2015     1     1     500
+## 2  2015     2     5      90
+## 3  2015     2    22     250
+## 4  2015     3    10     325</code></pre>
+<p>Year, Month, Day를 하나의 열로 합치도록 하겠습니다.</p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unite</span>(<span class="dt">col =</span> <span class="st">&quot;Date&quot;</span>, <span class="kw">c</span>(Year, Month, Day))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   Date      Expense
+##   &lt;chr&gt;       &lt;int&gt;
+## 1 2015_1_1      500
+## 2 2015_2_5       90
+## 3 2015_2_22     250
+## 4 2015_3_10     325</code></pre>
+<p>Date 열에 지정한 데이터가 합쳐지게 됩니다.</p>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unite</span>(<span class="dt">col =</span> <span class="st">&quot;Date&quot;</span>, <span class="kw">c</span> (Year, Month, Day), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   Date      Expense
+##   &lt;chr&gt;       &lt;int&gt;
+## 1 2015-1-1      500
+## 2 2015-2-5       90
+## 3 2015-2-22     250
+## 4 2015-3-10     325</code></pre>
+<p>sep 인자를 통해 구분자를 선택할 수도 있습니다.</p>
+</div>
+<div id="tidyr의-기타-함수" class="section level2">
+<h2><span class="header-section-number">16.5</span> <code>tidyr</code>의 기타 함수</h2>
+<p>먼저 다음의 예제 데이터를 만들어 줍니다.</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" data-line-number="1">expenses =<span class="st"> </span><span class="kw">tbl_df</span> (<span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb466-2" data-line-number="2"><span class="st">  Dept Year Month Day Cost</span></a>
+<a class="sourceLine" id="cb466-3" data-line-number="3"><span class="st">  A 2015 01 01 $500.00</span></a>
+<a class="sourceLine" id="cb466-4" data-line-number="4"><span class="st">  NA NA 02 05 $90.00</span></a>
+<a class="sourceLine" id="cb466-5" data-line-number="5"><span class="st">  NA NA 02 22 $1,250.45</span></a>
+<a class="sourceLine" id="cb466-6" data-line-number="6"><span class="st">  NA NA 03 NA $325.10</span></a>
+<a class="sourceLine" id="cb466-7" data-line-number="7"><span class="st">  B NA 01 02 $260.00</span></a>
+<a class="sourceLine" id="cb466-8" data-line-number="8"><span class="st">  NA NA 02 05 $90.00</span></a>
+<a class="sourceLine" id="cb466-9" data-line-number="9"><span class="st">&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb466-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb466-11" data-line-number="11">expenses</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   Dept   Year Month   Day Cost     
+##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
+## 1 A      2015     1     1 $500.00  
+## 2 &lt;NA&gt;     NA     2     5 $90.00   
+## 3 &lt;NA&gt;     NA     2    22 $1,250.45
+## 4 &lt;NA&gt;     NA     3    NA $325.10  
+## 5 B        NA     1     2 $260.00  
+## 6 &lt;NA&gt;     NA     2     5 $90.00</code></pre>
+<div id="fill" class="section level3">
+<h3><span class="header-section-number">16.5.1</span> <code>fill()</code></h3>
+<p>많은 부분이 결측치로 비어 있으므로, 이를 채워줄 필요가 있습니다.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fill</span>(Dept, Year)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   Dept   Year Month   Day Cost     
+##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
+## 1 A      2015     1     1 $500.00  
+## 2 A      2015     2     5 $90.00   
+## 3 A      2015     2    22 $1,250.45
+## 4 A      2015     3    NA $325.10  
+## 5 B      2015     1     2 $260.00  
+## 6 B      2015     2     5 $90.00</code></pre>
+<p><code>fill()</code> 함수는 결측치가 있을 경우, 각 열의 이전 데이터를 이용해 채워줍니다.</p>
+</div>
+<div id="replce_na" class="section level3">
+<h3><span class="header-section-number">16.5.2</span> <code>replce_na()</code></h3>
+<p>NA 데이터를 특정 값으로 변경하고자 합니다.</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">Day =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   Dept   Year Month Day     Cost     
+##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 A      2015     1 1       $500.00  
+## 2 &lt;NA&gt;     NA     2 5       $90.00   
+## 3 &lt;NA&gt;     NA     2 22      $1,250.45
+## 4 &lt;NA&gt;     NA     3 unknown $325.10  
+## 5 B        NA     1 2       $260.00  
+## 6 &lt;NA&gt;     NA     2 5       $90.00</code></pre>
+<p><code>replace_na()</code> 함수를 이용해 Day 열의 NA 데이터를 <strong>unknown</strong>으로 변경하였습니다.</p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">Year =</span> <span class="dv">2015</span>, <span class="dt">Day =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   Dept   Year Month Day     Cost     
+##   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 A      2015     1 1       $500.00  
+## 2 &lt;NA&gt;   2015     2 5       $90.00   
+## 3 &lt;NA&gt;   2015     2 22      $1,250.45
+## 4 &lt;NA&gt;   2015     3 unknown $325.10  
+## 5 B      2015     1 2       $260.00  
+## 6 &lt;NA&gt;   2015     2 5       $90.00</code></pre>
+<p>각 열마다 서로 다른 값으로 변경할 수 있습니다.</p>
 
 </div>
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="loop-statement.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tidyr을-이용한-데이터-모양-바꾸기.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pipe-operator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
