@@ -19,7 +19,7 @@ if (test_expression) {
 ```{r}
 x = c(8, 3, -2, 5)
 
-if(any(x < 0)) {
+if (any(x < 0)) {
   print('x contains negative number')
 }
 ```
@@ -31,7 +31,7 @@ y = c (8, 3, 2, 5)
 
 if (any (y < 0)) {
   print ("y contains negative numbers")
-  }
+}
 ```
 
 y에는 음수가 존재하지 않으므로, 구문이 실행되지 않습니다.
@@ -53,7 +53,7 @@ if (test_expression) {
 ```{r}
 y = c (8, 3, 2, 5)
 
-if(any (y < 0)) {
+if (any (y < 0)) {
   print ("y contains negative numbers")
 } else {
   print ("y contains all positive numbers")
@@ -67,7 +67,7 @@ if...else 구문은 `ifelse()` 함수로 간단히 나타낼 수도 있습니다
 ```{r}
 x = c (8, 3, 2, 5)
 
-ifelse (any (x < 0), "x contains negative numbers", "x contains all positive numbers")
+ifelse(any(x < 0), "x contains negative numbers", "x contains all positive numbers")
 ```
 
 또한 if와 else 사이에 else if 조건을 통해, 여러 조건을 추가할 수도 있습니다.
@@ -75,7 +75,7 @@ ifelse (any (x < 0), "x contains negative numbers", "x contains all positive num
 ```{r}
 x = 7
 
-if  (x >= 10){
+if (x >= 10) {
   print ("x exceeds acceptable tolerance levels")
 } else if(x >= 0 & x < 10) {
   print ("x is within acceptable tolerance levels")
@@ -93,3 +93,179 @@ if  (x >= 10){
 x는 7 이므로 else에 해당하는 내용이 출력됩니다. 
 
 ### `for loop`
+
+for loop 구문은 특정한 부분의 코드가 반복적으로 수행될 수 있도록 합니다. 
+
+```{r eval = FALSE}
+for (i in 1:100) {
+  <code: do stuff here with i>
+}
+```
+
+먼저 i에 1이 들어간 뒤 code에 해당하는 부분이 실행됩니다. 그 후, i에 2가 들어간 뒤 다시 code가 실행되며 이 작업이 100까지 반복됩니다. 실제 예제를 살펴보도록 하겠습니다.
+
+```{r}
+for (i in 2010:2016) {
+  output = paste("The year is", i)
+  print(output)
+}
+```
+
+i에 2010부터 2016 까지 대입되어 코드가 실행됩니다.
+
+### `while loop`
+
+while 구문은 for 구문과 비슷하며, 조건이 충족되는한 루프가 계속해서 실행됩니다.
+
+```{r eval = FALSE}
+counter = 1
+
+while (test_expression) {
+  statement
+  counter = counter + 1
+}
+```
+
+test_expression이 TRUE이면 statement 코드가 실행되며, counter를 1씩 더합니다. 즉, test_expression이 FALSE가 될때까지 loop가 반복됩니다.
+
+```{r}
+counter = 1
+
+while (counter <= 5) {
+  print(counter)
+  counter = counter + 1
+}
+```
+
+counter가 5 이하일 경우 이를 출력하며, 6일 경우 test_expression이 FALSE가 되어 loop가 멈추게 됩니다.
+
+### `next`
+
+next 명령어는 loop 구문에서 특정 단계를 실행하지 않고 넘어가기 위해 사용됩니다.
+
+```{r}
+x = 1:5
+
+for (i in x) {
+  if (i == 3) {
+    next
+  }
+  print(i)
+}
+```
+
+일반적인 for loop 구문으로써 i를 출력하며, if 구문을 통해 i가 3일 경우 명령을 실행하지 않고 다음 for 구문(i = 4)으로 건너뜁니다.
+
+## Apply 계열 함수
+
+apply 계열 함수는 loop 구문과 비슷한 역할을 하며, 훨씬 간결하게 표현할 수 있습니다.
+
+### `apply()`
+
+`apply()` 함수는 매트릭스나 데이터프레임의 행 혹은 열단위 계산에 자주 사용됩니다. 해당 함수는 다음과 같이 구성됩니다.
+
+```
+`apply(x, MARGIN, FUN, ...)`
+```
+- x: 매트릭스, 데이터프레임, 혹은 어레이
+- MARGIN: 함수가 적용될 벡. 1은 행을, 2는 열을, c(1, 2)는 행과 열을 의미
+- FUN: 적용될 함수
+- ...: 기타
+
+```{r}
+head(mtcars)
+```
+
+```{r}
+apply(mtcars, 2, mean)
+```
+
+mtcars 데이터에서 2, 즉 열의 방향으로 평균(mean)을 구합니다.
+
+```{r}
+apply(mtcars, 1, sum)
+```
+
+이번에는 1 즉 행의 방향으로 합계(sum)를 구합니다.
+
+```{r}
+apply(mtcars, 2, quantile, probs = c(0.10, 0.25, 0.05, 0.75, 0.90))
+```
+
+각 열의 분위수(quantile)를 구하게 되며, 분위는 probs 인자를 통해 직접 입력할 수 있습니다.
+
+### `lapply()`
+
+`lapply()` 함수는 리스트에 적용되며, 결과 또한 리스트로 반환됩니다. 해당 함수는 다음과 같이 구성됩니다.
+
+```
+`lapply(x, FUN, ...)`
+```
+- x: 리스트
+- FUN: 적용될 함수
+- ...: 기타
+
+```{r}
+data = list(item1 = 1:4,
+            item2 = rnorm(10),
+            item3 = rnorm(20, 1),
+            item4 = rnorm(100, 5))
+
+data
+```
+
+```{r}
+lapply(data, mean)
+```
+
+`lapply()` 함수를 통해 각 항목의 평균을 구하며, 결과 또한 리스트 형태입니다.
+
+```{r}
+beaver_data = list(beaver1 = beaver1, beaver2 = beaver2)
+
+lapply(beaver_data, head)
+```
+
+위 데이터의 각 항목에서 열 별 평균을 구하고자 할 경우 `lapply()` 함수 만으로는 계산이 불가능합니다. 이러한 경우 해당 함수 내부에 직접 `function()`을 정의하여 복잡한 계산을 수행할 수 있습니다.
+
+```{r}
+lapply(beaver_data, function(x) {
+  round(apply(x, 2, mean), 2)
+})
+```
+
+`function(x)`를 통해 각 항목에 적용될 함수를 직접 정의할 수 있으며, 열의 방향으로 평균을 구한 뒤 소수 둘째 자리까지 반올림을 하게 됩니다.
+
+### `sapply()`
+
+`sapply()` 함수는 `lapply()` 함수와 거의 동일하며, 결과가 리스트가 아닌 벡터 혹은 매트릭스로 출력된다는 점만 차이가 있습니다.
+
+```{r}
+lapply(beaver_data, function(x) {
+  round(apply(x, 2, mean), 2)
+})
+```
+
+```{r}
+sapply(beaver_data, function(x) {
+  round(apply(x, 2, mean), 2)
+})
+```
+
+## 기타 함수
+
+열과 행이 합계나 평균을 구할 때는 `apply()` 함수보다 간단하게 표현할 수 있는 함수들이 있습니다.
+
+```{r}
+rowSums(mtcars)
+colSums(mtcars)
+```
+
+`rowSums()` 함수는 행의 합계를, `colSums()` 함수는 열의 합계는 구하며 이는 `apply(mtcars, 1 or 2, sum)` 과 동일합니다.
+
+```{r}
+rowMeans(mtcars)
+colMeans(mtcars)
+```
+
+`rowMeans()`와 `colMeans()` 함수 역시 각각 행과 열의 평균을 구합니다.
