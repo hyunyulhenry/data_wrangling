@@ -2,7 +2,7 @@
 --- 
 title: "R을 이용한 데이터 랭글링"
 author: "이현열"
-date: "2020-02-04"
+date: "2020-02-05"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
