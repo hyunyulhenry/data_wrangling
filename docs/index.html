@@ -21,7 +21,7 @@
   
   
 
-<meta name="author" content="이현열" />
+<meta name="author" content="이현열 (Henry Lee)" />
 
 
 <meta name="date" content="2020-02-05" />
@@ -70,7 +70,9 @@
 <li><a href="./">R을 이용한 데이터 랭글링</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i>Contact Information</a></li>
+</ul></li>
 <li class="part"><span><b>I 데이터 타입별 다루기</b></span></li>
 <li class="chapter" data-level="1" data-path="numbers.html"><a href="numbers.html"><i class="fa fa-check"></i><b>1</b> Numbers</a><ul>
 <li class="chapter" data-level="1.1" data-path="numbers.html"><a href="numbers.html#integer와-double의-vector-만들기"><i class="fa fa-check"></i><b>1.1</b> integer와 double의 vector 만들기</a><ul>
@@ -206,8 +208,8 @@
 <li class="chapter" data-level="17.4" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#group_by-원하는-조건으로-그룹화"><i class="fa fa-check"></i><b>17.4</b> <code>group_by()</code>: 원하는 조건으로 그룹화</a></li>
 <li class="chapter" data-level="17.5" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#summarize-요약값-계산하기"><i class="fa fa-check"></i><b>17.5</b> <code>summarize()</code>: 요약값 계산하기</a></li>
 <li class="chapter" data-level="17.6" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#arrange-데이터-정렬하기"><i class="fa fa-check"></i><b>17.6</b> <code>arrange()</code>: 데이터 정렬하기</a></li>
-<li><a href="dplyr을-이용한-데이터-변형하기.html#join-데이터-합치기-mutate-새로운-열-생성하기"><span class="toc-section-number">17.7</span> *_join(): 데이터 합치기
-## <code>mutate()</code>: 새로운 열 생성하기</a></li>
+<li class="chapter" data-level="17.7" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>17.7</b> join(): 데이터 합치기</a></li>
+<li class="chapter" data-level="17.8" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#mutate-새로운-열-생성하기"><i class="fa fa-check"></i><b>17.8</b> <code>mutate()</code>: 새로운 열 생성하기</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -231,13 +233,60 @@
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">R을 이용한 데이터 랭글링</h1>
-<p class="author"><em>이현열</em></p>
+<p class="author"><em>이현열 (Henry Lee)</em></p>
 <p class="date"><em>2020-02-05</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
-<p>R을 이용한 데이터 랭글링</p>
+<p>본 페이지는 <strong>R을 이용한 데이터 랭글링</strong> 강의 페이지이며, 다음과 같은 내용으로 구성되었습니다.</p>
+<ul>
+<li>Part 1: 데이터 타입별 다루기
+<ul>
+<li>Chapter 1: Numbers</li>
+<li>Chapter 2: Character Strings</li>
+<li>Chapter 3: Factors</li>
+<li>Chapter 4: Date</li>
+</ul></li>
+<li>Part 2: 데이터 구조 다루기
+<ul>
+<li>Chapter 5: Data Structure Basics</li>
+<li>Chapter 6: Vector</li>
+<li>Chapter 7: List</li>
+<li>Chapter 8: Matrix</li>
+<li>Chapter 9: Data Frame</li>
+<li>Chapter 10: Missing Value</li>
+</ul></li>
+<li>Part 3: 데이터 불러오기 및 내보내기
+<ul>
+<li>Chapter 11: Import Data</li>
+<li>Chapter 12: Exporting Data</li>
+</ul></li>
+<li>Part 4: 데이터 구조 변형하기
+<ul>
+<li>Chapter 13: 함수</li>
+<li>Chapter 14: Loop Statement</li>
+<li>Chapter 15: Pipe Operator (%&gt;%)</li>
+</ul></li>
+<li>Part 5: 데이터 구조 변형하기
+<ul>
+<li>Chapter 16: tidyr을 이용한 데이터 모양 바꾸기</li>
+<li>Chapter 17: dplyr을 이용한 데이터 변형하기</li>
+</ul></li>
+</ul>
+<p>본 강의록의 대부분 내용은 <em>Bradley C. Boehmke</em>의 <strong>Data Wrangling with R (Use R!)</strong>을 참조하였습니다.</p>
+<p><a href="https://www.amazon.com/Data-Wrangling-R-Use/dp/3319455982" class="uri">https://www.amazon.com/Data-Wrangling-R-Use/dp/3319455982</a></p>
+<p><img src="images/user_cover.jpg" width="30%" style="display: block; margin: auto;" /></p>
+<div id="contact-information" class="section level2 unnumbered">
+<h2>Contact Information</h2>
+<ul>
+<li>E-mail: <a href="mailto:leebisu@gmail.com" class="email">leebisu@gmail.com</a></li>
+<li>Henry’s Quantopia: <a href="http://henryquant.blogspot.com" class="uri">http://henryquant.blogspot.com</a></li>
+<li>GitHub: <a href="https://github.com/hyunyulhenry/" class="uri">https://github.com/hyunyulhenry/</a></li>
+<li>Facebook: <a href="https://www.facebook.com/leebisu" class="uri">https://www.facebook.com/leebisu</a></li>
+<li>Instagram: <a href="https://www.instagram.com/hyunyul.lee/" class="uri">https://www.instagram.com/hyunyul.lee/</a></li>
+</ul>
 
+</div>
 </div>
 
 
