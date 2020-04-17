@@ -21,10 +21,10 @@
   
   
 
-<meta name="author" content="이현열" />
+<meta name="author" content="이현열 (Henry Lee)" />
 
 
-<meta name="date" content="2020-02-05" />
+<meta name="date" content="2020-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,233 +311,317 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="세로로-긴-데이터-만들기" class="section level2">
 <h2><span class="header-section-number">16.1</span> 세로로 긴 데이터 만들기</h2>
 <p>먼저 가로로 긴(Wide) 데이터를 세로로 길게 만드는데는 <code>gather()</code> 함수가 사용됩니다. 이 함수는 여러 열을 key-value 페어로 변형해줍니다.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">library</span> (dplyr) </a>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
 <a class="sourceLine" id="cb447-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb447-3" data-line-number="3">wide =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb447-4" data-line-number="4"><span class="st">  Group Year Qtr.1 Qtr.2 Qtr.3 Qtr.4</span></a>
-<a class="sourceLine" id="cb447-5" data-line-number="5"><span class="st">  1 2006 15 16 19 17</span></a>
-<a class="sourceLine" id="cb447-6" data-line-number="6"><span class="st">  1 2007 12 13 27 23</span></a>
-<a class="sourceLine" id="cb447-7" data-line-number="7"><span class="st">  1 2008 22 22 24 20</span></a>
-<a class="sourceLine" id="cb447-8" data-line-number="8"><span class="st">  1 2009 10 14 20 16</span></a>
-<a class="sourceLine" id="cb447-9" data-line-number="9"><span class="st">  2 2006 12 13 25 18</span></a>
-<a class="sourceLine" id="cb447-10" data-line-number="10"><span class="st">  2 2007 16 14 21 19</span></a>
-<a class="sourceLine" id="cb447-11" data-line-number="11"><span class="st">  2 2008 13 11 29 15</span></a>
-<a class="sourceLine" id="cb447-12" data-line-number="12"><span class="st">  2 2009 23 20 26 20</span></a>
-<a class="sourceLine" id="cb447-13" data-line-number="13"><span class="st">  3 2006 11 12 22 16</span></a>
-<a class="sourceLine" id="cb447-14" data-line-number="14"><span class="st">  3 2007 13 11 27 21</span></a>
-<a class="sourceLine" id="cb447-15" data-line-number="15"><span class="st">  3 2008 17 12 23 19</span></a>
-<a class="sourceLine" id="cb447-16" data-line-number="16"><span class="st">  3 2009 14 9 31 24</span></a>
-<a class="sourceLine" id="cb447-17" data-line-number="17"><span class="st">&quot;</span>))</a>
-<a class="sourceLine" id="cb447-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb447-19" data-line-number="19">wide</a></code></pre></div>
-<pre><code>## # A tibble: 12 x 6
-##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1     1  2006    15    16    19    17
-##  2     1  2007    12    13    27    23
-##  3     1  2008    22    22    24    20
-##  4     1  2009    10    14    20    16
-##  5     2  2006    12    13    25    18
-##  6     2  2007    16    14    21    19
-##  7     2  2008    13    11    29    15
-##  8     2  2009    23    20    26    20
-##  9     3  2006    11    12    22    16
-## 10     3  2007    13    11    27    21
-## 11     3  2008    17    12    23    19
-## 12     3  2009    14     9    31    24</code></pre>
-<p>각 연도 별 분기 자료가 가로로 길게 구성되 있습니다.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb447-3" data-line-number="3">table4a</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   country     `1999` `2000`
+## * &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766</code></pre>
+<p>세 국가의 1999, 2000년 데이터가 있습니다. 이 중 country를 제외한 연도별 데이터를 세로로 길게 만들도록 하겠습ㄴ다.</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1">long =<span class="st"> </span>table4a <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> years, <span class="dt">value =</span> cases, <span class="op">-</span>country)</a>
 <a class="sourceLine" id="cb449-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb449-3" data-line-number="3">long =<span class="st"> </span>wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(Quarter, Revenue, Qtr<span class="fl">.1</span><span class="op">:</span>Qtr<span class="fl">.4</span>)</a>
-<a class="sourceLine" id="cb449-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb449-5" data-line-number="5"><span class="kw">head</span>(long, <span class="dv">15</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 15 x 4
-##    Group  Year Quarter Revenue
-##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;int&gt;
-##  1     1  2006 Qtr.1        15
-##  2     1  2007 Qtr.1        12
-##  3     1  2008 Qtr.1        22
-##  4     1  2009 Qtr.1        10
-##  5     2  2006 Qtr.1        12
-##  6     2  2007 Qtr.1        16
-##  7     2  2008 Qtr.1        13
-##  8     2  2009 Qtr.1        23
-##  9     3  2006 Qtr.1        11
-## 10     3  2007 Qtr.1        13
-## 11     3  2008 Qtr.1        17
-## 12     3  2009 Qtr.1        14
-## 13     1  2006 Qtr.2        16
-## 14     1  2007 Qtr.2        13
-## 15     1  2008 Qtr.2        22</code></pre>
-<p>Quarter에는 열 이름에 해당하는 데이터가, Revenue에는 각 Qur.1에서 Qur.4까지의 관측치가 들어오게 되었습니다. 동일한 코드를 각기 다른 형태로 표현할 수도 있습니다.</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, Qtr<span class="fl">.1</span><span class="op">:</span>Qtr<span class="fl">.4</span>)</a>
-<a class="sourceLine" id="cb451-2" data-line-number="2">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, <span class="op">-</span>Group, <span class="op">-</span>Year)</a>
-<a class="sourceLine" id="cb451-3" data-line-number="3">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb451-4" data-line-number="4">wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span> (Quarter, Revenue, Qtr<span class="fl">.1</span>, Qtr<span class="fl">.2</span>, Qtr<span class="fl">.3</span>, Qtr<span class="fl">.4</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb449-3" data-line-number="3"><span class="kw">print</span>(long)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country     years  cases
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766</code></pre>
+<p>열 이름에 해당하던 데이터가 year 열에 들어왔으며, 관측치에 해당하는 값이 cases 열에 왔습니다.</p>
+<table class="kable_wrapper table table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+1999
+</th>
+<th style="text-align:right;">
+2000
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:right;">
+745
+</td>
+<td style="text-align:right;">
+2666
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brazil
+</td>
+<td style="text-align:right;">
+37737
+</td>
+<td style="text-align:right;">
+80488
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+China
+</td>
+<td style="text-align:right;">
+212258
+</td>
+<td style="text-align:right;">
+213766
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:left;">
+years
+</th>
+<th style="text-align:right;">
+cases
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+1999
+</td>
+<td style="text-align:right;">
+745
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brazil
+</td>
+<td style="text-align:left;">
+1999
+</td>
+<td style="text-align:right;">
+37737
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+China
+</td>
+<td style="text-align:left;">
+1999
+</td>
+<td style="text-align:right;">
+212258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2000
+</td>
+<td style="text-align:right;">
+2666
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brazil
+</td>
+<td style="text-align:left;">
+2000
+</td>
+<td style="text-align:right;">
+80488
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+China
+</td>
+<td style="text-align:left;">
+2000
+</td>
+<td style="text-align:right;">
+213766
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="가로로-긴-데이터-만들기" class="section level2">
 <h2><span class="header-section-number">16.2</span> 가로로 긴 데이터 만들기</h2>
-<p><code>gather()</code> 함수와 반대로, <code>spread()</code> 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 Quarter 열에 있는 항목들을 열 이름으로, Revenue 열에 있는 항목들을 Group, Year, Quarter에 맞춰 가로로 길게 되돌려야 합니다.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1">back2wide =<span class="st"> </span>long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Quarter, Revenue)</a>
-<a class="sourceLine" id="cb452-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb452-3" data-line-number="3">back2wide</a></code></pre></div>
-<pre><code>## # A tibble: 12 x 6
-##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1     1  2006    15    16    19    17
-##  2     1  2007    12    13    27    23
-##  3     1  2008    22    22    24    20
-##  4     1  2009    10    14    20    16
-##  5     2  2006    12    13    25    18
-##  6     2  2007    16    14    21    19
-##  7     2  2008    13    11    29    15
-##  8     2  2009    23    20    26    20
-##  9     3  2006    11    12    22    16
-## 10     3  2007    13    11    27    21
-## 11     3  2008    17    12    23    19
-## 12     3  2009    14     9    31    24</code></pre>
+<p><code>gather()</code> 함수와 반대로, <code>spread()</code> 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 year 열에 있는 항목들을 열 이름으로, cases 열에 있는 항목들을 가로로 길게 되돌려야 합니다.</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">back2wide =<span class="st"> </span>long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(years, cases)</a>
+<a class="sourceLine" id="cb451-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb451-3" data-line-number="3">back2wide</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   country     `1999` `2000`
+##   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766</code></pre>
 <p>원래와 동일한 데이터로 되돌아 왔습니다.</p>
 </div>
 <div id="하나의-열을-여러-열로-나누기" class="section level2">
 <h2><span class="header-section-number">16.3</span> 하나의 열을 여러 열로 나누기</h2>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1">messy_df =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb454-2" data-line-number="2"><span class="st">  Grp_Ind,Yr_Mo,City_State,Extra_variable</span></a>
-<a class="sourceLine" id="cb454-3" data-line-number="3"><span class="st">  1,1.a,2006_Jan,Dayton (OH),XX01person_1</span></a>
-<a class="sourceLine" id="cb454-4" data-line-number="4"><span class="st">  2,1.b,2006_Feb,Grand Forks (ND),XX02person_2</span></a>
-<a class="sourceLine" id="cb454-5" data-line-number="5"><span class="st">  3,1.c,2006_Mar,Fargo (ND),XX03person_3</span></a>
-<a class="sourceLine" id="cb454-6" data-line-number="6"><span class="st">  4,2.a,2007_Jan,Rochester (MN),XX04person_4</span></a>
-<a class="sourceLine" id="cb454-7" data-line-number="7"><span class="st">&quot;</span>,</a>
-<a class="sourceLine" id="cb454-8" data-line-number="8"><span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb454-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb454-10" data-line-number="10">messy_df</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   Grp_Ind Yr_Mo    City_State       Extra_variable
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
-## 1 1.a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1.b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1.c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2.a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
-<p>Grp_Ind열은 숫자.알파벳 형태로 이루어져 있으며, Yr_Mo 열은 YYYY_mm의 형태로 이루어져 있습니다. 이처럼 두개의 문자가 붙어있는 경우 <code>separate()</code> 함수를 통해 분리할 수 있습니다.</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1">messy_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> Grp_Ind, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Grp&quot;</span>, <span class="st">&quot;Ind&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
-##   Grp   Ind   Yr_Mo    City_State       Extra_variable
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
-## 1 1     a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1     b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1     c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2     a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
-<p>Grp_Ind 열이 점을 기준으로 Grp와 Ind 열로 분리되었습니다.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1">messy_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="dt">col =</span> Grp_Ind, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Grp&quot;</span>, <span class="st">&quot;Ind&quot;</span>), <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 6
-##   Grp_Ind Grp   Ind   Yr_Mo    City_State       Extra_variable
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         
-## 1 1.a     1     a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1.b     1     b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1.c     1     c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2.a     2     a     2007_Jan Rochester (MN)   XX04person_4</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1">table3</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country      year rate             
+## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583</code></pre>
+<p>rate 열에는 ###/#### 형태로 데이터가 들어가 있습니다. 이를 / 기준으로 앞과 뒤로 각각 나누어보도록 하겠습니다.</p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" data-line-number="1">table3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb455-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(rate, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country      year cases  population
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan  1999 745    19987071  
+## 2 Afghanistan  2000 2666   20595360  
+## 3 Brazil       1999 37737  172006362 
+## 4 Brazil       2000 80488  174504898 
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+<p>rate 열이 “/”를 기준으로 cases와 population 열로 분리되었습니다.</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" data-line-number="1">table3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb457-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(rate, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   country      year rate              cases  population
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan  1999 745/19987071      745    19987071  
+## 2 Afghanistan  2000 2666/20595360     2666   20595360  
+## 3 Brazil       1999 37737/172006362   37737  172006362 
+## 4 Brazil       2000 80488/174504898   80488  174504898 
+## 5 China        1999 212258/1272915272 212258 1272915272
+## 6 China        2000 213766/1280428583 213766 1280428583</code></pre>
 <p>remove = FALSE를 추가해주면 원래의 열을 유지합니다.</p>
 </div>
 <div id="여러-열을-하나로-합치기" class="section level2">
 <h2><span class="header-section-number">16.4</span> 여러 열을 하나로 합치기</h2>
 <p><code>separate()</code> 함수와는 반대로, <code>unite()</code> 함수를 이용시 여러 열을 하나로 합칠 수 있습니다.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1">expenses =<span class="st"> </span><span class="kw">tbl_df</span> ( <span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb460-2" data-line-number="2"><span class="st">  Year Month Day Expense</span></a>
-<a class="sourceLine" id="cb460-3" data-line-number="3"><span class="st">  2015 01 01 500</span></a>
-<a class="sourceLine" id="cb460-4" data-line-number="4"><span class="st">  2015 02 05 90</span></a>
-<a class="sourceLine" id="cb460-5" data-line-number="5"><span class="st">  2015 02 22 250</span></a>
-<a class="sourceLine" id="cb460-6" data-line-number="6"><span class="st">  2015 03 10 325</span></a>
-<a class="sourceLine" id="cb460-7" data-line-number="7"><span class="st">&quot;</span>))</a>
-<a class="sourceLine" id="cb460-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb460-9" data-line-number="9">expenses</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##    Year Month   Day Expense
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
-## 1  2015     1     1     500
-## 2  2015     2     5      90
-## 3  2015     2    22     250
-## 4  2015     3    10     325</code></pre>
-<p>Year, Month, Day를 하나의 열로 합치도록 하겠습니다.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unite</span>(<span class="dt">col =</span> <span class="st">&quot;Date&quot;</span>, <span class="kw">c</span>(Year, Month, Day))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 2
-##   Date      Expense
-##   &lt;chr&gt;       &lt;int&gt;
-## 1 2015_1_1      500
-## 2 2015_2_5       90
-## 3 2015_2_22     250
-## 4 2015_3_10     325</code></pre>
-<p>Date 열에 지정한 데이터가 합쳐지게 됩니다.</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unite</span>(<span class="dt">col =</span> <span class="st">&quot;Date&quot;</span>, <span class="kw">c</span> (Year, Month, Day), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 2
-##   Date      Expense
-##   &lt;chr&gt;       &lt;int&gt;
-## 1 2015-1-1      500
-## 2 2015-2-5       90
-## 3 2015-2-22     250
-## 4 2015-3-10     325</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1">table5</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country     century year  rate             
+## * &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 19      99    745/19987071     
+## 2 Afghanistan 20      00    2666/20595360    
+## 3 Brazil      19      99    37737/172006362  
+## 4 Brazil      20      00    80488/174504898  
+## 5 China       19      99    212258/1272915272
+## 6 China       20      00    213766/1280428583</code></pre>
+<p>century와 year 열을 하나로 합쳐보도록 하겠습니다.</p>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1">table5 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb461-2" data-line-number="2"><span class="st">  </span><span class="kw">unite</span>(new, century, year, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country     new   rate             
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 1999  745/19987071     
+## 2 Afghanistan 2000  2666/20595360    
+## 3 Brazil      1999  37737/172006362  
+## 4 Brazil      2000  80488/174504898  
+## 5 China       1999  212258/1272915272
+## 6 China       2000  213766/1280428583</code></pre>
+<p>new 열에 지정한 데이터가 합쳐지게 됩니다.</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" data-line-number="1">table5 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb463-2" data-line-number="2"><span class="st">  </span><span class="kw">unite</span>(new, century, year, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country     new   rate             
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+## 1 Afghanistan 19_99 745/19987071     
+## 2 Afghanistan 20_00 2666/20595360    
+## 3 Brazil      19_99 37737/172006362  
+## 4 Brazil      20_00 80488/174504898  
+## 5 China       19_99 212258/1272915272
+## 6 China       20_00 213766/1280428583</code></pre>
 <p>sep 인자를 통해 구분자를 선택할 수도 있습니다.</p>
 </div>
 <div id="tidyr의-기타-함수" class="section level2">
 <h2><span class="header-section-number">16.5</span> <code>tidyr</code>의 기타 함수</h2>
-<p>먼저 다음의 예제 데이터를 만들어 줍니다.</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" data-line-number="1">expenses =<span class="st"> </span><span class="kw">tbl_df</span> (<span class="kw">read.table</span>(<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb466-2" data-line-number="2"><span class="st">  Dept Year Month Day Cost</span></a>
-<a class="sourceLine" id="cb466-3" data-line-number="3"><span class="st">  A 2015 01 01 $500.00</span></a>
-<a class="sourceLine" id="cb466-4" data-line-number="4"><span class="st">  NA NA 02 05 $90.00</span></a>
-<a class="sourceLine" id="cb466-5" data-line-number="5"><span class="st">  NA NA 02 22 $1,250.45</span></a>
-<a class="sourceLine" id="cb466-6" data-line-number="6"><span class="st">  NA NA 03 NA $325.10</span></a>
-<a class="sourceLine" id="cb466-7" data-line-number="7"><span class="st">  B NA 01 02 $260.00</span></a>
-<a class="sourceLine" id="cb466-8" data-line-number="8"><span class="st">  NA NA 02 05 $90.00</span></a>
-<a class="sourceLine" id="cb466-9" data-line-number="9"><span class="st">&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb466-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb466-11" data-line-number="11">expenses</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 5
-##   Dept   Year Month   Day Cost     
-##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
-## 1 A      2015     1     1 $500.00  
-## 2 &lt;NA&gt;     NA     2     5 $90.00   
-## 3 &lt;NA&gt;     NA     2    22 $1,250.45
-## 4 &lt;NA&gt;     NA     3    NA $325.10  
-## 5 B        NA     1     2 $260.00  
-## 6 &lt;NA&gt;     NA     2     5 $90.00</code></pre>
 <div id="fill" class="section level3">
 <h3><span class="header-section-number">16.5.1</span> <code>fill()</code></h3>
 <p>많은 부분이 결측치로 비어 있으므로, 이를 채워줄 필요가 있습니다.</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fill</span>(Dept, Year)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 5
-##   Dept   Year Month   Day Cost     
-##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    
-## 1 A      2015     1     1 $500.00  
-## 2 A      2015     2     5 $90.00   
-## 3 A      2015     2    22 $1,250.45
-## 4 A      2015     3    NA $325.10  
-## 5 B      2015     1     2 $260.00  
-## 6 B      2015     2     5 $90.00</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1">treatment =<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb465-2" data-line-number="2">  <span class="op">~</span><span class="st"> </span>person,           <span class="op">~</span><span class="st"> </span>treatment, <span class="op">~</span>response,</a>
+<a class="sourceLine" id="cb465-3" data-line-number="3">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb465-4" data-line-number="4">  <span class="ot">NA</span>,                 <span class="dv">2</span>,           <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb465-5" data-line-number="5">  <span class="ot">NA</span>,                 <span class="ot">NA</span>,           <span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb465-6" data-line-number="6">  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></a>
+<a class="sourceLine" id="cb465-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb465-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb465-9" data-line-number="9">treatment</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 &lt;NA&gt;                     2       10
+## 3 &lt;NA&gt;                    NA        9
+## 4 Katherine Burke          1        4</code></pre>
+<p>treatment의 2번째와 3번째 행에 <code>NA</code> 데이터가 있어 이를 채워줄 필요가 있습니다.</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1">treatment <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb467-2" data-line-number="2"><span class="st">  </span><span class="kw">fill</span>(person, treatment)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         2        9
+## 4 Katherine Burke          1        4</code></pre>
 <p><code>fill()</code> 함수는 결측치가 있을 경우, 각 열의 이전 데이터를 이용해 채워줍니다.</p>
 </div>
 <div id="replce_na" class="section level3">
 <h3><span class="header-section-number">16.5.2</span> <code>replce_na()</code></h3>
-<p>NA 데이터를 특정 값으로 변경하고자 합니다.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">Day =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 5
-##   Dept   Year Month Day     Cost     
-##   &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    
-## 1 A      2015     1 1       $500.00  
-## 2 &lt;NA&gt;     NA     2 5       $90.00   
-## 3 &lt;NA&gt;     NA     2 22      $1,250.45
-## 4 &lt;NA&gt;     NA     3 unknown $325.10  
-## 5 B        NA     1 2       $260.00  
-## 6 &lt;NA&gt;     NA     2 5       $90.00</code></pre>
-<p><code>replace_na()</code> 함수를 이용해 Day 열의 NA 데이터를 <strong>unknown</strong>으로 변경하였습니다.</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1">expenses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">Year =</span> <span class="dv">2015</span>, <span class="dt">Day =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 5
-##   Dept   Year Month Day     Cost     
-##   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    
-## 1 A      2015     1 1       $500.00  
-## 2 &lt;NA&gt;   2015     2 5       $90.00   
-## 3 &lt;NA&gt;   2015     2 22      $1,250.45
-## 4 &lt;NA&gt;   2015     3 unknown $325.10  
-## 5 B      2015     1 2       $260.00  
-## 6 &lt;NA&gt;   2015     2 5       $90.00</code></pre>
+<p>NA 데이터를 특정 값으로 변경할 수도 있습니다.</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" data-line-number="1">treatment <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">person =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 unknown                  2       10
+## 3 unknown                 NA        9
+## 4 Katherine Burke          1        4</code></pre>
+<p><code>replace_na()</code> 함수를 이용해 person 열의 NA 데이터를 <strong>unknown</strong>으로 변경하였습니다.</p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" data-line-number="1">treatment <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="dt">replace =</span> <span class="kw">list</span> (<span class="dt">person =</span> <span class="st">&quot;unknown&quot;</span>, <span class="dt">treatment =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 unknown                  2       10
+## 3 unknown                  1        9
+## 4 Katherine Burke          1        4</code></pre>
 <p>각 열마다 서로 다른 값으로 변경할 수 있습니다.</p>
 
 </div>

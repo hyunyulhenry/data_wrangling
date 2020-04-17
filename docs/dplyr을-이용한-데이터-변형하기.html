@@ -21,10 +21,10 @@
   
   
 
-<meta name="author" content="이현열" />
+<meta name="author" content="이현열 (Henry Lee)" />
 
 
-<meta name="date" content="2020-02-05" />
+<meta name="date" content="2020-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,192 +296,243 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dplyr을-이용한-데이터-변형하기" class="section level1">
 <h1><span class="header-section-number">Chapter 17</span> <code>dplyr</code>을 이용한 데이터 변형하기</h1>
 <p>데이터를 필터링 하거나, 요약하거나, 정렬하거나, 새로운 변수를 만드는 등 데이터 분석을 위해서는 데이터 변형하고 가공해야 하는 경우가 많습니다. R의 기본 함수도 이러한 기능을 제공하지만. <code>dplyr</code> 패키지를 이용할 경우 훨씬 빠르고 효율적으로 업무를 처리할 수 있습니다.</p>
-<p>먼저 다음 데이터셋을 만들어 줍니다.</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb474-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb474-3" data-line-number="3">expenditure =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb474-4" data-line-number="4"><span class="st">Division State X1980 X1990 X2000 X2001 X2002 X2003 X2004 X2005 X2006 X2007 X2008 X2009 X2010 X2011</span></a>
-<a class="sourceLine" id="cb474-5" data-line-number="5"><span class="st">6 Alabama 1146713 2275233 4176082 4354794 4444390 4657643 4812479 5164406 5699076 6245031 6832439 6683843 6670517 6592925</span></a>
-<a class="sourceLine" id="cb474-6" data-line-number="6"><span class="st">9 Alaska 377947 828051 1183499 1229036 1284854 1326226 1354846 1442269 1529645 1634316 1918375 2007319 2084019 2201270</span></a>
-<a class="sourceLine" id="cb474-7" data-line-number="7"><span class="st">8 Arizona 949753 2258660 4288739 4846105 5395814 5892227 6071785 6579957 7130341 7815720 8403221 8726755 8482552 8340211</span></a>
-<a class="sourceLine" id="cb474-8" data-line-number="8"><span class="st">7 Arkansas 666949 1404545 2380331 2505179 2822877 2923401 3109644 3546999 3808011 3997701 4156368 4240839 4459910 4578136</span></a>
-<a class="sourceLine" id="cb474-9" data-line-number="9"><span class="st">9 California 9172158 21485782 38129479 42908787 46265544 47983402 49215866 50918654 53436103 57352599 61570555 60080929 58248662 57526835</span></a>
-<a class="sourceLine" id="cb474-10" data-line-number="10"><span class="st">8 Colorado 1243049 2451833 4401010 4758173 5151003 5551506 5666191 5994440 6368289 6579053 7338766 7187267 7429302 7409462</span></a>
-<a class="sourceLine" id="cb474-11" data-line-number="11"><span class="st">&quot;</span>))</a>
-<a class="sourceLine" id="cb474-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb474-13" data-line-number="13">expenditure</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 16
-##   Division State  X1980  X1990  X2000  X2001  X2002  X2003  X2004  X2005  X2006
-##      &lt;int&gt; &lt;fct&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-## 1        6 Alab… 1.15e6 2.28e6 4.18e6 4.35e6 4.44e6 4.66e6 4.81e6 5.16e6 5.70e6
-## 2        9 Alas… 3.78e5 8.28e5 1.18e6 1.23e6 1.28e6 1.33e6 1.35e6 1.44e6 1.53e6
-## 3        8 Ariz… 9.50e5 2.26e6 4.29e6 4.85e6 5.40e6 5.89e6 6.07e6 6.58e6 7.13e6
-## 4        7 Arka… 6.67e5 1.40e6 2.38e6 2.51e6 2.82e6 2.92e6 3.11e6 3.55e6 3.81e6
-## 5        9 Cali… 9.17e6 2.15e7 3.81e7 4.29e7 4.63e7 4.80e7 4.92e7 5.09e7 5.34e7
-## 6        8 Colo… 1.24e6 2.45e6 4.40e6 4.76e6 5.15e6 5.55e6 5.67e6 5.99e6 6.37e6
-## # … with 5 more variables: X2007 &lt;int&gt;, X2008 &lt;int&gt;, X2009 &lt;int&gt;, X2010 &lt;int&gt;,
-## #   X2011 &lt;int&gt;</code></pre>
+<p>nycflights13 패키지의 flights 데이터셋을 예제로 사용하도록 하겠습니다.</p>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb473-2" data-line-number="2"><span class="kw">library</span>(nycflights13)</a>
+<a class="sourceLine" id="cb473-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb473-4" data-line-number="4">flights</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <div id="select-원하는-열-선택하기" class="section level2">
 <h2><span class="header-section-number">17.1</span> <code>select()</code>: 원하는 열 선택하기</h2>
 <p><code>select()</code> 함수를 이용해 특정 열만을 선택할 수 있습니다.</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1">sub_exp =<span class="st"> </span>expenditure <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Division, State, X2007<span class="op">:</span>X2011)</a>
-<a class="sourceLine" id="cb476-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb476-3" data-line-number="3"><span class="kw">head</span>(sub_exp)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-##   Division State         X2007    X2008    X2009    X2010    X2011
-##      &lt;int&gt; &lt;fct&gt;         &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
-## 1        6 Alabama     6245031  6832439  6683843  6670517  6592925
-## 2        9 Alaska      1634316  1918375  2007319  2084019  2201270
-## 3        8 Arizona     7815720  8403221  8726755  8482552  8340211
-## 4        7 Arkansas    3997701  4156368  4240839  4459910  4578136
-## 5        9 California 57352599 61570555 60080929 58248662 57526835
-## 6        8 Colorado    6579053  7338766  7187267  7429302  7409462</code></pre>
-<p>Division과 State 열, 그리고 X2007부터 X2011까지의 열을 선택했습니다.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1">expenditure <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb478-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;X&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb478-3" data-line-number="3"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 14
-##    X1980  X1990  X2000  X2001  X2002  X2003  X2004  X2005  X2006  X2007  X2008
-##    &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-## 1 1.15e6 2.28e6 4.18e6 4.35e6 4.44e6 4.66e6 4.81e6 5.16e6 5.70e6 6.25e6 6.83e6
-## 2 3.78e5 8.28e5 1.18e6 1.23e6 1.28e6 1.33e6 1.35e6 1.44e6 1.53e6 1.63e6 1.92e6
-## 3 9.50e5 2.26e6 4.29e6 4.85e6 5.40e6 5.89e6 6.07e6 6.58e6 7.13e6 7.82e6 8.40e6
-## 4 6.67e5 1.40e6 2.38e6 2.51e6 2.82e6 2.92e6 3.11e6 3.55e6 3.81e6 4.00e6 4.16e6
-## 5 9.17e6 2.15e7 3.81e7 4.29e7 4.63e7 4.80e7 4.92e7 5.09e7 5.34e7 5.74e7 6.16e7
-## 6 1.24e6 2.45e6 4.40e6 4.76e6 5.15e6 5.55e6 5.67e6 5.99e6 6.37e6 6.58e6 7.34e6
-## # … with 3 more variables: X2009 &lt;int&gt;, X2010 &lt;int&gt;, X2011 &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(year, month, day)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # … with 336,766 more rows</code></pre>
+<p>year, month, day 열을 선택했습니다.</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(year<span class="op">:</span>day)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # … with 336,766 more rows</code></pre>
+<p>콜론(:)을 이용해 year부터 day 까지의 열을 한번에 선택할 수도 있습니다.</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>(year<span class="op">:</span>day))</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 16
+##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
+##  1      517            515         2      830            819        11 UA     
+##  2      533            529         4      850            830        20 UA     
+##  3      542            540         2      923            850        33 AA     
+##  4      544            545        -1     1004           1022       -18 B6     
+##  5      554            600        -6      812            837       -25 DL     
+##  6      554            558        -4      740            728        12 UA     
+##  7      555            600        -5      913            854        19 B6     
+##  8      557            600        -3      709            723       -14 EV     
+##  9      557            600        -3      838            846        -8 B6     
+## 10      558            600        -2      753            745         8 AA     
+## # … with 336,766 more rows, and 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>마이너스(-)를 이용할 경우 해당 열을 제외한 모든 열이 선택됩니다.</p>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;dep&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 2
+##    dep_time dep_delay
+##       &lt;int&gt;     &lt;dbl&gt;
+##  1      517         2
+##  2      533         4
+##  3      542         2
+##  4      544        -1
+##  5      554        -6
+##  6      554        -4
+##  7      555        -5
+##  8      557        -3
+##  9      557        -3
+## 10      558        -2
+## # … with 336,766 more rows</code></pre>
 <p><code>select()</code> 함수 내에 <code>starts_with()</code> 함수를 이용할 경우, 해당 문자로 시작하는 열을 모두 선택할 수 있습니다.</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1">expenditure <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>X1980<span class="op">:-</span>X2006)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-##   Division State         X2007    X2008    X2009    X2010    X2011
-##      &lt;int&gt; &lt;fct&gt;         &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
-## 1        6 Alabama     6245031  6832439  6683843  6670517  6592925
-## 2        9 Alaska      1634316  1918375  2007319  2084019  2201270
-## 3        8 Arizona     7815720  8403221  8726755  8482552  8340211
-## 4        7 Arkansas    3997701  4156368  4240839  4459910  4578136
-## 5        9 California 57352599 61570555 60080929 58248662 57526835
-## 6        8 Colorado    6579053  7338766  7187267  7429302  7409462</code></pre>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" data-line-number="1">expenditure <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;X&quot;</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 2
-##   Division State     
-##      &lt;int&gt; &lt;fct&gt;     
-## 1        6 Alabama   
-## 2        9 Alaska    
-## 3        8 Arizona   
-## 4        7 Arkansas  
-## 5        9 California
-## 6        8 Colorado</code></pre>
-<p>마이너스 부호를 사용할 경우, 해당 부분을 제외하고 데이터를 선택할 수 있습니다.</p>
 </div>
 <div id="rename-이름-새로-부여하기" class="section level2">
 <h2><span class="header-section-number">17.2</span> <code>rename()</code>: 이름 새로 부여하기</h2>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">expenditure <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(X2011) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">2011</span><span class="st">`</span> =<span class="st"> </span>X2011)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 1
-##     `2011`
-##      &lt;int&gt;
-## 1  6592925
-## 2  2201270
-## 3  8340211
-## 4  4578136
-## 5 57526835
-## 6  7409462</code></pre>
-<p><code>rename()</code> 함수를 이용해 X2011 이던 열 이름을 2011로 변형하였습니다.</p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">tail_num =</span> tailnum) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(tail_num)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 1
+##    tail_num
+##    &lt;chr&gt;   
+##  1 N14228  
+##  2 N24211  
+##  3 N619AA  
+##  4 N804JB  
+##  5 N668DN  
+##  6 N39463  
+##  7 N516JB  
+##  8 N829AS  
+##  9 N593JB  
+## 10 N3ALAA  
+## # … with 336,766 more rows</code></pre>
+<p><code>rename()</code> 함수를 이용해 tailnum 이던 열 이름을 tail_num 으로 변경하였습니다.</p>
 </div>
 <div id="filter-필터링" class="section level2">
 <h2><span class="header-section-number">17.3</span> <code>filter()</code>: 필터링</h2>
 <p>특정 열에 원하는 데이터가 있는 부분만 필터링을 해야하는 경우가 많으며, <code>filter()</code> 함수를 사용해 손쉽게 해결할 수 있습니다.</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Division <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 2 x 7
-##   Division State      X2007   X2008   X2009   X2010   X2011
-##      &lt;int&gt; &lt;fct&gt;      &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
-## 1        8 Arizona  7815720 8403221 8726755 8482552 8340211
-## 2        8 Colorado 6579053 7338766 7187267 7429302 7409462</code></pre>
-<p>Division 열의 데이터가 8인 부분만 선택되었습니다. 이러한 필터에는 다양한 조건이 들어갈 수도 있습니다.</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Division <span class="op">==</span><span class="st"> </span><span class="dv">7</span>, X2011 <span class="op">&gt;</span><span class="st"> </span><span class="dv">800000</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 7
-##   Division State      X2007   X2008   X2009   X2010   X2011
-##      &lt;int&gt; &lt;fct&gt;      &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
-## 1        7 Arkansas 3997701 4156368 4240839 4459910 4578136</code></pre>
-<p>Division이 7이며, X2011이 800000인 조건을 동시에 만족하는 행이 선택되었습니다.</p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, day <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 842 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 832 more rows, and 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>month 열이 1이고, day 열이 1인 부분만 선택되었습니다.</p>
 </div>
 <div id="group_by-원하는-조건으로-그룹화" class="section level2">
 <h2><span class="header-section-number">17.4</span> <code>group_by()</code>: 원하는 조건으로 그룹화</h2>
 <p>각 그룹별 통계량을 계산할 때는 <code>group_by()</code> 함수를 통해 그룹을 묶고, 계산하는 것이 편합니다.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1">group.exp =<span class="st"> </span>sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Division)</a>
-<a class="sourceLine" id="cb490-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb490-3" data-line-number="3">group.exp</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-## # Groups:   Division [4]
-##   Division State         X2007    X2008    X2009    X2010    X2011
-##      &lt;int&gt; &lt;fct&gt;         &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
-## 1        6 Alabama     6245031  6832439  6683843  6670517  6592925
-## 2        9 Alaska      1634316  1918375  2007319  2084019  2201270
-## 3        8 Arizona     7815720  8403221  8726755  8482552  8340211
-## 4        7 Arkansas    3997701  4156368  4240839  4459910  4578136
-## 5        9 California 57352599 61570555 60080929 58248662 57526835
-## 6        8 Colorado    6579053  7338766  7187267  7429302  7409462</code></pre>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1">by_day =<span class="st"> </span><span class="kw">group_by</span>(flights, year, month, day)</a>
+<a class="sourceLine" id="cb487-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb487-3" data-line-number="3">by_day</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 19
+## # Groups:   year, month, day [365]
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Division을 기준으로 그룹을 묶었습니다. 아직 계산을 하지 않았으므로 데이터프레임 자체는 원래와 동일하며, <strong>Groups</strong>를 통해 어떠한 조건으로 그룹이 묶여있는지 확인됩니다.</p>
 </div>
 <div id="summarize-요약값-계산하기" class="section level2">
 <h2><span class="header-section-number">17.5</span> <code>summarize()</code>: 요약값 계산하기</h2>
 <p>요약 통계값은 <code>summarize()</code> 함수를 통해 쉽게 계산할 수 있습니다.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Mean_2011 =</span> <span class="kw">mean</span>(X2011))</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
-##   Mean_2011
-##       &lt;dbl&gt;
-## 1 14441473.</code></pre>
-<p>X2011 열의 평균(mean)을 계산해 Mean_2011로 저장하였습니다.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb494-2" data-line-number="2">  <span class="dt">Min =</span> <span class="kw">min</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-3" data-line-number="3">  <span class="dt">Median =</span> <span class="kw">median</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-4" data-line-number="4">  <span class="dt">Var =</span> <span class="kw">var</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-5" data-line-number="5">  <span class="dt">SD =</span> <span class="kw">sd</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-6" data-line-number="6">  <span class="dt">Max =</span> <span class="kw">max</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-7" data-line-number="7">  <span class="dt">N =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb494-8" data-line-number="8">)</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
-##       Min   Median     Var        SD      Max     N
-##     &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;
-## 1 2201270 7001194. 4.50e14 21221360. 57526835     6</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" data-line-number="1">by_day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 365 x 4
+## # Groups:   year, month [12]
+##     year month   day delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  2013     1     1 11.5 
+##  2  2013     1     2 13.9 
+##  3  2013     1     3 11.0 
+##  4  2013     1     4  8.95
+##  5  2013     1     5  5.73
+##  6  2013     1     6  7.15
+##  7  2013     1     7  5.42
+##  8  2013     1     8  2.55
+##  9  2013     1     9  2.28
+## 10  2013     1    10  2.84
+## # … with 355 more rows</code></pre>
+<p>각 그룹 별 dep_delay의 평균을 구하며, <code>na.rm</code> 인자를 TRUE로 설정하여 <code>NA</code> 데이터는 제거해 줍니다.</p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb491-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb491-3" data-line-number="3">    <span class="dt">count =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb491-4" data-line-number="4">    <span class="dt">dist =</span> <span class="kw">mean</span>(distance, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb491-5" data-line-number="5">    <span class="dt">delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb491-6" data-line-number="6">)</a></code></pre></div>
+<pre><code>## # A tibble: 105 x 4
+##    dest  count  dist delay
+##    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 ABQ     254 1826   4.38
+##  2 ACK     265  199   4.85
+##  3 ALB     439  143  14.4 
+##  4 ANC       8 3370  -2.5 
+##  5 ATL   17215  757. 11.3 
+##  6 AUS    2439 1514.  6.02
+##  7 AVL     275  584.  8.00
+##  8 BDL     443  116   7.05
+##  9 BGR     375  378   8.03
+## 10 BHM     297  866. 16.9 
+## # … with 95 more rows</code></pre>
 <p>한 번에 여러 통계량을 계산할 수도 습니다. <code>n()</code>은 전체 행 갯수를 의미합니다. <code>group_by()</code>를 통해 그룹으로 묶여진 데이터에 <code>summarize()</code> 함수를 적용할 경우, 그룹 별 통계량이 계산됩니다.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Division) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb496-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_2010 =</span> <span class="kw">mean</span>(X2010, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb496-3" data-line-number="3">            <span class="dt">Mean_2011 =</span> <span class="kw">mean</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 3
-##   Division Mean_2010 Mean_2011
-##      &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1        6  6670517   6592925 
-## 2        7  4459910   4578136 
-## 3        8  7955927   7874836.
-## 4        9 30166340. 29864052.</code></pre>
-<p>Division별 2010열과 2011열의 평균값이 계산되었습니다.</p>
 </div>
 <div id="arrange-데이터-정렬하기" class="section level2">
 <h2><span class="header-section-number">17.6</span> <code>arrange()</code>: 데이터 정렬하기</h2>
 <p><code>arrange()</code> 함수를 통해 원하는 열을 기준으로 데이터를 순서대로 정렬할 수 있으며, 오름차순을 기본으로 합니다.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Division) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb498-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_2010 =</span> <span class="kw">mean</span>(X2010, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb498-3" data-line-number="3">            <span class="dt">Mean_2011 =</span> <span class="kw">mean</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb498-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(Mean_<span class="dv">2011</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 3
-##   Division Mean_2010 Mean_2011
-##      &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1        7  4459910   4578136 
-## 2        6  6670517   6592925 
-## 3        8  7955927   7874836.
-## 4        9 30166340. 29864052.</code></pre>
-<p>Mean_2010이 낮은 값부터 높은 순으로 정렬됩니다.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1">sub_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Division) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb500-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_2010 =</span> <span class="kw">mean</span>(X2010, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb500-3" data-line-number="3">            <span class="dt">Mean_2011 =</span> <span class="kw">mean</span>(X2011, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb500-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Mean_<span class="dv">2011</span>))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 3
-##   Division Mean_2010 Mean_2011
-##      &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1        9 30166340. 29864052.
-## 2        8  7955927   7874836.
-## 3        6  6670517   6592925 
-## 4        7  4459910   4578136</code></pre>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(year, month, day)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>[year -&gt; month -&gt; day] 순으로 내림차순 정렬이 됩니다.</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(dep_delay))</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     9      641            900      1301     1242           1530
+##  2  2013     6    15     1432           1935      1137     1607           2120
+##  3  2013     1    10     1121           1635      1126     1239           1810
+##  4  2013     9    20     1139           1845      1014     1457           2210
+##  5  2013     7    22      845           1600      1005     1044           1815
+##  6  2013     4    10     1100           1900       960     1342           2211
+##  7  2013     3    17     2321            810       911      135           1020
+##  8  2013     6    27      959           1900       899     1236           2226
+##  9  2013     7    22     2257            759       898      121           1026
+## 10  2013    12     5      756           1700       896     1058           2020
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p><code>arrange()</code> 내에 <code>desc()</code> 함수를 추가할 경우 내림차순으로 정렬됩니다.</p>
 </div>
 <div id="join-데이터-합치기" class="section level2">
@@ -495,141 +546,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>semi_join()</code></li>
 <li><code>anti_join()</code></li>
 </ul>
-<p>다음의 데이터프레임을 만들도록 합니다.</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1">inflation =<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">read.table</span> (<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">text =</span> <span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb502-2" data-line-number="2"><span class="st">Year Annual Inflation</span></a>
-<a class="sourceLine" id="cb502-3" data-line-number="3"><span class="st">2007 207.342 0.9030811</span></a>
-<a class="sourceLine" id="cb502-4" data-line-number="4"><span class="st">2008 215.303 0.9377553</span></a>
-<a class="sourceLine" id="cb502-5" data-line-number="5"><span class="st">2009 214.537 0.9344190</span></a>
-<a class="sourceLine" id="cb502-6" data-line-number="6"><span class="st">2010 218.056 0.9497461</span></a>
-<a class="sourceLine" id="cb502-7" data-line-number="7"><span class="st">2011 224.939 0.9797251</span></a>
-<a class="sourceLine" id="cb502-8" data-line-number="8"><span class="st">2012 229.594 1.0000000</span></a>
-<a class="sourceLine" id="cb502-9" data-line-number="9"><span class="st">&quot;</span>))</a>
-<a class="sourceLine" id="cb502-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb502-11" data-line-number="11">inflation</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 3
-##    Year Annual Inflation
-##   &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2007   207.     0.903
-## 2  2008   215.     0.938
-## 3  2009   215.     0.934
-## 4  2010   218.     0.950
-## 5  2011   225.     0.980
-## 6  2012   230.     1</code></pre>
-<p>기존 sub_exp 데이터를 <code>gather()</code> 함수를 사용해 세로로 긴 형태로 만들어줍니다.</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb504-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb504-3" data-line-number="3">long_exp =<span class="st"> </span>sub_exp <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb504-4" data-line-number="4"><span class="st">  </span><span class="kw">gather</span>(Year, Expenditure, X2007<span class="op">:</span>X2011) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb504-5" data-line-number="5"><span class="st">  </span><span class="kw">separate</span>(Year, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;Year&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;X&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb504-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>x) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb504-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> <span class="kw">as.numeric</span>(Year))</a>
-<a class="sourceLine" id="cb504-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb504-9" data-line-number="9"><span class="kw">head</span>(long_exp)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 4
-##   Division State       Year Expenditure
-##      &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;int&gt;
-## 1        6 Alabama     2007     6245031
-## 2        9 Alaska      2007     1634316
-## 3        8 Arizona     2007     7815720
-## 4        7 Arkansas    2007     3997701
-## 5        9 California  2007    57352599
-## 6        8 Colorado    2007     6579053</code></pre>
-<p><code>left_join()</code> 함수를 이용해 왼쪽 데이터프레임을 기준으로 합쳐보도록 합니다. 두 데이터 모두 Year가 있으므로 이를 기준으로 데이터가 합쳐집니다.</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" data-line-number="1">join_exp =<span class="st"> </span>long_exp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(inflation)</a>
-<a class="sourceLine" id="cb506-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb506-3" data-line-number="3">join_exp</a></code></pre></div>
-<pre><code>## # A tibble: 30 x 6
-##    Division State       Year Expenditure Annual Inflation
-##       &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
-##  1        6 Alabama     2007     6245031   207.     0.903
-##  2        9 Alaska      2007     1634316   207.     0.903
-##  3        8 Arizona     2007     7815720   207.     0.903
-##  4        7 Arkansas    2007     3997701   207.     0.903
-##  5        9 California  2007    57352599   207.     0.903
-##  6        8 Colorado    2007     6579053   207.     0.903
-##  7        6 Alabama     2008     6832439   215.     0.938
-##  8        9 Alaska      2008     1918375   215.     0.938
-##  9        8 Arizona     2008     8403221   215.     0.938
-## 10        7 Arkansas    2008     4156368   215.     0.938
-## # … with 20 more rows</code></pre>
-<p>Division과 Start, Year, Expenditure는 long_exp 데이터를 그대로 가져오며, Year에 매핑되는 Anuual, Inlation 값이 새로운 열로 생성됩니다.</p>
+<p>다음 두개의 데이터 테이블을 이용하도록 합니다.</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1">flights2 =<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb497-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(year<span class="op">:</span>day, hour, tailnum, carrier)</a>
+<a class="sourceLine" id="cb497-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb497-4" data-line-number="4">flights2</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 6
+##     year month   day  hour tailnum carrier
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+##  1  2013     1     1     5 N14228  UA     
+##  2  2013     1     1     5 N24211  UA     
+##  3  2013     1     1     5 N619AA  AA     
+##  4  2013     1     1     5 N804JB  B6     
+##  5  2013     1     1     6 N668DN  DL     
+##  6  2013     1     1     5 N39463  UA     
+##  7  2013     1     1     6 N516JB  B6     
+##  8  2013     1     1     6 N829AS  EV     
+##  9  2013     1     1     6 N593JB  B6     
+## 10  2013     1     1     6 N3ALAA  AA     
+## # … with 336,766 more rows</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1">airlines</a></code></pre></div>
+<pre><code>## # A tibble: 16 x 2
+##    carrier name                       
+##    &lt;chr&gt;   &lt;chr&gt;                      
+##  1 9E      Endeavor Air Inc.          
+##  2 AA      American Airlines Inc.     
+##  3 AS      Alaska Airlines Inc.       
+##  4 B6      JetBlue Airways            
+##  5 DL      Delta Air Lines Inc.       
+##  6 EV      ExpressJet Airlines Inc.   
+##  7 F9      Frontier Airlines Inc.     
+##  8 FL      AirTran Airways Corporation
+##  9 HA      Hawaiian Airlines Inc.     
+## 10 MQ      Envoy Air                  
+## 11 OO      SkyWest Airlines Inc.      
+## 12 UA      United Air Lines Inc.      
+## 13 US      US Airways Inc.            
+## 14 VX      Virgin America             
+## 15 WN      Southwest Airlines Co.     
+## 16 YV      Mesa Airlines Inc.</code></pre>
+<p><code>left_join()</code> 함수를 이용해 왼쪽 데이터프레임을 기준으로 합쳐보도록 합니다. 두 데이터 모두 carrier 열이 있으므로 이를 기준으로 데이터가 합쳐집니다.</p>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" data-line-number="1">flights2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb501-2" data-line-number="2"><span class="st">  </span><span class="kw">left_join</span>(airlines, <span class="dt">by =</span> <span class="st">&quot;carrier&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 7
+##     year month   day  hour tailnum carrier name                    
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                   
+##  1  2013     1     1     5 N14228  UA      United Air Lines Inc.   
+##  2  2013     1     1     5 N24211  UA      United Air Lines Inc.   
+##  3  2013     1     1     5 N619AA  AA      American Airlines Inc.  
+##  4  2013     1     1     5 N804JB  B6      JetBlue Airways         
+##  5  2013     1     1     6 N668DN  DL      Delta Air Lines Inc.    
+##  6  2013     1     1     5 N39463  UA      United Air Lines Inc.   
+##  7  2013     1     1     6 N516JB  B6      JetBlue Airways         
+##  8  2013     1     1     6 N829AS  EV      ExpressJet Airlines Inc.
+##  9  2013     1     1     6 N593JB  B6      JetBlue Airways         
+## 10  2013     1     1     6 N3ALAA  AA      American Airlines Inc.  
+## # … with 336,766 more rows</code></pre>
+<p>flights2의 모든 데이터를 가져오며, airlines의 name 열이 기존 테이블에 추가됩니다.</p>
+<p>join 구문에 대한 더욱 상세한 예제 및 애니메이션은 다음 주소를 참조하시기 바랍니다.</p>
+<pre><code>https://github.com/gadenbuie/tidyexplain</code></pre>
 </div>
 <div id="mutate-새로운-열-생성하기" class="section level2">
 <h2><span class="header-section-number">17.8</span> <code>mutate()</code>: 새로운 열 생성하기</h2>
 <p><code>mutate()</code> 함수를 사용해 기존 열끼리 계산을 하여 새로운 열을 생성할 수 있습니다.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" data-line-number="1">inflation_adj =<span class="st"> </span>join_exp <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb508-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Adj_Exp =</span> Expenditure <span class="op">/</span><span class="st"> </span>Inflation)</a>
-<a class="sourceLine" id="cb508-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb508-4" data-line-number="4"><span class="kw">head</span>(inflation_adj)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-##   Division State       Year Expenditure Annual Inflation   Adj_Exp
-##      &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1        6 Alabama     2007     6245031   207.     0.903  6915249.
-## 2        9 Alaska      2007     1634316   207.     0.903  1809711.
-## 3        8 Arizona     2007     7815720   207.     0.903  8654505.
-## 4        7 Arkansas    2007     3997701   207.     0.903  4426735.
-## 5        9 California  2007    57352599   207.     0.903 63507695.
-## 6        8 Colorado    2007     6579053   207.     0.903  7285119.</code></pre>
-<p>Expenditure를 Inflation으로 나눈 값을 Adj_Exp 열로 생성하였습니다.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" data-line-number="1">rank_exp =<span class="st"> </span>inflation_adj <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb510-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(Year <span class="op">==</span><span class="st"> </span><span class="dv">2010</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb510-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Adj_Exp)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb510-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Rank =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Adj_Exp))</a>
-<a class="sourceLine" id="cb510-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb510-6" data-line-number="6"><span class="kw">head</span>(rank_exp)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 8
-##   Division State       Year Expenditure Annual Inflation   Adj_Exp  Rank
-##      &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;       &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-## 1        9 California  2010    58248662   218.     0.950 61330773.     1
-## 2        8 Arizona     2010     8482552   218.     0.950  8931389.     2
-## 3        8 Colorado    2010     7429302   218.     0.950  7822409.     3
-## 4        6 Alabama     2010     6670517   218.     0.950  7023474.     4
-## 5        7 Arkansas    2010     4459910   218.     0.950  4695897.     5
-## 6        9 Alaska      2010     2084019   218.     0.950  2194291.     6</code></pre>
-<ol style="list-style-type: decimal">
-<li>Year가 2010인 행만 선택합니다.</li>
-<li>Adj_Exp를 내림차순으로 정리합니다.</li>
-<li>Rank열에 순서를 생성합니다.</li>
-</ol>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1">inflation_adj <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb512-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(State <span class="op">==</span><span class="st"> &#39;Arizona&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb512-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Perc_Chg =</span> (Adj_Exp <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(Adj_Exp)) <span class="op">/</span><span class="st"> </span><span class="kw">lag</span>(Adj_Exp))</a></code></pre></div>
-<pre><code>## # A tibble: 5 x 8
-##   Division State    Year Expenditure Annual Inflation  Adj_Exp Perc_Chg
-##      &lt;int&gt; &lt;fct&gt;   &lt;dbl&gt;       &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-## 1        8 Arizona  2007     7815720   207.     0.903 8654505.  NA     
-## 2        8 Arizona  2008     8403221   215.     0.938 8960995.   0.0354
-## 3        8 Arizona  2009     8726755   215.     0.934 9339231.   0.0422
-## 4        8 Arizona  2010     8482552   218.     0.950 8931389.  -0.0437
-## 5        8 Arizona  2011     8340211   225.     0.980 8512807.  -0.0469</code></pre>
-<ol style="list-style-type: decimal">
-<li>State가 Arizona인 행만 선택합니다.</li>
-<li><code>lag()</code> 함수는 한 단계 이전을 선택하므로, 이를 통해 전년 대비 증가율을 계산할 수 있습니다.</li>
-</ol>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1">inflation_adj <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb514-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(Year <span class="op">==</span><span class="st"> </span><span class="dv">2011</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb514-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Adj_Exp)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb514-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pct_of_Total =</span> Adj_Exp <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Adj_Exp),</a>
-<a class="sourceLine" id="cb514-5" data-line-number="5">         <span class="dt">Cum_Perc =</span> <span class="kw">cumsum</span>(Pct_of_Total)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb514-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Expenditure, <span class="op">-</span>Annual, <span class="op">-</span>Inflation) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb514-7" data-line-number="7"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 5 x 6
-##   Division State       Year   Adj_Exp Pct_of_Total Cum_Perc
-##      &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
-## 1        9 California  2011 58717323.       0.664     0.664
-## 2        8 Arizona     2011  8512807.       0.0963    0.760
-## 3        8 Colorado    2011  7562797.       0.0855    0.846
-## 4        6 Alabama     2011  6729362.       0.0761    0.922
-## 5        7 Arkansas    2011  4672878.       0.0528    0.975</code></pre>
-<ol style="list-style-type: decimal">
-<li>Year가 2011인 행만 선택합니다.</li>
-<li>Adj_Exp를 기준으로 내림차순 정렬합니다.</li>
-<li>Adj_Exp를 전체 합으로 나누어 비율을 계산합니다.</li>
-<li><code>cumsum()</code> 함수를 통해 누적합을 구합니다.</li>
-<li><code>select()</code> 함수를 통해 불필요한 열을 제거합니다.</li>
-<li><code>slice()</code> 함수를 통해 1부터 5행 까지만 보여줍니다.</li>
-</ol>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1">flights_sml =<span class="st"> </span>flights <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb504-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb504-3" data-line-number="3">    year<span class="op">:</span>day, </a>
+<a class="sourceLine" id="cb504-4" data-line-number="4">    <span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), </a>
+<a class="sourceLine" id="cb504-5" data-line-number="5">    distance, </a>
+<a class="sourceLine" id="cb504-6" data-line-number="6">    air_time</a>
+<a class="sourceLine" id="cb504-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb504-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb504-9" data-line-number="9">flights_sml <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb504-10" data-line-number="10">  <span class="dt">gain =</span> dep_delay <span class="op">-</span><span class="st"> </span>arr_delay,</a>
+<a class="sourceLine" id="cb504-11" data-line-number="11">  <span class="dt">speed =</span> distance <span class="op">/</span><span class="st"> </span>air_time <span class="op">*</span><span class="st"> </span><span class="dv">60</span></a>
+<a class="sourceLine" id="cb504-12" data-line-number="12">)</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 9
+##     year month   day dep_delay arr_delay distance air_time  gain speed
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  2013     1     1         2        11     1400      227    -9  370.
+##  2  2013     1     1         4        20     1416      227   -16  374.
+##  3  2013     1     1         2        33     1089      160   -31  408.
+##  4  2013     1     1        -1       -18     1576      183    17  517.
+##  5  2013     1     1        -6       -25      762      116    19  394.
+##  6  2013     1     1        -4        12      719      150   -16  288.
+##  7  2013     1     1        -5        19     1065      158   -24  404.
+##  8  2013     1     1        -3       -14      229       53    11  259.
+##  9  2013     1     1        -3        -8      944      140     5  405.
+## 10  2013     1     1        -2         8      733      138   -10  319.
+## # … with 336,766 more rows</code></pre>
+<p>먼저 flights에서 일부 열을 선택한 후, <code>mutate()</code> 함수를 이용해 새로운 열을 만들어 줍니다. gain 열에는 dep_delay와 arr_delay의 차이가, speed 열에는 distance와 air_time 비에 60을 곱한 값이 새롭게 생성됩니다.</p>
 
 </div>
 </div>

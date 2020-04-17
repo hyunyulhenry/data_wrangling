@@ -22,114 +22,144 @@
 
 
 ```r
-library (dplyr) 
-
-wide = tbl_df(read.table (header = TRUE, text = "
-  Group Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
-  1 2006 15 16 19 17
-  1 2007 12 13 27 23
-  1 2008 22 22 24 20
-  1 2009 10 14 20 16
-  2 2006 12 13 25 18
-  2 2007 16 14 21 19
-  2 2008 13 11 29 15
-  2 2009 23 20 26 20
-  3 2006 11 12 22 16
-  3 2007 13 11 27 21
-  3 2008 17 12 23 19
-  3 2009 14 9 31 24
-"))
-
-wide
-```
-
-```
-## # A tibble: 12 x 6
-##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
-##    <int> <int> <int> <int> <int> <int>
-##  1     1  2006    15    16    19    17
-##  2     1  2007    12    13    27    23
-##  3     1  2008    22    22    24    20
-##  4     1  2009    10    14    20    16
-##  5     2  2006    12    13    25    18
-##  6     2  2007    16    14    21    19
-##  7     2  2008    13    11    29    15
-##  8     2  2009    23    20    26    20
-##  9     3  2006    11    12    22    16
-## 10     3  2007    13    11    27    21
-## 11     3  2008    17    12    23    19
-## 12     3  2009    14     9    31    24
-```
-
-각 연도 별 분기 자료가 가로로 길게 구성되 있습니다.
-
-
-```r
 library(tidyr)
 
-long = wide %>% gather(Quarter, Revenue, Qtr.1:Qtr.4)
-
-head(long, 15)
+table4a
 ```
 
 ```
-## # A tibble: 15 x 4
-##    Group  Year Quarter Revenue
-##    <int> <int> <chr>     <int>
-##  1     1  2006 Qtr.1        15
-##  2     1  2007 Qtr.1        12
-##  3     1  2008 Qtr.1        22
-##  4     1  2009 Qtr.1        10
-##  5     2  2006 Qtr.1        12
-##  6     2  2007 Qtr.1        16
-##  7     2  2008 Qtr.1        13
-##  8     2  2009 Qtr.1        23
-##  9     3  2006 Qtr.1        11
-## 10     3  2007 Qtr.1        13
-## 11     3  2008 Qtr.1        17
-## 12     3  2009 Qtr.1        14
-## 13     1  2006 Qtr.2        16
-## 14     1  2007 Qtr.2        13
-## 15     1  2008 Qtr.2        22
+## # A tibble: 3 x 3
+##   country     `1999` `2000`
+## * <chr>        <int>  <int>
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766
 ```
 
-Quarter에는 열 이름에 해당하는 데이터가, Revenue에는 각 Qur.1에서 Qur.4까지의 관측치가 들어오게 되었습니다. 동일한 코드를 각기 다른 형태로 표현할 수도 있습니다.
+세 국가의 1999, 2000년 데이터가 있습니다. 이 중 country를 제외한 연도별 데이터를 세로로 길게 만들도록 하겠습ㄴ다.
 
 
 ```r
-wide %>% gather (Quarter, Revenue, Qtr.1:Qtr.4)
-wide %>% gather (Quarter, Revenue, -Group, -Year)
-wide %>% gather (Quarter, Revenue, 3:6)
-wide %>% gather (Quarter, Revenue, Qtr.1, Qtr.2, Qtr.3, Qtr.4)
+long = table4a %>% gather(key = years, value = cases, -country)
+
+print(long)
 ```
+
+```
+## # A tibble: 6 x 3
+##   country     years  cases
+##   <chr>       <chr>  <int>
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766
+```
+
+열 이름에 해당하던 데이터가 year 열에 들어왔으며, 관측치에 해당하는 값이 cases 열에 왔습니다.
+
+<table class="kable_wrapper table table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+  <tr>
+   <td> 
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> country </th>
+   <th style="text-align:right;"> 1999 </th>
+   <th style="text-align:right;"> 2000 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Afghanistan </td>
+   <td style="text-align:right;"> 745 </td>
+   <td style="text-align:right;"> 2666 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brazil </td>
+   <td style="text-align:right;"> 37737 </td>
+   <td style="text-align:right;"> 80488 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> China </td>
+   <td style="text-align:right;"> 212258 </td>
+   <td style="text-align:right;"> 213766 </td>
+  </tr>
+</tbody>
+</table>
+
+ </td>
+   <td> 
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> country </th>
+   <th style="text-align:left;"> years </th>
+   <th style="text-align:right;"> cases </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Afghanistan </td>
+   <td style="text-align:left;"> 1999 </td>
+   <td style="text-align:right;"> 745 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brazil </td>
+   <td style="text-align:left;"> 1999 </td>
+   <td style="text-align:right;"> 37737 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> China </td>
+   <td style="text-align:left;"> 1999 </td>
+   <td style="text-align:right;"> 212258 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Afghanistan </td>
+   <td style="text-align:left;"> 2000 </td>
+   <td style="text-align:right;"> 2666 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brazil </td>
+   <td style="text-align:left;"> 2000 </td>
+   <td style="text-align:right;"> 80488 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> China </td>
+   <td style="text-align:left;"> 2000 </td>
+   <td style="text-align:right;"> 213766 </td>
+  </tr>
+</tbody>
+</table>
+
+ </td>
+  </tr>
+</tbody>
+</table>
+
 
 ## 가로로 긴 데이터 만들기
 
-`gather()` 함수와 반대로, `spread()` 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 Quarter 열에 있는 항목들을 열 이름으로, Revenue 열에 있는 항목들을 Group, Year, Quarter에 맞춰 가로로 길게 되돌려야 합니다.
+`gather()` 함수와 반대로, `spread()` 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 year 열에 있는 항목들을 열 이름으로, cases 열에 있는 항목들을 가로로 길게 되돌려야 합니다.
 
 
 ```r
-back2wide = long %>% spread(Quarter, Revenue)
+back2wide = long %>% spread(years, cases)
 
 back2wide
 ```
 
 ```
-## # A tibble: 12 x 6
-##    Group  Year Qtr.1 Qtr.2 Qtr.3 Qtr.4
-##    <int> <int> <int> <int> <int> <int>
-##  1     1  2006    15    16    19    17
-##  2     1  2007    12    13    27    23
-##  3     1  2008    22    22    24    20
-##  4     1  2009    10    14    20    16
-##  5     2  2006    12    13    25    18
-##  6     2  2007    16    14    21    19
-##  7     2  2008    13    11    29    15
-##  8     2  2009    23    20    26    20
-##  9     3  2006    11    12    22    16
-## 10     3  2007    13    11    27    21
-## 11     3  2008    17    12    23    19
-## 12     3  2009    14     9    31    24
+## # A tibble: 3 x 3
+##   country     `1999` `2000`
+##   <chr>        <int>  <int>
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766
 ```
 
 원래와 동일한 데이터로 되돌아 왔습니다.
@@ -138,60 +168,59 @@ back2wide
 
 
 ```r
-messy_df = tbl_df(read.table (header = TRUE, sep = ",", text = "
-  Grp_Ind,Yr_Mo,City_State,Extra_variable
-  1,1.a,2006_Jan,Dayton (OH),XX01person_1
-  2,1.b,2006_Feb,Grand Forks (ND),XX02person_2
-  3,1.c,2006_Mar,Fargo (ND),XX03person_3
-  4,2.a,2007_Jan,Rochester (MN),XX04person_4
-",
-stringsAsFactors = FALSE))
-
-messy_df
+table3
 ```
 
 ```
-## # A tibble: 4 x 4
-##   Grp_Ind Yr_Mo    City_State       Extra_variable
-##   <chr>   <chr>    <chr>            <chr>         
-## 1 1.a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1.b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1.c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2.a     2007_Jan Rochester (MN)   XX04person_4
+## # A tibble: 6 x 3
+##   country      year rate             
+## * <chr>       <int> <chr>            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583
 ```
 
-Grp_Ind열은 숫자.알파벳 형태로 이루어져 있으며, Yr_Mo 열은 YYYY_mm의 형태로 이루어져 있습니다. 이처럼 두개의 문자가 붙어있는 경우 `separate()` 함수를 통해 분리할 수 있습니다.
+rate 열에는 ###/#### 형태로 데이터가 들어가 있습니다. 이를 / 기준으로 앞과 뒤로 각각 나누어보도록 하겠습니다.
 
 
 ```r
-messy_df %>% separate(col = Grp_Ind, into = c("Grp", "Ind"))
+table3 %>% 
+  separate(rate, into = c("cases", "population"))
 ```
 
 ```
-## # A tibble: 4 x 5
-##   Grp   Ind   Yr_Mo    City_State       Extra_variable
-##   <chr> <chr> <chr>    <chr>            <chr>         
-## 1 1     a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1     b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1     c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2     a     2007_Jan Rochester (MN)   XX04person_4
+## # A tibble: 6 x 4
+##   country      year cases  population
+##   <chr>       <int> <chr>  <chr>     
+## 1 Afghanistan  1999 745    19987071  
+## 2 Afghanistan  2000 2666   20595360  
+## 3 Brazil       1999 37737  172006362 
+## 4 Brazil       2000 80488  174504898 
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583
 ```
 
-Grp_Ind 열이 점을 기준으로 Grp와 Ind 열로 분리되었습니다.
+rate 열이 "/"를 기준으로 cases와 population 열로 분리되었습니다.
 
 
 ```r
-messy_df %>% separate(col = Grp_Ind, into = c("Grp", "Ind"), remove = FALSE)
+table3 %>% 
+  separate(rate, into = c("cases", "population"), remove = FALSE)
 ```
 
 ```
-## # A tibble: 4 x 6
-##   Grp_Ind Grp   Ind   Yr_Mo    City_State       Extra_variable
-##   <chr>   <chr> <chr> <chr>    <chr>            <chr>         
-## 1 1.a     1     a     2006_Jan Dayton (OH)      XX01person_1  
-## 2 1.b     1     b     2006_Feb Grand Forks (ND) XX02person_2  
-## 3 1.c     1     c     2006_Mar Fargo (ND)       XX03person_3  
-## 4 2.a     2     a     2007_Jan Rochester (MN)   XX04person_4
+## # A tibble: 6 x 5
+##   country      year rate              cases  population
+##   <chr>       <int> <chr>             <chr>  <chr>     
+## 1 Afghanistan  1999 745/19987071      745    19987071  
+## 2 Afghanistan  2000 2666/20595360     2666   20595360  
+## 3 Brazil       1999 37737/172006362   37737  172006362 
+## 4 Brazil       2000 80488/174504898   80488  174504898 
+## 5 China        1999 212258/1272915272 212258 1272915272
+## 6 China        2000 213766/1280428583 213766 1280428583
 ```
 
 remove = FALSE를 추가해주면 원래의 열을 유지합니다.
@@ -202,92 +231,64 @@ remove = FALSE를 추가해주면 원래의 열을 유지합니다.
 
 
 ```r
-expenses = tbl_df ( read.table (header = TRUE, text = "
-  Year Month Day Expense
-  2015 01 01 500
-  2015 02 05 90
-  2015 02 22 250
-  2015 03 10 325
-"))
-
-expenses
+table5
 ```
 
 ```
-## # A tibble: 4 x 4
-##    Year Month   Day Expense
-##   <int> <int> <int>   <int>
-## 1  2015     1     1     500
-## 2  2015     2     5      90
-## 3  2015     2    22     250
-## 4  2015     3    10     325
+## # A tibble: 6 x 4
+##   country     century year  rate             
+## * <chr>       <chr>   <chr> <chr>            
+## 1 Afghanistan 19      99    745/19987071     
+## 2 Afghanistan 20      00    2666/20595360    
+## 3 Brazil      19      99    37737/172006362  
+## 4 Brazil      20      00    80488/174504898  
+## 5 China       19      99    212258/1272915272
+## 6 China       20      00    213766/1280428583
 ```
 
-Year, Month, Day를 하나의 열로 합치도록 하겠습니다.
+century와 year 열을 하나로 합쳐보도록 하겠습니다.
 
 
 ```r
-expenses %>% unite(col = "Date", c(Year, Month, Day))
+table5 %>% 
+  unite(new, century, year, sep = "")
 ```
 
 ```
-## # A tibble: 4 x 2
-##   Date      Expense
-##   <chr>       <int>
-## 1 2015_1_1      500
-## 2 2015_2_5       90
-## 3 2015_2_22     250
-## 4 2015_3_10     325
+## # A tibble: 6 x 3
+##   country     new   rate             
+##   <chr>       <chr> <chr>            
+## 1 Afghanistan 1999  745/19987071     
+## 2 Afghanistan 2000  2666/20595360    
+## 3 Brazil      1999  37737/172006362  
+## 4 Brazil      2000  80488/174504898  
+## 5 China       1999  212258/1272915272
+## 6 China       2000  213766/1280428583
 ```
 
-Date 열에 지정한 데이터가 합쳐지게 됩니다.
+new 열에 지정한 데이터가 합쳐지게 됩니다. 
 
 
 ```r
-expenses %>% unite(col = "Date", c (Year, Month, Day), sep = "-")
+table5 %>% 
+  unite(new, century, year, sep = "_")
 ```
 
 ```
-## # A tibble: 4 x 2
-##   Date      Expense
-##   <chr>       <int>
-## 1 2015-1-1      500
-## 2 2015-2-5       90
-## 3 2015-2-22     250
-## 4 2015-3-10     325
+## # A tibble: 6 x 3
+##   country     new   rate             
+##   <chr>       <chr> <chr>            
+## 1 Afghanistan 19_99 745/19987071     
+## 2 Afghanistan 20_00 2666/20595360    
+## 3 Brazil      19_99 37737/172006362  
+## 4 Brazil      20_00 80488/174504898  
+## 5 China       19_99 212258/1272915272
+## 6 China       20_00 213766/1280428583
 ```
 
 sep 인자를 통해 구분자를 선택할 수도 있습니다.
 
 ## `tidyr`의 기타 함수
-
-먼저 다음의 예제 데이터를 만들어 줍니다.
-
-```r
-expenses = tbl_df (read.table(header = TRUE, text = "
-  Dept Year Month Day Cost
-  A 2015 01 01 $500.00
-  NA NA 02 05 $90.00
-  NA NA 02 22 $1,250.45
-  NA NA 03 NA $325.10
-  B NA 01 02 $260.00
-  NA NA 02 05 $90.00
-", stringsAsFactors = FALSE))
-
-expenses
-```
-
-```
-## # A tibble: 6 x 5
-##   Dept   Year Month   Day Cost     
-##   <chr> <int> <int> <int> <chr>    
-## 1 A      2015     1     1 $500.00  
-## 2 <NA>     NA     2     5 $90.00   
-## 3 <NA>     NA     2    22 $1,250.45
-## 4 <NA>     NA     3    NA $325.10  
-## 5 B        NA     1     2 $260.00  
-## 6 <NA>     NA     2     5 $90.00
-```
 
 ### `fill()`
 
@@ -295,62 +296,81 @@ expenses
 
 
 ```r
-expenses %>% fill(Dept, Year)
+treatment = tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 NA,           9,
+  "Katherine Burke",  1,           4
+)
+
+treatment
 ```
 
 ```
-## # A tibble: 6 x 5
-##   Dept   Year Month   Day Cost     
-##   <chr> <int> <int> <int> <chr>    
-## 1 A      2015     1     1 $500.00  
-## 2 A      2015     2     5 $90.00   
-## 3 A      2015     2    22 $1,250.45
-## 4 A      2015     3    NA $325.10  
-## 5 B      2015     1     2 $260.00  
-## 6 B      2015     2     5 $90.00
+## # A tibble: 4 x 3
+##   person           treatment response
+##   <chr>                <dbl>    <dbl>
+## 1 Derrick Whitmore         1        7
+## 2 <NA>                     2       10
+## 3 <NA>                    NA        9
+## 4 Katherine Burke          1        4
+```
+
+treatment의 2번째와 3번째 행에 `NA` 데이터가 있어 이를 채워줄 필요가 있습니다.
+
+
+```r
+treatment %>% 
+  fill(person, treatment)
+```
+
+```
+## # A tibble: 4 x 3
+##   person           treatment response
+##   <chr>                <dbl>    <dbl>
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         2        9
+## 4 Katherine Burke          1        4
 ```
 
 `fill()` 함수는 결측치가 있을 경우, 각 열의 이전 데이터를 이용해 채워줍니다.
 
 ### `replce_na()`
 
-NA 데이터를 특정 값으로 변경하고자 합니다.
+NA 데이터를 특정 값으로 변경할 수도 있습니다.
 
 
 ```r
-expenses %>% replace_na(replace = list (Day = "unknown"))
+treatment %>% replace_na(replace = list (person = "unknown"))
 ```
 
 ```
-## # A tibble: 6 x 5
-##   Dept   Year Month Day     Cost     
-##   <chr> <int> <int> <chr>   <chr>    
-## 1 A      2015     1 1       $500.00  
-## 2 <NA>     NA     2 5       $90.00   
-## 3 <NA>     NA     2 22      $1,250.45
-## 4 <NA>     NA     3 unknown $325.10  
-## 5 B        NA     1 2       $260.00  
-## 6 <NA>     NA     2 5       $90.00
+## # A tibble: 4 x 3
+##   person           treatment response
+##   <chr>                <dbl>    <dbl>
+## 1 Derrick Whitmore         1        7
+## 2 unknown                  2       10
+## 3 unknown                 NA        9
+## 4 Katherine Burke          1        4
 ```
 
-`replace_na()` 함수를 이용해 Day 열의 NA 데이터를 **unknown**으로 변경하였습니다.
+`replace_na()` 함수를 이용해 person 열의 NA 데이터를 **unknown**으로 변경하였습니다.
 
 
 ```r
-expenses %>% replace_na(replace = list (Year = 2015, Day = "unknown"))
+treatment %>% replace_na(replace = list (person = "unknown", treatment = 1))
 ```
 
 ```
-## # A tibble: 6 x 5
-##   Dept   Year Month Day     Cost     
-##   <chr> <dbl> <int> <chr>   <chr>    
-## 1 A      2015     1 1       $500.00  
-## 2 <NA>   2015     2 5       $90.00   
-## 3 <NA>   2015     2 22      $1,250.45
-## 4 <NA>   2015     3 unknown $325.10  
-## 5 B      2015     1 2       $260.00  
-## 6 <NA>   2015     2 5       $90.00
+## # A tibble: 4 x 3
+##   person           treatment response
+##   <chr>                <dbl>    <dbl>
+## 1 Derrick Whitmore         1        7
+## 2 unknown                  2       10
+## 3 unknown                  1        9
+## 4 Katherine Burke          1        4
 ```
 
 각 열마다 서로 다른 값으로 변경할 수 있습니다.
-
