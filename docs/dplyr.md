@@ -426,13 +426,9 @@ flights2 %>%
 ## # … with 336,766 more rows
 ```
 
-flights2의 모든 데이터를 가져오며, airlines의 name 열이 기존 테이블에 추가됩니다. 
+flights2의 모든 데이터를 가져오며, airlines의 name 열이 기존 테이블에 추가됩니다. join 구문에 대한 더욱 상세한 예제 및 애니메이션은 다음 주소를 참조하시기 바랍니다.
 
-join 구문에 대한 더욱 상세한 예제 및 애니메이션은 다음 주소를 참조하시기 바랍니다.
-
-```
 https://github.com/gadenbuie/tidyexplain
-```
 
 ## `mutate()`: 새로운 열 생성하기
 
