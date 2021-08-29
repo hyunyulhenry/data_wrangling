@@ -49,10 +49,10 @@ col_names 인자를 FALSE로 지정할 경우 열 이름 역시 저장되지 않
 
 ## 엑셀 저장하기
 
-`xlsx` 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.
+`openxlsx` 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.
 
 ```{r, eval = FALSE}
-library(xlsx)
+library(openxlsx)
 
 write.xlsx(df, file = 'output_example.xlsx')
 ```

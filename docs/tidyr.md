@@ -1,4 +1,3 @@
-
 # (PART) 데이터 구조 변형하기 {-}
 
 # `tidyr`을 이용한 데이터 모양 바꾸기
@@ -11,7 +10,7 @@
 
 <div class="figure" style="text-align: center">
 <img src="images/tidy_data.png" alt="tidy 데이터 요건" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)tidy 데이터 요건</p>
+<p class="caption">(\#fig:unnamed-chunk-1)tidy 데이터 요건</p>
 </div>
 
 `tidyr` 패키지는 이러한 깔끔한 데이터를 만드는데 필요한 여러 함수가 있습니다.

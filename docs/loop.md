@@ -1,4 +1,3 @@
-
 # Loop Statement
 
 루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다. 
@@ -233,13 +232,20 @@ head(mtcars)
 ```
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                    mpg cyl disp  hp drat    wt  qsec vs
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1
+##                   am gear carb
+## Mazda RX4          1    4    4
+## Mazda RX4 Wag      1    4    4
+## Datsun 710         1    4    1
+## Hornet 4 Drive     0    3    1
+## Hornet Sportabout  0    3    2
+## Valiant            0    3    1
 ```
 
 
@@ -248,10 +254,10 @@ apply(mtcars, 2, mean)
 ```
 
 ```
-##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
-##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172  17.8487   0.4375 
-##       am     gear     carb 
-##   0.4062   3.6875   2.8125
+##      mpg      cyl     disp       hp     drat       wt 
+##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172 
+##     qsec       vs       am     gear     carb 
+##  17.8487   0.4375   0.4062   3.6875   2.8125
 ```
 
 mtcars 데이터에서 2, 즉 열의 방향으로 평균(mean)을 구합니다.
@@ -262,22 +268,38 @@ apply(mtcars, 1, sum)
 ```
 
 ```
-##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-##               329.0               329.8               259.6               426.1 
-##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-##               590.3               385.5               656.9               271.0 
-##            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-##               299.6               350.5               349.7               510.7 
-##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-##               511.5               509.9               728.6               726.6 
-##   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-##               725.7               213.8               195.2               207.0 
-##       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-##               273.8               519.6               506.1               646.3 
-##    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-##               631.2               208.2               272.6               273.7 
-##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-##               670.7               379.6               694.7               288.9
+##           Mazda RX4       Mazda RX4 Wag 
+##               329.0               329.8 
+##          Datsun 710      Hornet 4 Drive 
+##               259.6               426.1 
+##   Hornet Sportabout             Valiant 
+##               590.3               385.5 
+##          Duster 360           Merc 240D 
+##               656.9               271.0 
+##            Merc 230            Merc 280 
+##               299.6               350.5 
+##           Merc 280C          Merc 450SE 
+##               349.7               510.7 
+##          Merc 450SL         Merc 450SLC 
+##               511.5               509.9 
+##  Cadillac Fleetwood Lincoln Continental 
+##               728.6               726.6 
+##   Chrysler Imperial            Fiat 128 
+##               725.7               213.8 
+##         Honda Civic      Toyota Corolla 
+##               195.2               207.0 
+##       Toyota Corona    Dodge Challenger 
+##               273.8               519.6 
+##         AMC Javelin          Camaro Z28 
+##               506.1               646.3 
+##    Pontiac Firebird           Fiat X1-9 
+##               631.2               208.2 
+##       Porsche 914-2        Lotus Europa 
+##               272.6               273.7 
+##      Ford Pantera L        Ferrari Dino 
+##               670.7               379.6 
+##       Maserati Bora          Volvo 142E 
+##               694.7               288.9
 ```
 
 이번에는 1 즉 행의 방향으로 합계(sum)를 구합니다.
@@ -288,12 +310,18 @@ apply(mtcars, 2, quantile, probs = c(0.10, 0.25, 0.05, 0.75, 0.90))
 ```
 
 ```
-##       mpg cyl   disp     hp  drat    wt  qsec vs am gear carb
-## 10% 14.34   4  80.61  66.00 3.007 1.956 15.53  0  0    3    1
-## 25% 15.43   4 120.83  96.50 3.080 2.581 16.89  0  0    3    2
-## 5%  12.00   4  77.35  63.65 2.853 1.736 15.05  0  0    3    1
-## 75% 22.80   8 326.00 180.00 3.920 3.610 18.90  1  1    4    4
-## 90% 30.09   8 396.00 243.50 4.209 4.048 19.99  1  1    5    4
+##       mpg cyl   disp     hp  drat    wt  qsec vs am
+## 10% 14.34   4  80.61  66.00 3.007 1.956 15.53  0  0
+## 25% 15.43   4 120.83  96.50 3.080 2.581 16.89  0  0
+## 5%  12.00   4  77.35  63.65 2.853 1.736 15.05  0  0
+## 75% 22.80   8 326.00 180.00 3.920 3.610 18.90  1  1
+## 90% 30.09   8 396.00 243.50 4.209 4.048 19.99  1  1
+##     gear carb
+## 10%    3    1
+## 25%    3    2
+## 5%     3    1
+## 75%    4    4
+## 90%    5    4
 ```
 
 각 열의 분위수(quantile)를 구하게 되며, 분위는 probs 인자를 통해 직접 입력할 수 있습니다.
@@ -325,23 +353,28 @@ data
 ## [1] 1 2 3 4
 ## 
 ## $item2
-##  [1] -0.56048 -0.23018  1.55871  0.07051  0.12929  1.71506  0.46092 -1.26506
-##  [9] -0.68685 -0.44566
+##  [1] -0.56048 -0.23018  1.55871  0.07051  0.12929
+##  [6]  1.71506  0.46092 -1.26506 -0.68685 -0.44566
 ## 
 ## $item3
-##  [1]  2.22408  1.35981  1.40077  1.11068  0.44416  2.78691  1.49785 -0.96662
-##  [9]  1.70136  0.52721 -0.06782  0.78203 -0.02600  0.27111  0.37496 -0.68669
-## [17]  1.83779  1.15337 -0.13814  2.25381
+##  [1]  2.22408  1.35981  1.40077  1.11068  0.44416
+##  [6]  2.78691  1.49785 -0.96662  1.70136  0.52721
+## [11] -0.06782  0.78203 -0.02600  0.27111  0.37496
+## [16] -0.68669  1.83779  1.15337 -0.13814  2.25381
 ## 
 ## $item4
-##   [1] 5.426 4.705 5.895 5.878 5.822 5.689 5.554 4.938 4.694 4.620 4.305 4.792
-##  [13] 3.735 7.169 6.208 3.877 4.597 4.533 5.780 4.917 5.253 4.971 4.957 6.369
-##  [25] 4.774 6.516 3.451 5.585 5.124 5.216 5.380 4.498 4.667 3.981 3.928 5.304
-##  [37] 5.448 5.053 5.922 7.050 4.509 2.691 6.006 4.291 4.312 6.026 4.715 3.779
-##  [49] 5.181 4.861 5.006 5.385 4.629 5.644 4.780 5.332 6.097 5.435 4.674 6.149
-##  [61] 5.994 5.548 5.239 4.372 6.361 4.400 7.187 6.533 4.764 3.974 4.290 5.257
-##  [73] 4.753 4.652 4.048 4.955 4.215 3.332 4.620 5.919 4.425 5.608 3.382 4.944
-##  [85] 5.519 5.301 5.106 4.359 4.150 3.976 5.118 4.053 4.509 4.744 6.844 4.348
+##   [1] 5.426 4.705 5.895 5.878 5.822 5.689 5.554 4.938
+##   [9] 4.694 4.620 4.305 4.792 3.735 7.169 6.208 3.877
+##  [17] 4.597 4.533 5.780 4.917 5.253 4.971 4.957 6.369
+##  [25] 4.774 6.516 3.451 5.585 5.124 5.216 5.380 4.498
+##  [33] 4.667 3.981 3.928 5.304 5.448 5.053 5.922 7.050
+##  [41] 4.509 2.691 6.006 4.291 4.312 6.026 4.715 3.779
+##  [49] 5.181 4.861 5.006 5.385 4.629 5.644 4.780 5.332
+##  [57] 6.097 5.435 4.674 6.149 5.994 5.548 5.239 4.372
+##  [65] 6.361 4.400 7.187 6.533 4.764 3.974 4.290 5.257
+##  [73] 4.753 4.652 4.048 4.955 4.215 3.332 4.620 5.919
+##  [81] 4.425 5.608 3.382 4.944 5.519 5.301 5.106 4.359
+##  [89] 4.150 3.976 5.118 4.053 4.509 4.744 6.844 4.348
 ##  [97] 5.235 5.078 4.038 4.929
 ```
 
@@ -460,22 +493,38 @@ rowSums(mtcars)
 ```
 
 ```
-##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-##               329.0               329.8               259.6               426.1 
-##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-##               590.3               385.5               656.9               271.0 
-##            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-##               299.6               350.5               349.7               510.7 
-##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-##               511.5               509.9               728.6               726.6 
-##   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-##               725.7               213.8               195.2               207.0 
-##       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-##               273.8               519.6               506.1               646.3 
-##    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-##               631.2               208.2               272.6               273.7 
-##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-##               670.7               379.6               694.7               288.9
+##           Mazda RX4       Mazda RX4 Wag 
+##               329.0               329.8 
+##          Datsun 710      Hornet 4 Drive 
+##               259.6               426.1 
+##   Hornet Sportabout             Valiant 
+##               590.3               385.5 
+##          Duster 360           Merc 240D 
+##               656.9               271.0 
+##            Merc 230            Merc 280 
+##               299.6               350.5 
+##           Merc 280C          Merc 450SE 
+##               349.7               510.7 
+##          Merc 450SL         Merc 450SLC 
+##               511.5               509.9 
+##  Cadillac Fleetwood Lincoln Continental 
+##               728.6               726.6 
+##   Chrysler Imperial            Fiat 128 
+##               725.7               213.8 
+##         Honda Civic      Toyota Corolla 
+##               195.2               207.0 
+##       Toyota Corona    Dodge Challenger 
+##               273.8               519.6 
+##         AMC Javelin          Camaro Z28 
+##               506.1               646.3 
+##    Pontiac Firebird           Fiat X1-9 
+##               631.2               208.2 
+##       Porsche 914-2        Lotus Europa 
+##               272.6               273.7 
+##      Ford Pantera L        Ferrari Dino 
+##               670.7               379.6 
+##       Maserati Bora          Volvo 142E 
+##               694.7               288.9
 ```
 
 ```r
@@ -483,8 +532,10 @@ colSums(mtcars)
 ```
 
 ```
-##    mpg    cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb 
-##  642.9  198.0 7383.1 4694.0  115.1  103.0  571.2   14.0   13.0  118.0   90.0
+##    mpg    cyl   disp     hp   drat     wt   qsec     vs 
+##  642.9  198.0 7383.1 4694.0  115.1  103.0  571.2   14.0 
+##     am   gear   carb 
+##   13.0  118.0   90.0
 ```
 
 `rowSums()` 함수는 행의 합계를, `colSums()` 함수는 열의 합계는 구하며 이는 `apply(mtcars, 1 or 2, sum)` 과 동일합니다.
@@ -495,22 +546,38 @@ rowMeans(mtcars)
 ```
 
 ```
-##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
-##               29.91               29.98               23.60               38.74 
-##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
-##               53.66               35.05               59.72               24.63 
-##            Merc 230            Merc 280           Merc 280C          Merc 450SE 
-##               27.23               31.86               31.79               46.43 
-##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
-##               46.50               46.35               66.23               66.06 
-##   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
-##               65.97               19.44               17.74               18.81 
-##       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
-##               24.89               47.24               46.01               58.75 
-##    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
-##               57.38               18.93               24.78               24.88 
-##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
-##               60.97               34.51               63.16               26.26
+##           Mazda RX4       Mazda RX4 Wag 
+##               29.91               29.98 
+##          Datsun 710      Hornet 4 Drive 
+##               23.60               38.74 
+##   Hornet Sportabout             Valiant 
+##               53.66               35.05 
+##          Duster 360           Merc 240D 
+##               59.72               24.63 
+##            Merc 230            Merc 280 
+##               27.23               31.86 
+##           Merc 280C          Merc 450SE 
+##               31.79               46.43 
+##          Merc 450SL         Merc 450SLC 
+##               46.50               46.35 
+##  Cadillac Fleetwood Lincoln Continental 
+##               66.23               66.06 
+##   Chrysler Imperial            Fiat 128 
+##               65.97               19.44 
+##         Honda Civic      Toyota Corolla 
+##               17.74               18.81 
+##       Toyota Corona    Dodge Challenger 
+##               24.89               47.24 
+##         AMC Javelin          Camaro Z28 
+##               46.01               58.75 
+##    Pontiac Firebird           Fiat X1-9 
+##               57.38               18.93 
+##       Porsche 914-2        Lotus Europa 
+##               24.78               24.88 
+##      Ford Pantera L        Ferrari Dino 
+##               60.97               34.51 
+##       Maserati Bora          Volvo 142E 
+##               63.16               26.26
 ```
 
 ```r
@@ -518,10 +585,10 @@ colMeans(mtcars)
 ```
 
 ```
-##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
-##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172  17.8487   0.4375 
-##       am     gear     carb 
-##   0.4062   3.6875   2.8125
+##      mpg      cyl     disp       hp     drat       wt 
+##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172 
+##     qsec       vs       am     gear     carb 
+##  17.8487   0.4375   0.4062   3.6875   2.8125
 ```
 
 `rowMeans()`와 `colMeans()` 함수 역시 각각 행과 열의 평균을 구합니다.

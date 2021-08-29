@@ -1,4 +1,3 @@
-
 # (PART) 데이터 불러오기 및 내보내기 {-}
 
 # Import Data
@@ -62,7 +61,7 @@ str(mydata)
 ```
 ## 'data.frame':	3 obs. of  3 variables:
 ##  $ variable.1: int  10 25 8
-##  $ variable.2: Factor w/ 3 levels "beer","cheese",..: 1 3 2
+##  $ variable.2: chr  "beer" "wine" "cheese"
 ##  $ variable.3: logi  TRUE TRUE FALSE
 ```
 
@@ -156,16 +155,17 @@ str(mydata3)
 ```
 
 ```
-## Classes 'spec_tbl_df', 'tbl_df', 'tbl' and 'data.frame':	3 obs. of  3 variables:
-##  $ variable 1: num  10 25 8
-##  $ variable 2: chr  "beer" "wine" "cheese"
-##  $ variable 3: logi  TRUE TRUE FALSE
+## spec_tbl_df [3 x 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ variable 1: num [1:3] 10 25 8
+##  $ variable 2: chr [1:3] "beer" "wine" "cheese"
+##  $ variable 3: logi [1:3] TRUE TRUE FALSE
 ##  - attr(*, "spec")=
 ##   .. cols(
 ##   ..   `variable 1` = col_double(),
 ##   ..   `variable 2` = col_character(),
 ##   ..   `variable 3` = col_logical()
 ##   .. )
+##  - attr(*, "problems")=<externalptr>
 ```
 
 `read_csv()` 함수를 이용해 csv 파일을 불러올 수 있습니다. 열이름의 공백이 그대로 유지되며, 문자 형태 역시 팩터가 아닌 원래 형식이 그대로 유지됩니다.
@@ -252,15 +252,15 @@ read.table('mydata.txt', sep = ',', header = TRUE)
 
 엑셀 파일을 불러오기 위한 패키지는 매우 많으며, 이 중 `xlsx`와 `readxl` 패키지를 살펴보도록 하겠습니다.
 
-### `xlsx` 패키지
+### `openxlsx` 패키지
 
-`xlsx` 패캐지의 `read.xlsx()` 함수를 이용해 엑셀 데이터를 불러올 수 있습니다.
+`openxlsx` 패캐지의 `read.xlsx()` 함수를 이용해 엑셀 데이터를 불러올 수 있습니다.
 
 
 ```r
-library(xlsx)
+library(openxlsx)
 
-read.xlsx('mydata.xlsx', sheetName = 'Sheet1')
+read.xlsx('mydata.xlsx', sheet = 'Sheet1')
 ```
 
 ```
@@ -272,7 +272,7 @@ read.xlsx('mydata.xlsx', sheetName = 'Sheet1')
 
 
 ```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet2')
+read.xlsx('mydata.xlsx', sheet = 'Sheet2')
 ```
 
 ```
@@ -283,28 +283,35 @@ read.xlsx('mydata.xlsx', sheetName = 'Sheet2')
 ## 4 Cincinnati      alice
 ```
 
-엑셀은 여러 시트로 구성되어 있으므로, sheetName 인자를 통해 원하는 시트명의 내용만 불러올 수 있습니다.
+엑셀은 여러 시트로 구성되어 있으므로, sheet 인자를 통해 원하는 시트명의 내용만 불러올 수 있습니다.
 
 
 ```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3')
+read.xlsx('mydata.xlsx', sheet = 'Sheet3')
 ```
 
 ```
-##                                         Header..Company.A        NA.
-## 1 What if we want to disregard header text in Excel file?       <NA>
-## 2                                              variable 6 variable 7
-## 3                                                     200       Male
-## 4                                                     225     Female
-## 5                                                     400     Female
-## 6                                                     310       Male
+##                                          Header.Company.A
+## 1 What if we want to disregard header text in Excel file?
+## 2                                              variable 6
+## 3                                                     200
+## 4                                                     225
+## 5                                                     400
+## 6                                                     310
+##           X2
+## 1       <NA>
+## 2 variable 7
+## 3       Male
+## 4     Female
+## 5     Female
+## 6       Male
 ```
 
 간혹 엑셀 파일에는 데이터가 아닌 설명을 위한 텍스트가 적힌 경우도 있으므로, 이를 제외하고 데이터를 불러올 필요가 있습니다.
 
 
 ```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3', startRow = 3)
+read.xlsx('mydata.xlsx', sheet = 'Sheet3', startRow = 3)
 ```
 
 ```
@@ -319,7 +326,7 @@ startRow 인자를 통해 3번째 행부터 데이터를 불러오게 되어, �
 
 
 ```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3', rowIndex = 3:5)
+read.xlsx('mydata.xlsx', sheet = 'Sheet3', rows = 3:5)
 ```
 
 ```
@@ -328,37 +335,6 @@ read.xlsx('mydata.xlsx', sheetName = 'Sheet3', rowIndex = 3:5)
 ## 2        225     Female
 ```
 rowIndex 인자를 통해 원하는 행의 데이터만 불러올 수 있습니다.
-
-
-```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet4')
-```
-
-```
-##   Future.Value  Rate Period Present.Value
-## 1          500 0.065     10         266.4
-## 2          600 0.085      6         367.8
-## 3          750 0.080     11         321.7
-## 4         1000 0.070     16         338.7
-```
-
-불러온 데이터 중 Present Value에 해당하는 열은 $\frac{Future\  Value}{(1+Rate)^{Period}}$를 통해 엑셀 내에서 계산된 값입니다.
-
-
-
-```r
-read.xlsx('mydata.xlsx', sheetName = 'Sheet4', keepFormulas= TRUE)
-```
-
-```
-##   Future.Value  Rate Period Present.Value
-## 1          500 0.065     10  A2/(1+B2)^C2
-## 2          600 0.085      6  A3/(1+B3)^C3
-## 3          750 0.080     11  A4/(1+B4)^C4
-## 4         1000 0.070     16  A5/(1+B5)^C5
-```
-
-keepFormulas인자를 TRUE로 설정할 경우 엑셀 내에서 셀 간의 계산이 되지 않고 수식이 그대로 표현됩니다.
 
 ### `readxl` 패키지
 
@@ -374,11 +350,13 @@ mydata
 
 ```
 ## # A tibble: 3 x 5
-##   `Variable 1` `Variable 2` `Variable 3` `Variable 4`        `Variable 5`       
-##          <dbl> <chr>               <dbl> <dttm>              <dttm>             
-## 1           10 beer                    1 2015-11-20 00:00:00 2015-11-20 13:30:00
-## 2           25 wine                    1 NA                  2015-11-21 16:30:00
-## 3            8 <NA>                    0 2015-11-22 00:00:00 2015-11-22 14:45:00
+##   `Variable 1` `Variable 2` `Variable 3`
+##          <dbl> <chr>               <dbl>
+## 1           10 beer                    1
+## 2           25 wine                    1
+## 3            8 <NA>                    0
+## # ... with 2 more variables: Variable 4 <dttm>,
+## #   Variable 5 <dttm>
 ```
 
 ```r
@@ -386,12 +364,12 @@ str(mydata)
 ```
 
 ```
-## Classes 'tbl_df', 'tbl' and 'data.frame':	3 obs. of  5 variables:
-##  $ Variable 1: num  10 25 8
-##  $ Variable 2: chr  "beer" "wine" NA
-##  $ Variable 3: num  1 1 0
-##  $ Variable 4: POSIXct, format: "2015-11-20" NA ...
-##  $ Variable 5: POSIXct, format: "2015-11-20 13:30:00" "2015-11-21 16:30:00" ...
+## tibble [3 x 5] (S3: tbl_df/tbl/data.frame)
+##  $ Variable 1: num [1:3] 10 25 8
+##  $ Variable 2: chr [1:3] "beer" "wine" NA
+##  $ Variable 3: num [1:3] 1 1 0
+##  $ Variable 4: POSIXct[1:3], format: "2015-11-20" ...
+##  $ Variable 5: POSIXct[1:3], format: "2015-11-20 13:30:00" ...
 ```
 
 `read_excel()` 함수 역시 sheet 인자를 통해 원하는 시트의 데이터를 불러올 수 있습니다. 빈 칸의 경우 결측치(NA)로 변형되며, 날짜의 경우 POSIXct 형식으로 불러옵니다.
@@ -404,11 +382,12 @@ read_excel('mydata.xlsx', sheet = 'Sheet5', skip = 1,
 
 ```
 ## # A tibble: 3 x 5
-##   `Var 1` `Var 2` `Var 3` `Var 4`             `Var 5`            
-##     <dbl> <chr>     <dbl> <dttm>              <dttm>             
-## 1      10 beer          1 2015-11-20 00:00:00 2015-11-20 13:30:00
-## 2      25 wine          1 NA                  2015-11-21 16:30:00
-## 3       8 <NA>          0 2015-11-22 00:00:00 2015-11-22 14:45:00
+##   `Var 1` `Var 2` `Var 3` `Var 4`            
+##     <dbl> <chr>     <dbl> <dttm>             
+## 1      10 beer          1 2015-11-20 00:00:00
+## 2      25 wine          1 NA                 
+## 3       8 <NA>          0 2015-11-22 00:00:00
+## # ... with 1 more variable: Var 5 <dttm>
 ```
 
 skip 인자를 통해 위에서 n 번째까지 행을 건너뛸 수 있으며, col_names 인자를 통해 원하는 열이름을 직접 입력할 수 있습니다.
@@ -452,11 +431,13 @@ read_excel('mydata.xlsx', sheet = 'Sheet5')
 
 ```
 ## # A tibble: 3 x 5
-##   `Variable 1` `Variable 2` `Variable 3` `Variable 4`        `Variable 5`       
-##          <dbl> <chr>               <dbl> <dttm>              <dttm>             
-## 1           10 beer                    1 2015-11-20 00:00:00 2015-11-20 13:30:00
-## 2           25 wine                    1 NA                  2015-11-21 16:30:00
-## 3            8 <NA>                    0 2015-11-22 00:00:00 2015-11-22 14:45:00
+##   `Variable 1` `Variable 2` `Variable 3`
+##          <dbl> <chr>               <dbl>
+## 1           10 beer                    1
+## 2           25 wine                    1
+## 3            8 <NA>                    0
+## # ... with 2 more variables: Variable 4 <dttm>,
+## #   Variable 5 <dttm>
 ```
 
 

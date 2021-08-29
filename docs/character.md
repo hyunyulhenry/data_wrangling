@@ -1,4 +1,3 @@
-
 # Character Strings
 
 문자열은 R의 기본함수 및`stringr` 패키지를 이용해 쉽게 다룰 수 있습니다.
@@ -227,8 +226,8 @@ print(text)
 ```
 
 ```
-## [1] "Text "        " with"        " whitespace " " on"          "both "       
-## [6] "sides "
+## [1] "Text "        " with"        " whitespace "
+## [4] " on"          "both "        "sides "
 ```
 
 각 단어의 좌/우 혹은 양쪽에 공백이 있습니다.
@@ -239,8 +238,8 @@ str_trim(text, side = 'left')
 ```
 
 ```
-## [1] "Text "       "with"        "whitespace " "on"          "both "      
-## [6] "sides "
+## [1] "Text "       "with"        "whitespace "
+## [4] "on"          "both "       "sides "
 ```
 
 ```r
@@ -248,8 +247,8 @@ str_trim(text, side = 'right')
 ```
 
 ```
-## [1] "Text"        " with"       " whitespace" " on"         "both"       
-## [6] "sides"
+## [1] "Text"        " with"       " whitespace"
+## [4] " on"         "both"        "sides"
 ```
 
 ```r
@@ -257,8 +256,8 @@ str_trim(text, side = 'both')
 ```
 
 ```
-## [1] "Text"       "with"       "whitespace" "on"         "both"      
-## [6] "sides"
+## [1] "Text"       "with"       "whitespace" "on"        
+## [5] "both"       "sides"
 ```
 
 `str_trim()` 함수를 통해 좌/우/양쪽의 공백을 제거할 수 있습니다.

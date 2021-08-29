@@ -1,4 +1,3 @@
-
 # Vector
 
 벡터는 R의 가장 기본적인 데이터 구조로써 integer, double, logical, character로 이루어져 있습니다.

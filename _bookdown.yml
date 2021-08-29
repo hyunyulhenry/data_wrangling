@@ -8,7 +8,7 @@ language:
     chapter_name: "Chapter "
 
 delete_merged_file: true
-new_session: yes
+new_session: no
 output_dir: docs
 
 rmd_files: [

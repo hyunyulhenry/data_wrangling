@@ -1,6 +1,6 @@
 Package: placeholder
 Type: Book
-Title: R을 이용한 퀀트 투자 포트폴리오 만들기
+Title: R을 이용한 데이터 랭글링
 Version: 0.0.1
-Imports: bookdown
-Remotes: rstudio/bookdown
+Imports: data_wrangling
+Remotes: hyunyulhenry/data_wrangling

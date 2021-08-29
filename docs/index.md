@@ -1,8 +1,7 @@
-
 --- 
 title: "R을 이용한 데이터 랭글링"
 author: "이현열 (Henry Lee)"
-date: "2020-04-17"
+date: "2021-08-29"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -48,7 +47,5 @@ https://www.amazon.com/Data-Wrangling-R-Use/dp/3319455982
 ## Contact Information {-}
 
 - E-mail: leebisu@gmail.com
-- Henry’s Quantopia: http://henryquant.blogspot.com
+- Henry’s Quantopia: https://blog.naver.com/leebisu
 - GitHub: https://github.com/hyunyulhenry/
-- Facebook: https://www.facebook.com/leebisu
-- Instagram: https://www.instagram.com/hyunyul.lee/

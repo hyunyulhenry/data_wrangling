@@ -1,5 +1,4 @@
 
-
 # (PART) 데이터 구조 다루기 {-}
 
 # Data Structure Basics
@@ -73,7 +72,8 @@ list
 ##  [1]  1  2  3  4  5  6  7  8  9 10
 ## 
 ## $item2
-##  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R"
+##  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M"
+## [14] "N" "O" "P" "Q" "R"
 ```
 
 ```r
@@ -139,6 +139,6 @@ str(df)
 ```
 ## 'data.frame':	18 obs. of  2 variables:
 ##  $ item1: int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ item2: Factor w/ 18 levels "A","B","C","D",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ item2: chr  "A" "B" "C" "D" ...
 ```
 

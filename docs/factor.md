@@ -1,4 +1,3 @@
-
 # Factors
 
 R에서 Factor 형태는 범주형(categorical) 데이터를 다룰때 사용됩니다.
@@ -88,8 +87,9 @@ ses
 ```
 
 ```
-##  [1] low    middle low    low    low    low    middle low    middle middle
-## [11] middle middle middle high   high   low    middle middle low    high  
+##  [1] low    middle low    low    low    low    middle
+##  [8] low    middle middle middle middle middle high  
+## [15] high   low    middle middle low    high  
 ## Levels: low < middle < high
 ```
 
@@ -105,8 +105,9 @@ fct_recode(ses, small = 'low', medium = 'middle', large = 'high')
 ```
 
 ```
-##  [1] small  medium small  small  small  small  medium small  medium medium
-## [11] medium medium medium large  large  small  medium medium small  large 
+##  [1] small  medium small  small  small  small  medium
+##  [8] small  medium medium medium medium medium large 
+## [15] large  small  medium medium small  large 
 ## Levels: small < medium < large
 ```
 

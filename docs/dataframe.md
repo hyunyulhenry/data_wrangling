@@ -1,4 +1,3 @@
-
 # Data Frame
 
 데이터프레임은 R에서 가장 널리 사용되는 형식으로써, 각 컬럼이 다른 클래스를 가질 수 있습니다.
@@ -19,7 +18,7 @@ str(df)
 ```
 ## 'data.frame':	3 obs. of  4 variables:
 ##  $ col1: int  1 2 3
-##  $ col2: Factor w/ 3 levels "is","text","this": 3 1 2
+##  $ col2: chr  "this" "is" "text"
 ##  $ col3: logi  TRUE FALSE TRUE
 ##  $ col4: num  2.5 4.2 3.14
 ```

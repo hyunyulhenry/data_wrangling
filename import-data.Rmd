@@ -135,51 +135,38 @@ read.table('mydata.txt', sep = ',', header = TRUE)
 
 엑셀 파일을 불러오기 위한 패키지는 매우 많으며, 이 중 `xlsx`와 `readxl` 패키지를 살펴보도록 하겠습니다.
 
-### `xlsx` 패키지
+### `openxlsx` 패키지
 
-`xlsx` 패캐지의 `read.xlsx()` 함수를 이용해 엑셀 데이터를 불러올 수 있습니다.
+`openxlsx` 패캐지의 `read.xlsx()` 함수를 이용해 엑셀 데이터를 불러올 수 있습니다.
 
 ```{r}
-library(xlsx)
+library(openxlsx)
 
-read.xlsx('mydata.xlsx', sheetName = 'Sheet1')
+read.xlsx('mydata.xlsx', sheet = 'Sheet1')
 ```
 
 ```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet2')
+read.xlsx('mydata.xlsx', sheet = 'Sheet2')
 ```
 
-엑셀은 여러 시트로 구성되어 있으므로, sheetName 인자를 통해 원하는 시트명의 내용만 불러올 수 있습니다.
+엑셀은 여러 시트로 구성되어 있으므로, sheet 인자를 통해 원하는 시트명의 내용만 불러올 수 있습니다.
 
 ```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3')
+read.xlsx('mydata.xlsx', sheet = 'Sheet3')
 ```
 
 간혹 엑셀 파일에는 데이터가 아닌 설명을 위한 텍스트가 적힌 경우도 있으므로, 이를 제외하고 데이터를 불러올 필요가 있습니다.
 
 ```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3', startRow = 3)
+read.xlsx('mydata.xlsx', sheet = 'Sheet3', startRow = 3)
 ```
 
 startRow 인자를 통해 3번째 행부터 데이터를 불러오게 되어, 불필요한 텍스트가 제거되었습니다.
 
 ```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet3', rowIndex = 3:5)
+read.xlsx('mydata.xlsx', sheet = 'Sheet3', rows = 3:5)
 ```
 rowIndex 인자를 통해 원하는 행의 데이터만 불러올 수 있습니다.
-
-```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet4')
-```
-
-불러온 데이터 중 Present Value에 해당하는 열은 $\frac{Future\  Value}{(1+Rate)^{Period}}$를 통해 엑셀 내에서 계산된 값입니다.
-
-
-```{r}
-read.xlsx('mydata.xlsx', sheetName = 'Sheet4', keepFormulas= TRUE)
-```
-
-keepFormulas인자를 TRUE로 설정할 경우 엑셀 내에서 셀 간의 계산이 되지 않고 수식이 그대로 표현됩니다.
 
 ### `readxl` 패키지
 

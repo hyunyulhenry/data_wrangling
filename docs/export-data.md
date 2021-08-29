@@ -1,4 +1,3 @@
-
 # Exporting Data
 
 작업을 마무리 했으면 csv, excel, rds 등의 형태로 데이터를 저장해야 합니다.
@@ -62,11 +61,11 @@ col_names 인자를 FALSE로 지정할 경우 열 이름 역시 저장되지 않
 
 ## 엑셀 저장하기
 
-`xlsx` 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.
+`openxlsx` 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.
 
 
 ```r
-library(xlsx)
+library(openxlsx)
 
 write.xlsx(df, file = 'output_example.xlsx')
 ```

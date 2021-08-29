@@ -8,7 +8,7 @@ documentclass: book
 fontsize: 12pt
 link-citations: yes
 latex_engine: xelatex
-github-repo: hyunyulhenry/lecture/data_wrangling
+github-repo: hyunyulhenry/data_wrangling
 ---
 
 # Welcome {-}
@@ -49,7 +49,5 @@ knitr::include_graphics('images/user_cover.jpg')
 ## Contact Information {-}
 
 - E-mail: leebisu@gmail.com
-- Henry’s Quantopia: http://henryquant.blogspot.com
+- Henry’s Quantopia: https://blog.naver.com/leebisu
 - GitHub: https://github.com/hyunyulhenry/
-- Facebook: https://www.facebook.com/leebisu
-- Instagram: https://www.instagram.com/hyunyul.lee/
