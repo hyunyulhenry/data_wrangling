@@ -1,6 +1,6 @@
 bookdown::gitbook:
   css: style.css
-  split_by: chapter
+  split_by: section
   config:
     toc:
       collapse: section
@@ -10,5 +10,3 @@ bookdown::gitbook:
         <li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
     edit: null
     download: no
-    split_bib: no
-

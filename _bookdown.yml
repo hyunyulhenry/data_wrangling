@@ -8,7 +8,7 @@ language:
     chapter_name: "Chapter "
 
 delete_merged_file: true
-new_session: no
+new_session: no # 전부다 렌더링 할지
 output_dir: docs
 
 rmd_files: [

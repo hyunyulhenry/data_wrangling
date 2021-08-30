@@ -8,7 +8,7 @@ documentclass: book
 fontsize: 12pt
 link-citations: yes
 latex_engine: xelatex
-github-repo: hyunyulhenry/lecture/data_wrangling
+github-repo: hyunyulhenry/data_wrangling
 ---
 
 # Welcome {-}
