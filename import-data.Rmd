@@ -27,7 +27,7 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds
 ```{r eval = FALSE}
 download.file('https://raw.githubusercontent.com/hyunyulhenry/data_wrangling/master/mydata.csv', 'mydata.csv')
 download.file('https://raw.githubusercontent.com/hyunyulhenry/data_wrangling/master/mydata.txt', 'mydata.txt')
-download.file('https://github.com/hyunyulhenry/data_wrangling/raw/master/mydata.xlsx','mydata.xlsx')
+download.file('https://github.com/hyunyulhenry/data_wrangling/raw/master/mydata.xlsx','mydata.xlsx', mode = 'wb')
 download.file('https://github.com/hyunyulhenry/data_wrangling/raw/master/mydata.rds','mydata.rds')
 ```
 
@@ -88,7 +88,7 @@ nrows 인자를 통해 전체 데이터가 아닌 지정한 행까지의 데이�
 
 ### `readr` 패키지
 
-기본 함수 대비 readr 패키지를 이용할 경우 10배 정도 빠르게 데이털르 불러올 수 있습니다.
+기본 함수 대비 readr 패키지를 이용할 경우 10배 정도 빠르게 데이터를 불러올 수 있습니다.
 
 ```{r}
 library(readr)

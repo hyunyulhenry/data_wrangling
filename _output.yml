@@ -1,3 +1,7 @@
+bookdown::bs4_book:
+  theme:
+    primary: "#637238"
+
 bookdown::gitbook:
   css: style.css
   split_by: chapter
@@ -10,5 +14,4 @@ bookdown::gitbook:
         <li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
     edit: null
     download: no
-    split_bib: no
-
+    

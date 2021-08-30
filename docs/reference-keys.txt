@@ -1,3 +1,5 @@
+tab:mag
+fig:unnamed-chunk-204
 numbers
 integer와-double의-vector-만들기
 둘-간의-형태-바꾸기
@@ -84,9 +86,6 @@ sapply
 기타-함수
 pipe-operator
 pipe-operator-1
-중첩
-다중-객체
-section
 tidyr을-이용한-데이터-모양-바꾸기
 세로로-긴-데이터-만들기
 가로로-긴-데이터-만들기

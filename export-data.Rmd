@@ -57,11 +57,8 @@ library(openxlsx)
 write.xlsx(df, file = 'output_example.xlsx')
 ```
 
-`xlsx` 패키지를 이용할 경우 R 내에서 다양한 형식으로 엑셀을 꾸민 후 파일을 저장할 수 있습니다. 자세한 내용은 다음 url을 참조하시기 바랍니다.
+`openxlsx` 패키지를 이용할 경우 R 내에서 다양한 형식으로 엑셀을 꾸민 후 파일을 저장할 수 있습니다. 자세한 내용은 다음 url을 참조하시기 바랍니다.
 
-```
-http://www.sthda.com/english/wiki/r-xlsx-package-a-quick-start-guide-to-manipulate-excel-files-in-r
-```
 
 ## R object File
 
