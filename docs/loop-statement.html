@@ -1,115 +1,357 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 Loop Statement | R을 이용한 데이터 랭글링</title>
-<meta name="author" content="이현열 (Henry Lee)">
-<meta name="description" content="루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다.  14.1 기본 제어 구문 (if, for, while 등)  14.1.1 if 구문 if 구문은 다음과 같이 구성됩니다. if (test_expression) {  statement } 괄호 안의 test_expression이 TRUE일 경우에만 statement 코드가...">
-<meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/loop-statement.html">
-<meta property="og:description" content="루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다.  14.1 기본 제어 구문 (if, for, while 등)  14.1.1 if 구문 if 구문은 다음과 같이 구성됩니다. if (test_expression) {  statement } 괄호 안의 test_expression이 TRUE일 경우에만 statement 코드가...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링">
-<meta name="twitter:description" content="루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다.  14.1 기본 제어 구문 (if, for, while 등)  14.1.1 if 구문 if 구문은 다음과 같이 구성됩니다. if (test_expression) {  statement } 괄호 안의 test_expression이 TRUE일 경우에만 statement 코드가...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Loop Statement | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/" />
+  
+  <meta property="og:description" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="github-repo" content="hyunyulhenry/data_wrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링" />
+  
+  <meta name="twitter:description" content="Chapter 14 Loop Statement | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  
+
+<meta name="author" content="이현열 (Henry Lee)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="함수.html"/>
+<link rel="next" href="pipe-operator.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">R을 이용한 데이터 랭글링</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li class="book-part">데이터 타입별 다루기</li>
-<li><a class="" href="numbers.html"><span class="header-section-number">1</span> Numbers</a></li>
-<li><a class="" href="character-strings.html"><span class="header-section-number">2</span> Character Strings</a></li>
-<li><a class="" href="factors.html"><span class="header-section-number">3</span> Factors</a></li>
-<li><a class="" href="date.html"><span class="header-section-number">4</span> Date</a></li>
-<li class="book-part">데이터 구조 다루기</li>
-<li><a class="" href="data-structure-basics.html"><span class="header-section-number">5</span> Data Structure Basics</a></li>
-<li><a class="" href="vector.html"><span class="header-section-number">6</span> Vector</a></li>
-<li><a class="" href="list.html"><span class="header-section-number">7</span> List</a></li>
-<li><a class="" href="matrix.html"><span class="header-section-number">8</span> Matrix</a></li>
-<li><a class="" href="data-frame.html"><span class="header-section-number">9</span> Data Frame</a></li>
-<li><a class="" href="missing-value.html"><span class="header-section-number">10</span> Missing Value</a></li>
-<li class="book-part">데이터 불러오기 및 내보내기</li>
-<li><a class="" href="import-data.html"><span class="header-section-number">11</span> Import Data</a></li>
-<li><a class="" href="exporting-data.html"><span class="header-section-number">12</span> Exporting Data</a></li>
-<li class="book-part">효율적이고 가독성 높은 코드</li>
-<li><a class="" href="%ED%95%A8%EC%88%98.html"><span class="header-section-number">13</span> 함수</a></li>
-<li><a class="active" href="loop-statement.html"><span class="header-section-number">14</span> Loop Statement</a></li>
-<li><a class="" href="pipe-operator.html"><span class="header-section-number">15</span> Pipe Operator (%&gt;%)</a></li>
-<li class="book-part">데이터 구조 변형하기</li>
-<li><a class="" href="tidyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EC%96%91-%EB%B0%94%EA%BE%B8%EA%B8%B0.html"><span class="header-section-number">16</span> tidyr을 이용한 데이터 모양 바꾸기</a></li>
-<li><a class="" href="dplyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%80%ED%98%95%ED%95%98%EA%B8%B0.html"><span class="header-section-number">17</span> dplyr을 이용한 데이터 변형하기</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R을 이용한 데이터 랭글링</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i>Contact Information</a></li>
+</ul></li>
+<li class="part"><span><b>I 데이터 타입별 다루기</b></span></li>
+<li class="chapter" data-level="1" data-path="numbers.html"><a href="numbers.html"><i class="fa fa-check"></i><b>1</b> Numbers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="numbers.html"><a href="numbers.html#integer와-double의-vector-만들기"><i class="fa fa-check"></i><b>1.1</b> integer와 double의 vector 만들기</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="numbers.html"><a href="numbers.html#둘-간의-형태-바꾸기"><i class="fa fa-check"></i><b>1.1.1</b> 둘 간의 형태 바꾸기</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="numbers.html"><a href="numbers.html#비임의non-random-숫자-생성하기"><i class="fa fa-check"></i><b>1.2</b> 비임의(Non-random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="numbers.html"><a href="numbers.html#seq-함수-이용"><i class="fa fa-check"></i><b>1.2.1</b> <code>seq()</code> 함수 이용</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="numbers.html"><a href="numbers.html#임의random-숫자-생성하기"><i class="fa fa-check"></i><b>1.3</b> 임의(Random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="numbers.html"><a href="numbers.html#uniform-numbers"><i class="fa fa-check"></i><b>1.3.1</b> Uniform Numbers</a></li>
+<li class="chapter" data-level="1.3.2" data-path="numbers.html"><a href="numbers.html#non-uniform-numbers"><i class="fa fa-check"></i><b>1.3.2</b> Non-Uniform Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="numbers.html"><a href="numbers.html#반올림"><i class="fa fa-check"></i><b>1.4</b> 반올림</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="character-strings.html"><a href="character-strings.html"><i class="fa fa-check"></i><b>2</b> Character Strings</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="character-strings.html"><a href="character-strings.html#문자열-기본"><i class="fa fa-check"></i><b>2.1</b> 문자열 기본</a></li>
+<li class="chapter" data-level="2.2" data-path="character-strings.html"><a href="character-strings.html#문자열-출력"><i class="fa fa-check"></i><b>2.2</b> 문자열 출력</a></li>
+<li class="chapter" data-level="2.3" data-path="character-strings.html"><a href="character-strings.html#문자열-갯수-확인"><i class="fa fa-check"></i><b>2.3</b> 문자열 갯수 확인</a></li>
+<li class="chapter" data-level="2.4" data-path="character-strings.html"><a href="character-strings.html#stringr-패키지를-이용한-문자열-다루기"><i class="fa fa-check"></i><b>2.4</b> <code>stringr</code> 패키지를 이용한 문자열 다루기</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="character-strings.html"><a href="character-strings.html#기본-사용법"><i class="fa fa-check"></i><b>2.4.1</b> 기본 사용법</a></li>
+<li class="chapter" data-level="2.4.2" data-path="character-strings.html"><a href="character-strings.html#공백whitespace-제거"><i class="fa fa-check"></i><b>2.4.2</b> 공백(Whitespace) 제거</a></li>
+<li class="chapter" data-level="2.4.3" data-path="character-strings.html"><a href="character-strings.html#문자열-자리수-채우기"><i class="fa fa-check"></i><b>2.4.3</b> 문자열 자리수 채우기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>3</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="factors.html"><a href="factors.html#팩터-생성-및-탐색"><i class="fa fa-check"></i><b>3.1</b> 팩터 생성 및 탐색</a></li>
+<li class="chapter" data-level="3.2" data-path="factors.html"><a href="factors.html#레벨에-순서-부여하기"><i class="fa fa-check"></i><b>3.2</b> 레벨에 순서 부여하기</a></li>
+<li class="chapter" data-level="3.3" data-path="factors.html"><a href="factors.html#순서-재정의"><i class="fa fa-check"></i><b>3.3</b> 순서 재정의</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="date.html"><a href="date.html"><i class="fa fa-check"></i><b>4</b> Date</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="date.html"><a href="date.html#현재-날짜-및-시간"><i class="fa fa-check"></i><b>4.1</b> 현재 날짜 및 시간</a></li>
+<li class="chapter" data-level="4.2" data-path="date.html"><a href="date.html#문자열을-날짜로-변경하기"><i class="fa fa-check"></i><b>4.2</b> 문자열을 날짜로 변경하기</a></li>
+<li class="chapter" data-level="4.3" data-path="date.html"><a href="date.html#날짜-관련-정보-추출"><i class="fa fa-check"></i><b>4.3</b> 날짜 관련 정보 추출</a></li>
+<li class="chapter" data-level="4.4" data-path="date.html"><a href="date.html#날짜-순서-생성하기"><i class="fa fa-check"></i><b>4.4</b> 날짜 순서 생성하기</a></li>
+</ul></li>
+<li class="part"><span><b>II 데이터 구조 다루기</b></span></li>
+<li class="chapter" data-level="5" data-path="data-structure-basics.html"><a href="data-structure-basics.html"><i class="fa fa-check"></i><b>5</b> Data Structure Basics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structure-basics.html"><a href="data-structure-basics.html#구조-파악하기"><i class="fa fa-check"></i><b>5.1</b> 구조 파악하기</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="vector.html"><a href="vector.html#벡터-만들기"><i class="fa fa-check"></i><b>6.1</b> 벡터 만들기</a></li>
+<li class="chapter" data-level="6.2" data-path="vector.html"><a href="vector.html#벡터에-값-추가하기"><i class="fa fa-check"></i><b>6.2</b> 벡터에 값 추가하기</a></li>
+<li class="chapter" data-level="6.3" data-path="vector.html"><a href="vector.html#벡터-추출하기"><i class="fa fa-check"></i><b>6.3</b> 벡터 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="list.html"><a href="list.html"><i class="fa fa-check"></i><b>7</b> List</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="list.html"><a href="list.html#리스트-생성하기"><i class="fa fa-check"></i><b>7.1</b> 리스트 생성하기</a></li>
+<li class="chapter" data-level="7.2" data-path="list.html"><a href="list.html#기존-리스트에-데이터-추가하기"><i class="fa fa-check"></i><b>7.2</b> 기존 리스트에 데이터 추가하기</a></li>
+<li class="chapter" data-level="7.3" data-path="list.html"><a href="list.html#리스트-추출하기"><i class="fa fa-check"></i><b>7.3</b> 리스트 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="matrix.html"><a href="matrix.html"><i class="fa fa-check"></i><b>8</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="matrix.html"><a href="matrix.html#행렬-생성하기"><i class="fa fa-check"></i><b>8.1</b> 행렬 생성하기</a></li>
+<li class="chapter" data-level="8.2" data-path="matrix.html"><a href="matrix.html#기존-행렬에-데이터-추가하기"><i class="fa fa-check"></i><b>8.2</b> 기존 행렬에 데이터 추가하기</a></li>
+<li class="chapter" data-level="8.3" data-path="matrix.html"><a href="matrix.html#행이름-및-열이름-추가하기"><i class="fa fa-check"></i><b>8.3</b> 행이름 및 열이름 추가하기</a></li>
+<li class="chapter" data-level="8.4" data-path="matrix.html"><a href="matrix.html#행렬-추출하기"><i class="fa fa-check"></i><b>8.4</b> 행렬 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>9</b> Data Frame</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="data-frame.html"><a href="data-frame.html#데이터프레임-생성하기"><i class="fa fa-check"></i><b>9.1</b> 데이터프레임 생성하기</a></li>
+<li class="chapter" data-level="9.2" data-path="data-frame.html"><a href="data-frame.html#기존-데이터프레임에-데이터-추가하기"><i class="fa fa-check"></i><b>9.2</b> 기존 데이터프레임에 데이터 추가하기</a></li>
+<li class="chapter" data-level="9.3" data-path="data-frame.html"><a href="data-frame.html#데이터프레임추출하기"><i class="fa fa-check"></i><b>9.3</b> 데이터프레임추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="missing-value.html"><a href="missing-value.html"><i class="fa fa-check"></i><b>10</b> Missing Value</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="missing-value.html"><a href="missing-value.html#결측치-테스트"><i class="fa fa-check"></i><b>10.1</b> 결측치 테스트</a></li>
+<li class="chapter" data-level="10.2" data-path="missing-value.html"><a href="missing-value.html#결측치-제거"><i class="fa fa-check"></i><b>10.2</b> 결측치 제거</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="missing-value.html"><a href="missing-value.html#평균값-대체"><i class="fa fa-check"></i><b>10.2.1</b> 평균값 대체</a></li>
+<li class="chapter" data-level="10.2.2" data-path="missing-value.html"><a href="missing-value.html#데이터-제거"><i class="fa fa-check"></i><b>10.2.2</b> 데이터 제거</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="missing-value.html"><a href="missing-value.html#결측치-대체"><i class="fa fa-check"></i><b>10.3</b> 결측치 대체</a></li>
+</ul></li>
+<li class="part"><span><b>III 데이터 불러오기 및 내보내기</b></span></li>
+<li class="chapter" data-level="11" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>11</b> Import Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="import-data.html"><a href="import-data.html#csv-파일-불러오기"><i class="fa fa-check"></i><b>11.1</b> csv 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="import-data.html"><a href="import-data.html#기본함수"><i class="fa fa-check"></i><b>11.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="11.1.2" data-path="import-data.html"><a href="import-data.html#readr-패키지"><i class="fa fa-check"></i><b>11.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="import-data.html"><a href="import-data.html#텍스트-파일-불러오기"><i class="fa fa-check"></i><b>11.2</b> 텍스트 파일 불러오기</a></li>
+<li class="chapter" data-level="11.3" data-path="import-data.html"><a href="import-data.html#엑셀-파일-불러오기"><i class="fa fa-check"></i><b>11.3</b> 엑셀 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="import-data.html"><a href="import-data.html#openxlsx-패키지"><i class="fa fa-check"></i><b>11.3.1</b> <code>openxlsx</code> 패키지</a></li>
+<li class="chapter" data-level="11.3.2" data-path="import-data.html"><a href="import-data.html#readxl-패키지"><i class="fa fa-check"></i><b>11.3.2</b> <code>readxl</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="import-data.html"><a href="import-data.html#r-object-file"><i class="fa fa-check"></i><b>11.4</b> R object File</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exporting-data.html"><a href="exporting-data.html"><i class="fa fa-check"></i><b>12</b> Exporting Data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exporting-data.html"><a href="exporting-data.html#텍스트-csv-파일-저장하기"><i class="fa fa-check"></i><b>12.1</b> 텍스트, csv 파일 저장하기</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="exporting-data.html"><a href="exporting-data.html#기본함수-1"><i class="fa fa-check"></i><b>12.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="12.1.2" data-path="exporting-data.html"><a href="exporting-data.html#readr-패키지-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="exporting-data.html"><a href="exporting-data.html#엑셀-저장하기"><i class="fa fa-check"></i><b>12.2</b> 엑셀 저장하기</a></li>
+<li class="chapter" data-level="12.3" data-path="exporting-data.html"><a href="exporting-data.html#r-object-file-1"><i class="fa fa-check"></i><b>12.3</b> R object File</a></li>
+</ul></li>
+<li class="part"><span><b>IV 효율적이고 가독성 높은 코드</b></span></li>
+<li class="chapter" data-level="13" data-path="함수.html"><a href="함수.html"><i class="fa fa-check"></i><b>13</b> 함수</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="함수.html"><a href="함수.html#함수의-요소"><i class="fa fa-check"></i><b>13.1</b> 함수의 요소</a></li>
+<li class="chapter" data-level="13.2" data-path="함수.html"><a href="함수.html#인자"><i class="fa fa-check"></i><b>13.2</b> 인자</a></li>
+<li class="chapter" data-level="13.3" data-path="함수.html"><a href="함수.html#다중-결과값-출력"><i class="fa fa-check"></i><b>13.3</b> 다중 결과값 출력</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="loop-statement.html"><a href="loop-statement.html"><i class="fa fa-check"></i><b>14</b> Loop Statement</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="loop-statement.html"><a href="loop-statement.html#기본-제어-구문-if-for-while-등"><i class="fa fa-check"></i><b>14.1</b> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="loop-statement.html"><a href="loop-statement.html#if-구문"><i class="fa fa-check"></i><b>14.1.1</b> <code>if</code> 구문</a></li>
+<li class="chapter" data-level="14.1.2" data-path="loop-statement.html"><a href="loop-statement.html#if...else-구문"><i class="fa fa-check"></i><b>14.1.2</b> <code>if...else</code> 구문</a></li>
+<li class="chapter" data-level="14.1.3" data-path="loop-statement.html"><a href="loop-statement.html#for-loop"><i class="fa fa-check"></i><b>14.1.3</b> <code>for loop</code></a></li>
+<li class="chapter" data-level="14.1.4" data-path="loop-statement.html"><a href="loop-statement.html#while-loop"><i class="fa fa-check"></i><b>14.1.4</b> <code>while loop</code></a></li>
+<li class="chapter" data-level="14.1.5" data-path="loop-statement.html"><a href="loop-statement.html#next"><i class="fa fa-check"></i><b>14.1.5</b> <code>next</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="loop-statement.html"><a href="loop-statement.html#apply-계열-함수"><i class="fa fa-check"></i><b>14.2</b> Apply 계열 함수</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="loop-statement.html"><a href="loop-statement.html#apply"><i class="fa fa-check"></i><b>14.2.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="loop-statement.html"><a href="loop-statement.html#lapply"><i class="fa fa-check"></i><b>14.2.2</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="loop-statement.html"><a href="loop-statement.html#sapply"><i class="fa fa-check"></i><b>14.2.3</b> <code>sapply()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="loop-statement.html"><a href="loop-statement.html#기타-함수"><i class="fa fa-check"></i><b>14.3</b> 기타 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="pipe-operator.html"><a href="pipe-operator.html"><i class="fa fa-check"></i><b>15</b> Pipe Operator (<code>%&gt;%</code>)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="pipe-operator.html"><a href="pipe-operator.html#pipe-operator-1"><i class="fa fa-check"></i><b>15.1</b> Pipe Operator (<code>%&gt;%</code>)</a></li>
+</ul></li>
+<li class="part"><span><b>V 데이터 구조 변형하기</b></span></li>
+<li class="chapter" data-level="16" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html"><i class="fa fa-check"></i><b>16</b> <code>tidyr</code>을 이용한 데이터 모양 바꾸기</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#세로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.1</b> 세로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#가로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.2</b> 가로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.3" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#하나의-열을-여러-열로-나누기"><i class="fa fa-check"></i><b>16.3</b> 하나의 열을 여러 열로 나누기</a></li>
+<li class="chapter" data-level="16.4" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#여러-열을-하나로-합치기"><i class="fa fa-check"></i><b>16.4</b> 여러 열을 하나로 합치기</a></li>
+<li class="chapter" data-level="16.5" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#tidyr의-기타-함수"><i class="fa fa-check"></i><b>16.5</b> <code>tidyr</code>의 기타 함수</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#fill"><i class="fa fa-check"></i><b>16.5.1</b> <code>fill()</code></a></li>
+<li class="chapter" data-level="16.5.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#replce_na"><i class="fa fa-check"></i><b>16.5.2</b> <code>replce_na()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html"><i class="fa fa-check"></i><b>17</b> <code>dplyr</code>을 이용한 데이터 변형하기</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#select-원하는-열-선택하기"><i class="fa fa-check"></i><b>17.1</b> <code>select()</code>: 원하는 열 선택하기</a></li>
+<li class="chapter" data-level="17.2" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#rename-이름-새로-부여하기"><i class="fa fa-check"></i><b>17.2</b> <code>rename()</code>: 이름 새로 부여하기</a></li>
+<li class="chapter" data-level="17.3" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#filter-필터링"><i class="fa fa-check"></i><b>17.3</b> <code>filter()</code>: 필터링</a></li>
+<li class="chapter" data-level="17.4" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#group_by-원하는-조건으로-그룹화"><i class="fa fa-check"></i><b>17.4</b> <code>group_by()</code>: 원하는 조건으로 그룹화</a></li>
+<li class="chapter" data-level="17.5" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#summarize-요약값-계산하기"><i class="fa fa-check"></i><b>17.5</b> <code>summarize()</code>: 요약값 계산하기</a></li>
+<li class="chapter" data-level="17.6" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#arrange-데이터-정렬하기"><i class="fa fa-check"></i><b>17.6</b> <code>arrange()</code>: 데이터 정렬하기</a></li>
+<li class="chapter" data-level="17.7" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>17.7</b> join(): 데이터 합치기</a></li>
+<li class="chapter" data-level="17.8" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#mutate-새로운-열-생성하기"><i class="fa fa-check"></i><b>17.8</b> <code>mutate()</code>: 새로운 열 생성하기</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="loop-statement" class="section level1" number="14">
-<h1>
-<span class="header-section-number">14</span> Loop Statement<a class="anchor" aria-label="anchor" href="#loop-statement"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 데이터 랭글링</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loop-statement" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Loop Statement</h1>
 <p>루프 구문을 사용할 경우 반복된 작업을 간단히 수행할 수 있습니다.</p>
 <div id="기본-제어-구문-if-for-while-등" class="section level2" number="14.1">
-<h2>
-<span class="header-section-number">14.1</span> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)<a class="anchor" aria-label="anchor" href="#%EA%B8%B0%EB%B3%B8-%EC%A0%9C%EC%96%B4-%EA%B5%AC%EB%AC%B8-if-for-while-%EB%93%B1"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">14.1</span> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)</h2>
 <div id="if-구문" class="section level3" number="14.1.1">
-<h3>
-<span class="header-section-number">14.1.1</span> <code>if</code> 구문<a class="anchor" aria-label="anchor" href="#if-%EA%B5%AC%EB%AC%B8"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">14.1.1</span> <code>if</code> 구문</h3>
 <p>if 구문은 다음과 같이 구성됩니다.</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="va">test_expression</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">statement</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="loop-statement.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (test_expression) {</span>
+<span id="cb384-2"><a href="loop-statement.html#cb384-2" aria-hidden="true" tabindex="-1"></a>  statement</span>
+<span id="cb384-3"><a href="loop-statement.html#cb384-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>괄호 안의 test_expression이 TRUE일 경우에만 statement 코드가 실행됩니다.</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'x contains negative number'</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<pre><code>## [1] "x contains negative number"</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="loop-statement.html#cb385-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">3</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb385-2"><a href="loop-statement.html#cb385-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb385-3"><a href="loop-statement.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb385-4"><a href="loop-statement.html#cb385-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&#39;x contains negative number&#39;</span>)</span>
+<span id="cb385-5"><a href="loop-statement.html#cb385-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;x contains negative number&quot;</code></pre>
 <p>만일 x중 음수가 존재하면 <em>x contains negative number</em>가 출력되는 조건이며, -2가 음수이므로 조건을 만족합니다.</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span> <span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"y contains negative numbers"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="loop-statement.html#cb387-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb387-2"><a href="loop-statement.html#cb387-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-3"><a href="loop-statement.html#cb387-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span> (y <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb387-4"><a href="loop-statement.html#cb387-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;y contains negative numbers&quot;</span>)</span>
+<span id="cb387-5"><a href="loop-statement.html#cb387-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>y에는 음수가 존재하지 않으므로, 구문이 실행되지 않습니다.</p>
 </div>
 <div id="if...else-구문" class="section level3" number="14.1.2">
-<h3>
-<span class="header-section-number">14.1.2</span> <code>if...else</code> 구문<a class="anchor" aria-label="anchor" href="#if...else-%EA%B5%AC%EB%AC%B8"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">14.1.2</span> <code>if...else</code> 구문</h3>
 <p>if 구문만 존재할 시 이를 만족하지 않는 경우 아무런 구문도 실행되지 않습니다. if else 구문의 경우 조건을 만족하지 않을 경우 else에 해당하는 구문이 실행됩니다.</p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="loop-statement.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (test_expression) {</span>
 <span id="cb388-2"><a href="loop-statement.html#cb388-2" aria-hidden="true" tabindex="-1"></a>  statement <span class="dv">1</span></span>
@@ -117,34 +359,31 @@
 <span id="cb388-4"><a href="loop-statement.html#cb388-4" aria-hidden="true" tabindex="-1"></a>  statement <span class="dv">2</span></span>
 <span id="cb388-5"><a href="loop-statement.html#cb388-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>만일 test_expression 구문이 TRUE이면 statement 1이 실행되며, 그렇지 않을 경우 statement 2가 실행됩니다.</p>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span> <span class="op">(</span><span class="va">y</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"y contains negative numbers"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"y contains all positive numbers"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<pre><code>## [1] "y contains all positive numbers"</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="loop-statement.html#cb389-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb389-2"><a href="loop-statement.html#cb389-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb389-3"><a href="loop-statement.html#cb389-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span> (y <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb389-4"><a href="loop-statement.html#cb389-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;y contains negative numbers&quot;</span>)</span>
+<span id="cb389-5"><a href="loop-statement.html#cb389-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb389-6"><a href="loop-statement.html#cb389-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;y contains all positive numbers&quot;</span>)</span>
+<span id="cb389-7"><a href="loop-statement.html#cb389-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;y contains all positive numbers&quot;</code></pre>
 <p>y에 음수가 존재하는 if구문이 FALSE 이므로, else에 해당하는 메세지가 출력됩니다.</p>
-<p>if…else 구문은 <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> 함수로 간단히 나타낼 수도 있습니다.</p>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="st">"x contains negative numbers"</span>, <span class="st">"x contains all positive numbers"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "x contains all positive numbers"</code></pre>
+<p>if…else 구문은 <code>ifelse()</code> 함수로 간단히 나타낼 수도 있습니다.</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="loop-statement.html#cb391-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span> (<span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb391-2"><a href="loop-statement.html#cb391-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb391-3"><a href="loop-statement.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="fu">any</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>), <span class="st">&quot;x contains negative numbers&quot;</span>, <span class="st">&quot;x contains all positive numbers&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x contains all positive numbers&quot;</code></pre>
 <p>또한 if와 else 사이에 else if 조건을 통해, 여러 조건을 추가할 수도 있습니다.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fl">7</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"x exceeds acceptable tolerance levels"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"x is within acceptable tolerance levels"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="st">"x is negative"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<pre><code>## [1] "x is within acceptable tolerance levels"</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="loop-statement.html#cb393-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">7</span></span>
+<span id="cb393-2"><a href="loop-statement.html#cb393-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-3"><a href="loop-statement.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb393-4"><a href="loop-statement.html#cb393-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;x exceeds acceptable tolerance levels&quot;</span>)</span>
+<span id="cb393-5"><a href="loop-statement.html#cb393-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">10</span>) {</span>
+<span id="cb393-6"><a href="loop-statement.html#cb393-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;x is within acceptable tolerance levels&quot;</span>)</span>
+<span id="cb393-7"><a href="loop-statement.html#cb393-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb393-8"><a href="loop-statement.html#cb393-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (<span class="st">&quot;x is negative&quot;</span>)</span>
+<span id="cb393-9"><a href="loop-statement.html#cb393-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;x is within acceptable tolerance levels&quot;</code></pre>
 <p>위 조건은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
 <li>x가 10 이상일 경우 <strong>x exceeds acceptable tolerance levels</strong>을 출력합니다.</li>
@@ -154,48 +393,41 @@
 <p>x는 7 이므로 else에 해당하는 내용이 출력됩니다.</p>
 </div>
 <div id="for-loop" class="section level3" number="14.1.3">
-<h3>
-<span class="header-section-number">14.1.3</span> <code>for loop</code><a class="anchor" aria-label="anchor" href="#for-loop"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">14.1.3</span> <code>for loop</code></h3>
 <p>for loop 구문은 특정한 부분의 코드가 반복적으로 수행될 수 있도록 합니다.</p>
 <div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="loop-statement.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
 <span id="cb395-2"><a href="loop-statement.html#cb395-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>code<span class="sc">:</span> do stuff here with i<span class="sc">&gt;</span></span>
 <span id="cb395-3"><a href="loop-statement.html#cb395-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>먼저 i에 1이 들어간 뒤 code에 해당하는 부분이 실행됩니다. 그 후, i에 2가 들어간 뒤 다시 code가 실행되며 이 작업이 100까지 반복됩니다. 실제 예제를 살펴보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2016</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">output</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"The year is"</span>, <span class="va">i</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<pre><code>## [1] "The year is 2010"
-## [1] "The year is 2011"
-## [1] "The year is 2012"
-## [1] "The year is 2013"
-## [1] "The year is 2014"
-## [1] "The year is 2015"
-## [1] "The year is 2016"</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="loop-statement.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2016</span>) {</span>
+<span id="cb396-2"><a href="loop-statement.html#cb396-2" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;The year is&quot;</span>, i)</span>
+<span id="cb396-3"><a href="loop-statement.html#cb396-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(output)</span>
+<span id="cb396-4"><a href="loop-statement.html#cb396-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;The year is 2010&quot;
+## [1] &quot;The year is 2011&quot;
+## [1] &quot;The year is 2012&quot;
+## [1] &quot;The year is 2013&quot;
+## [1] &quot;The year is 2014&quot;
+## [1] &quot;The year is 2015&quot;
+## [1] &quot;The year is 2016&quot;</code></pre>
 <p>i에 2010부터 2016 까지 대입되어 코드가 실행됩니다.</p>
 </div>
 <div id="while-loop" class="section level3" number="14.1.4">
-<h3>
-<span class="header-section-number">14.1.4</span> <code>while loop</code><a class="anchor" aria-label="anchor" href="#while-loop"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">14.1.4</span> <code>while loop</code></h3>
 <p>while 구문은 for 구문과 비슷하며, 조건이 충족되는한 루프가 계속해서 실행됩니다.</p>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counter</span> <span class="op">=</span> <span class="fl">1</span>
-
-<span class="kw">while</span> <span class="op">(</span><span class="va">test_expression</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">statement</span>
-  <span class="va">counter</span> <span class="op">=</span> <span class="va">counter</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="loop-statement.html#cb398-1" aria-hidden="true" tabindex="-1"></a>counter <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb398-2"><a href="loop-statement.html#cb398-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-3"><a href="loop-statement.html#cb398-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (test_expression) {</span>
+<span id="cb398-4"><a href="loop-statement.html#cb398-4" aria-hidden="true" tabindex="-1"></a>  statement</span>
+<span id="cb398-5"><a href="loop-statement.html#cb398-5" aria-hidden="true" tabindex="-1"></a>  counter <span class="ot">=</span> counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb398-6"><a href="loop-statement.html#cb398-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>test_expression이 TRUE이면 statement 코드가 실행되며, counter를 1씩 더합니다. 즉, test_expression이 FALSE가 될때까지 loop가 반복됩니다.</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counter</span> <span class="op">=</span> <span class="fl">1</span>
-
-<span class="kw">while</span> <span class="op">(</span><span class="va">counter</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">counter</span><span class="op">)</span>
-  <span class="va">counter</span> <span class="op">=</span> <span class="va">counter</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="loop-statement.html#cb399-1" aria-hidden="true" tabindex="-1"></a>counter <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb399-2"><a href="loop-statement.html#cb399-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-3"><a href="loop-statement.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (counter <span class="sc">&lt;=</span> <span class="dv">5</span>) {</span>
+<span id="cb399-4"><a href="loop-statement.html#cb399-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(counter)</span>
+<span id="cb399-5"><a href="loop-statement.html#cb399-5" aria-hidden="true" tabindex="-1"></a>  counter <span class="ot">=</span> counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb399-6"><a href="loop-statement.html#cb399-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3
@@ -204,19 +436,16 @@
 <p>counter가 5 이하일 경우 이를 출력하며, 6일 경우 test_expression이 FALSE가 되어 loop가 멈추게 됩니다.</p>
 </div>
 <div id="next" class="section level3" number="14.1.5">
-<h3>
-<span class="header-section-number">14.1.5</span> <code>next</code><a class="anchor" aria-label="anchor" href="#next"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">14.1.5</span> <code>next</code></h3>
 <p>next 명령어는 loop 구문에서 특정 단계를 실행하지 않고 넘어가기 위해 사용됩니다.</p>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw">next</span>
-  <span class="op">}</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="loop-statement.html#cb401-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb401-2"><a href="loop-statement.html#cb401-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-3"><a href="loop-statement.html#cb401-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> x) {</span>
+<span id="cb401-4"><a href="loop-statement.html#cb401-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">3</span>) {</span>
+<span id="cb401-5"><a href="loop-statement.html#cb401-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
+<span id="cb401-6"><a href="loop-statement.html#cb401-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb401-7"><a href="loop-statement.html#cb401-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb401-8"><a href="loop-statement.html#cb401-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 4
@@ -225,25 +454,19 @@
 </div>
 </div>
 <div id="apply-계열-함수" class="section level2" number="14.2">
-<h2>
-<span class="header-section-number">14.2</span> Apply 계열 함수<a class="anchor" aria-label="anchor" href="#apply-%EA%B3%84%EC%97%B4-%ED%95%A8%EC%88%98"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">14.2</span> Apply 계열 함수</h2>
 <p>apply 계열 함수는 loop 구문과 비슷한 역할을 하며, 훨씬 간결하게 표현할 수 있습니다.</p>
 <div id="apply" class="section level3" number="14.2.1">
-<h3>
-<span class="header-section-number">14.2.1</span> <code>apply()</code><a class="anchor" aria-label="anchor" href="#apply"><i class="fas fa-link"></i></a>
-</h3>
-<p><code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> 함수는 매트릭스나 데이터프레임의 행 혹은 열단위 계산에 자주 사용됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">MARGIN</span>, <span class="va">FUN</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<h3><span class="header-section-number">14.2.1</span> <code>apply()</code></h3>
+<p><code>apply()</code> 함수는 매트릭스나 데이터프레임의 행 혹은 열단위 계산에 자주 사용됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="loop-statement.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(x, MARGIN, FUN, ...)</span></code></pre></div>
 <ul>
 <li>x: 매트릭스, 데이터프레임, 혹은 어레이</li>
 <li>MARGIN: 함수가 적용될 벡. 1은 행을, 2는 열을, c(1, 2)는 행과 열을 의미</li>
 <li>FUN: 적용될 함수</li>
 <li>…: 기타</li>
 </ul>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="loop-statement.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
@@ -251,15 +474,13 @@
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="loop-statement.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mtcars, <span class="dv">2</span>, mean)</span></code></pre></div>
 <pre><code>##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
 ##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172  17.8487   0.4375 
 ##       am     gear     carb 
 ##   0.4062   3.6875   2.8125</code></pre>
 <p>mtcars 데이터에서 2, 즉 열의 방향으로 평균(mean)을 구합니다.</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fl">1</span>, <span class="va">sum</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="loop-statement.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mtcars, <span class="dv">1</span>, sum)</span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##               329.0               329.8               259.6               426.1 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -277,8 +498,7 @@
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##               670.7               379.6               694.7               288.9</code></pre>
 <p>이번에는 1 즉 행의 방향으로 합계(sum)를 구합니다.</p>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span>, <span class="fl">0.75</span>, <span class="fl">0.90</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="loop-statement.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(mtcars, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span>, <span class="fl">0.75</span>, <span class="fl">0.90</span>))</span></code></pre></div>
 <pre><code>##       mpg cyl   disp     hp  drat    wt  qsec vs am gear carb
 ## 10% 14.34   4  80.61  66.00 3.007 1.956 15.53  0  0    3    1
 ## 25% 15.43   4 120.83  96.50 3.080 2.581 16.89  0  0    3    2
@@ -288,24 +508,20 @@
 <p>각 열의 분위수(quantile)를 구하게 되며, 분위는 probs 인자를 통해 직접 입력할 수 있습니다.</p>
 </div>
 <div id="lapply" class="section level3" number="14.2.2">
-<h3>
-<span class="header-section-number">14.2.2</span> <code>lapply()</code><a class="anchor" aria-label="anchor" href="#lapply"><i class="fas fa-link"></i></a>
-</h3>
-<p><code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> 함수는 리스트에 적용되며, 결과 또한 리스트로 반환됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">FUN</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<h3><span class="header-section-number">14.2.2</span> <code>lapply()</code></h3>
+<p><code>lapply()</code> 함수는 리스트에 적용되며, 결과 또한 리스트로 반환됩니다. 해당 함수는 다음과 같이 구성됩니다.</p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="loop-statement.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(x, FUN, ...)</span></code></pre></div>
 <ul>
 <li>x: 리스트</li>
 <li>FUN: 적용될 함수</li>
 <li>…: 기타</li>
 </ul>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>item1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,
-            item2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,
-            item3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>,
-            item4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">data</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="loop-statement.html#cb413-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>(<span class="at">item1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb413-2"><a href="loop-statement.html#cb413-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">item2 =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb413-3"><a href="loop-statement.html#cb413-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">item3 =</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="dv">1</span>),</span>
+<span id="cb413-4"><a href="loop-statement.html#cb413-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">item4 =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>))</span>
+<span id="cb413-5"><a href="loop-statement.html#cb413-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-6"><a href="loop-statement.html#cb413-6" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
 <pre><code>## $item1
 ## [1] 1 2 3 4
 ## 
@@ -328,8 +544,7 @@
 ##  [73] 4.753 4.652 4.048 4.955 4.215 3.332 4.620 5.919 4.425 5.608 3.382 4.944
 ##  [85] 5.519 5.301 5.106 4.359 4.150 3.976 5.118 4.053 4.509 4.744 6.844 4.348
 ##  [97] 5.235 5.078 4.038 4.929</code></pre>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mean</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="loop-statement.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(data, mean)</span></code></pre></div>
 <pre><code>## $item1
 ## [1] 2.5
 ## 
@@ -341,11 +556,10 @@
 ## 
 ## $item4
 ## [1] 5.022</code></pre>
-<p><code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> 함수를 통해 각 항목의 평균을 구하며, 결과 또한 리스트 형태입니다.</p>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">beaver_data</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>beaver1 <span class="op">=</span> <span class="va">beaver1</span>, beaver2 <span class="op">=</span> <span class="va">beaver2</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">beaver_data</span>, <span class="va">head</span><span class="op">)</span></code></pre></div>
+<p><code>lapply()</code> 함수를 통해 각 항목의 평균을 구하며, 결과 또한 리스트 형태입니다.</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="loop-statement.html#cb417-1" aria-hidden="true" tabindex="-1"></a>beaver_data <span class="ot">=</span> <span class="fu">list</span>(<span class="at">beaver1 =</span> beaver1, <span class="at">beaver2 =</span> beaver2)</span>
+<span id="cb417-2"><a href="loop-statement.html#cb417-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb417-3"><a href="loop-statement.html#cb417-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(beaver_data, head)</span></code></pre></div>
 <pre><code>## $beaver1
 ##   day time  temp activ
 ## 1 346  840 36.33     0
@@ -363,11 +577,10 @@
 ## 4 307 1000 37.15     0
 ## 5 307 1010 37.23     0
 ## 6 307 1020 37.24     0</code></pre>
-<p>위 데이터의 각 항목에서 열 별 평균을 구하고자 할 경우 <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> 함수 만으로는 계산이 불가능합니다. 이러한 경우 해당 함수 내부에 직접 <code>function()</code>을 정의하여 복잡한 계산을 수행할 수 있습니다.</p>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">beaver_data</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>위 데이터의 각 항목에서 열 별 평균을 구하고자 할 경우 <code>lapply()</code> 함수 만으로는 계산이 불가능합니다. 이러한 경우 해당 함수 내부에 직접 <code>function()</code>을 정의하여 복잡한 계산을 수행할 수 있습니다.</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="loop-statement.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(beaver_data, <span class="cf">function</span>(x) {</span>
+<span id="cb419-2"><a href="loop-statement.html#cb419-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">apply</span>(x, <span class="dv">2</span>, mean), <span class="dv">2</span>)</span>
+<span id="cb419-3"><a href="loop-statement.html#cb419-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>## $beaver1
 ##     day    time    temp   activ 
 ##  346.20 1312.02   36.86    0.05 
@@ -378,14 +591,11 @@
 <p><code>function(x)</code>를 통해 각 항목에 적용될 함수를 직접 정의할 수 있으며, 열의 방향으로 평균을 구한 뒤 소수 둘째 자리까지 반올림을 하게 됩니다.</p>
 </div>
 <div id="sapply" class="section level3" number="14.2.3">
-<h3>
-<span class="header-section-number">14.2.3</span> <code>sapply()</code><a class="anchor" aria-label="anchor" href="#sapply"><i class="fas fa-link"></i></a>
-</h3>
-<p><code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> 함수는 <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> 함수와 거의 동일하며, 결과가 리스트가 아닌 벡터 혹은 매트릭스로 출력된다는 점만 차이가 있습니다.</p>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">beaver_data</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<h3><span class="header-section-number">14.2.3</span> <code>sapply()</code></h3>
+<p><code>sapply()</code> 함수는 <code>lapply()</code> 함수와 거의 동일하며, 결과가 리스트가 아닌 벡터 혹은 매트릭스로 출력된다는 점만 차이가 있습니다.</p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="loop-statement.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(beaver_data, <span class="cf">function</span>(x) {</span>
+<span id="cb421-2"><a href="loop-statement.html#cb421-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">apply</span>(x, <span class="dv">2</span>, mean), <span class="dv">2</span>)</span>
+<span id="cb421-3"><a href="loop-statement.html#cb421-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>## $beaver1
 ##     day    time    temp   activ 
 ##  346.20 1312.02   36.86    0.05 
@@ -393,10 +603,9 @@
 ## $beaver2
 ##     day    time    temp   activ 
 ##  307.13 1446.20   37.60    0.62</code></pre>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">beaver_data</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="loop-statement.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(beaver_data, <span class="cf">function</span>(x) {</span>
+<span id="cb423-2"><a href="loop-statement.html#cb423-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">apply</span>(x, <span class="dv">2</span>, mean), <span class="dv">2</span>)</span>
+<span id="cb423-3"><a href="loop-statement.html#cb423-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>##       beaver1 beaver2
 ## day    346.20  307.13
 ## time  1312.02 1446.20
@@ -405,12 +614,9 @@
 </div>
 </div>
 <div id="기타-함수" class="section level2" number="14.3">
-<h2>
-<span class="header-section-number">14.3</span> 기타 함수<a class="anchor" aria-label="anchor" href="#%EA%B8%B0%ED%83%80-%ED%95%A8%EC%88%98"><i class="fas fa-link"></i></a>
-</h2>
-<p>열과 행이 합계나 평균을 구할 때는 <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> 함수보다 간단하게 표현할 수 있는 함수들이 있습니다.</p>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<h2><span class="header-section-number">14.3</span> 기타 함수</h2>
+<p>열과 행이 합계나 평균을 구할 때는 <code>apply()</code> 함수보다 간단하게 표현할 수 있는 함수들이 있습니다.</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="loop-statement.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(mtcars)</span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##               329.0               329.8               259.6               426.1 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -427,13 +633,11 @@
 ##               631.2               208.2               272.6               273.7 
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##               670.7               379.6               694.7               288.9</code></pre>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="loop-statement.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(mtcars)</span></code></pre></div>
 <pre><code>##    mpg    cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb 
 ##  642.9  198.0 7383.1 4694.0  115.1  103.0  571.2   14.0   13.0  118.0   90.0</code></pre>
-<p><code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> 함수는 행의 합계를, <code><a href="https://rdrr.io/r/base/colSums.html">colSums()</a></code> 함수는 열의 합계는 구하며 이는 <code>apply(mtcars, 1 or 2, sum)</code> 과 동일합니다.</p>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<p><code>rowSums()</code> 함수는 행의 합계를, <code>colSums()</code> 함수는 열의 합계는 구하며 이는 <code>apply(mtcars, 1 or 2, sum)</code> 과 동일합니다.</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="loop-statement.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(mtcars)</span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##               29.91               29.98               23.60               38.74 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -450,65 +654,75 @@
 ##               57.38               18.93               24.78               24.88 
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##               60.97               34.51               63.16               26.26</code></pre>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="loop-statement.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(mtcars)</span></code></pre></div>
 <pre><code>##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
 ##  20.0906   6.1875 230.7219 146.6875   3.5966   3.2172  17.8487   0.4375 
 ##       am     gear     carb 
 ##   0.4062   3.6875   2.8125</code></pre>
-<p><code><a href="https://rdrr.io/r/base/colSums.html">rowMeans()</a></code>와 <code><a href="https://rdrr.io/r/base/colSums.html">colMeans()</a></code> 함수 역시 각각 행과 열의 평균을 구합니다.</p>
+<p><code>rowMeans()</code>와 <code>colMeans()</code> 함수 역시 각각 행과 열의 평균을 구합니다.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="%ED%95%A8%EC%88%98.html"><span class="header-section-number">13</span> 함수</a></div>
-<div class="next"><a href="pipe-operator.html"><span class="header-section-number">15</span> Pipe Operator (%&gt;%)</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#loop-statement"><span class="header-section-number">14</span> Loop Statement</a></li>
-<li>
-<a class="nav-link" href="#%EA%B8%B0%EB%B3%B8-%EC%A0%9C%EC%96%B4-%EA%B5%AC%EB%AC%B8-if-for-while-%EB%93%B1"><span class="header-section-number">14.1</span> 기본 제어 구문 (if, for, while 등)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#if-%EA%B5%AC%EB%AC%B8"><span class="header-section-number">14.1.1</span> if 구문</a></li>
-<li><a class="nav-link" href="#if...else-%EA%B5%AC%EB%AC%B8"><span class="header-section-number">14.1.2</span> if...else 구문</a></li>
-<li><a class="nav-link" href="#for-loop"><span class="header-section-number">14.1.3</span> for loop</a></li>
-<li><a class="nav-link" href="#while-loop"><span class="header-section-number">14.1.4</span> while loop</a></li>
-<li><a class="nav-link" href="#next"><span class="header-section-number">14.1.5</span> next</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#apply-%EA%B3%84%EC%97%B4-%ED%95%A8%EC%88%98"><span class="header-section-number">14.2</span> Apply 계열 함수</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#apply"><span class="header-section-number">14.2.1</span> apply()</a></li>
-<li><a class="nav-link" href="#lapply"><span class="header-section-number">14.2.2</span> lapply()</a></li>
-<li><a class="nav-link" href="#sapply"><span class="header-section-number">14.2.3</span> sapply()</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#%EA%B8%B0%ED%83%80-%ED%95%A8%EC%88%98"><span class="header-section-number">14.3</span> 기타 함수</a></li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R을 이용한 데이터 랭글링</strong>" was written by 이현열 (Henry Lee). </p>
+          </div>
+        </div>
+      </div>
+<a href="함수.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pipe-operator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -520,22 +734,7 @@
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>

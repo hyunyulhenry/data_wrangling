@@ -1,93 +1,339 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 13 함수 | R을 이용한 데이터 랭글링</title>
-<meta name="author" content="이현열 (Henry Lee)">
-<meta name="description" content="반복되는 작업을 매번 복사-붙여넣기 하는 것은 매우 비효율적이며, 함수를 작성하여 사용할 경우 매우 효율적인 작업이 가능합니다.  13.1 함수의 요소 R에서 함수는 크게 3가지 요소로 구성됩니다. body(): 함수 내부의 코드 formals(): 인자(argument) 내역 environment(): 함수의 변수에 대한 위치 예를 들어 금융...">
-<meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/함수.html">
-<meta property="og:description" content="반복되는 작업을 매번 복사-붙여넣기 하는 것은 매우 비효율적이며, 함수를 작성하여 사용할 경우 매우 효율적인 작업이 가능합니다.  13.1 함수의 요소 R에서 함수는 크게 3가지 요소로 구성됩니다. body(): 함수 내부의 코드 formals(): 인자(argument) 내역 environment(): 함수의 변수에 대한 위치 예를 들어 금융...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링">
-<meta name="twitter:description" content="반복되는 작업을 매번 복사-붙여넣기 하는 것은 매우 비효율적이며, 함수를 작성하여 사용할 경우 매우 효율적인 작업이 가능합니다.  13.1 함수의 요소 R에서 함수는 크게 3가지 요소로 구성됩니다. body(): 함수 내부의 코드 formals(): 인자(argument) 내역 environment(): 함수의 변수에 대한 위치 예를 들어 금융...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 함수 | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 13 함수 | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/" />
+  
+  <meta property="og:description" content="Chapter 13 함수 | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="github-repo" content="hyunyulhenry/data_wrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 함수 | R을 이용한 데이터 랭글링" />
+  
+  <meta name="twitter:description" content="Chapter 13 함수 | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  
+
+<meta name="author" content="이현열 (Henry Lee)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exporting-data.html"/>
+<link rel="next" href="loop-statement.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">R을 이용한 데이터 랭글링</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li class="book-part">데이터 타입별 다루기</li>
-<li><a class="" href="numbers.html"><span class="header-section-number">1</span> Numbers</a></li>
-<li><a class="" href="character-strings.html"><span class="header-section-number">2</span> Character Strings</a></li>
-<li><a class="" href="factors.html"><span class="header-section-number">3</span> Factors</a></li>
-<li><a class="" href="date.html"><span class="header-section-number">4</span> Date</a></li>
-<li class="book-part">데이터 구조 다루기</li>
-<li><a class="" href="data-structure-basics.html"><span class="header-section-number">5</span> Data Structure Basics</a></li>
-<li><a class="" href="vector.html"><span class="header-section-number">6</span> Vector</a></li>
-<li><a class="" href="list.html"><span class="header-section-number">7</span> List</a></li>
-<li><a class="" href="matrix.html"><span class="header-section-number">8</span> Matrix</a></li>
-<li><a class="" href="data-frame.html"><span class="header-section-number">9</span> Data Frame</a></li>
-<li><a class="" href="missing-value.html"><span class="header-section-number">10</span> Missing Value</a></li>
-<li class="book-part">데이터 불러오기 및 내보내기</li>
-<li><a class="" href="import-data.html"><span class="header-section-number">11</span> Import Data</a></li>
-<li><a class="" href="exporting-data.html"><span class="header-section-number">12</span> Exporting Data</a></li>
-<li class="book-part">효율적이고 가독성 높은 코드</li>
-<li><a class="active" href="%ED%95%A8%EC%88%98.html"><span class="header-section-number">13</span> 함수</a></li>
-<li><a class="" href="loop-statement.html"><span class="header-section-number">14</span> Loop Statement</a></li>
-<li><a class="" href="pipe-operator.html"><span class="header-section-number">15</span> Pipe Operator (%&gt;%)</a></li>
-<li class="book-part">데이터 구조 변형하기</li>
-<li><a class="" href="tidyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EC%96%91-%EB%B0%94%EA%BE%B8%EA%B8%B0.html"><span class="header-section-number">16</span> tidyr을 이용한 데이터 모양 바꾸기</a></li>
-<li><a class="" href="dplyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%80%ED%98%95%ED%95%98%EA%B8%B0.html"><span class="header-section-number">17</span> dplyr을 이용한 데이터 변형하기</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R을 이용한 데이터 랭글링</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i>Contact Information</a></li>
+</ul></li>
+<li class="part"><span><b>I 데이터 타입별 다루기</b></span></li>
+<li class="chapter" data-level="1" data-path="numbers.html"><a href="numbers.html"><i class="fa fa-check"></i><b>1</b> Numbers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="numbers.html"><a href="numbers.html#integer와-double의-vector-만들기"><i class="fa fa-check"></i><b>1.1</b> integer와 double의 vector 만들기</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="numbers.html"><a href="numbers.html#둘-간의-형태-바꾸기"><i class="fa fa-check"></i><b>1.1.1</b> 둘 간의 형태 바꾸기</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="numbers.html"><a href="numbers.html#비임의non-random-숫자-생성하기"><i class="fa fa-check"></i><b>1.2</b> 비임의(Non-random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="numbers.html"><a href="numbers.html#seq-함수-이용"><i class="fa fa-check"></i><b>1.2.1</b> <code>seq()</code> 함수 이용</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="numbers.html"><a href="numbers.html#임의random-숫자-생성하기"><i class="fa fa-check"></i><b>1.3</b> 임의(Random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="numbers.html"><a href="numbers.html#uniform-numbers"><i class="fa fa-check"></i><b>1.3.1</b> Uniform Numbers</a></li>
+<li class="chapter" data-level="1.3.2" data-path="numbers.html"><a href="numbers.html#non-uniform-numbers"><i class="fa fa-check"></i><b>1.3.2</b> Non-Uniform Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="numbers.html"><a href="numbers.html#반올림"><i class="fa fa-check"></i><b>1.4</b> 반올림</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="character-strings.html"><a href="character-strings.html"><i class="fa fa-check"></i><b>2</b> Character Strings</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="character-strings.html"><a href="character-strings.html#문자열-기본"><i class="fa fa-check"></i><b>2.1</b> 문자열 기본</a></li>
+<li class="chapter" data-level="2.2" data-path="character-strings.html"><a href="character-strings.html#문자열-출력"><i class="fa fa-check"></i><b>2.2</b> 문자열 출력</a></li>
+<li class="chapter" data-level="2.3" data-path="character-strings.html"><a href="character-strings.html#문자열-갯수-확인"><i class="fa fa-check"></i><b>2.3</b> 문자열 갯수 확인</a></li>
+<li class="chapter" data-level="2.4" data-path="character-strings.html"><a href="character-strings.html#stringr-패키지를-이용한-문자열-다루기"><i class="fa fa-check"></i><b>2.4</b> <code>stringr</code> 패키지를 이용한 문자열 다루기</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="character-strings.html"><a href="character-strings.html#기본-사용법"><i class="fa fa-check"></i><b>2.4.1</b> 기본 사용법</a></li>
+<li class="chapter" data-level="2.4.2" data-path="character-strings.html"><a href="character-strings.html#공백whitespace-제거"><i class="fa fa-check"></i><b>2.4.2</b> 공백(Whitespace) 제거</a></li>
+<li class="chapter" data-level="2.4.3" data-path="character-strings.html"><a href="character-strings.html#문자열-자리수-채우기"><i class="fa fa-check"></i><b>2.4.3</b> 문자열 자리수 채우기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>3</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="factors.html"><a href="factors.html#팩터-생성-및-탐색"><i class="fa fa-check"></i><b>3.1</b> 팩터 생성 및 탐색</a></li>
+<li class="chapter" data-level="3.2" data-path="factors.html"><a href="factors.html#레벨에-순서-부여하기"><i class="fa fa-check"></i><b>3.2</b> 레벨에 순서 부여하기</a></li>
+<li class="chapter" data-level="3.3" data-path="factors.html"><a href="factors.html#순서-재정의"><i class="fa fa-check"></i><b>3.3</b> 순서 재정의</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="date.html"><a href="date.html"><i class="fa fa-check"></i><b>4</b> Date</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="date.html"><a href="date.html#현재-날짜-및-시간"><i class="fa fa-check"></i><b>4.1</b> 현재 날짜 및 시간</a></li>
+<li class="chapter" data-level="4.2" data-path="date.html"><a href="date.html#문자열을-날짜로-변경하기"><i class="fa fa-check"></i><b>4.2</b> 문자열을 날짜로 변경하기</a></li>
+<li class="chapter" data-level="4.3" data-path="date.html"><a href="date.html#날짜-관련-정보-추출"><i class="fa fa-check"></i><b>4.3</b> 날짜 관련 정보 추출</a></li>
+<li class="chapter" data-level="4.4" data-path="date.html"><a href="date.html#날짜-순서-생성하기"><i class="fa fa-check"></i><b>4.4</b> 날짜 순서 생성하기</a></li>
+</ul></li>
+<li class="part"><span><b>II 데이터 구조 다루기</b></span></li>
+<li class="chapter" data-level="5" data-path="data-structure-basics.html"><a href="data-structure-basics.html"><i class="fa fa-check"></i><b>5</b> Data Structure Basics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structure-basics.html"><a href="data-structure-basics.html#구조-파악하기"><i class="fa fa-check"></i><b>5.1</b> 구조 파악하기</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="vector.html"><a href="vector.html#벡터-만들기"><i class="fa fa-check"></i><b>6.1</b> 벡터 만들기</a></li>
+<li class="chapter" data-level="6.2" data-path="vector.html"><a href="vector.html#벡터에-값-추가하기"><i class="fa fa-check"></i><b>6.2</b> 벡터에 값 추가하기</a></li>
+<li class="chapter" data-level="6.3" data-path="vector.html"><a href="vector.html#벡터-추출하기"><i class="fa fa-check"></i><b>6.3</b> 벡터 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="list.html"><a href="list.html"><i class="fa fa-check"></i><b>7</b> List</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="list.html"><a href="list.html#리스트-생성하기"><i class="fa fa-check"></i><b>7.1</b> 리스트 생성하기</a></li>
+<li class="chapter" data-level="7.2" data-path="list.html"><a href="list.html#기존-리스트에-데이터-추가하기"><i class="fa fa-check"></i><b>7.2</b> 기존 리스트에 데이터 추가하기</a></li>
+<li class="chapter" data-level="7.3" data-path="list.html"><a href="list.html#리스트-추출하기"><i class="fa fa-check"></i><b>7.3</b> 리스트 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="matrix.html"><a href="matrix.html"><i class="fa fa-check"></i><b>8</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="matrix.html"><a href="matrix.html#행렬-생성하기"><i class="fa fa-check"></i><b>8.1</b> 행렬 생성하기</a></li>
+<li class="chapter" data-level="8.2" data-path="matrix.html"><a href="matrix.html#기존-행렬에-데이터-추가하기"><i class="fa fa-check"></i><b>8.2</b> 기존 행렬에 데이터 추가하기</a></li>
+<li class="chapter" data-level="8.3" data-path="matrix.html"><a href="matrix.html#행이름-및-열이름-추가하기"><i class="fa fa-check"></i><b>8.3</b> 행이름 및 열이름 추가하기</a></li>
+<li class="chapter" data-level="8.4" data-path="matrix.html"><a href="matrix.html#행렬-추출하기"><i class="fa fa-check"></i><b>8.4</b> 행렬 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>9</b> Data Frame</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="data-frame.html"><a href="data-frame.html#데이터프레임-생성하기"><i class="fa fa-check"></i><b>9.1</b> 데이터프레임 생성하기</a></li>
+<li class="chapter" data-level="9.2" data-path="data-frame.html"><a href="data-frame.html#기존-데이터프레임에-데이터-추가하기"><i class="fa fa-check"></i><b>9.2</b> 기존 데이터프레임에 데이터 추가하기</a></li>
+<li class="chapter" data-level="9.3" data-path="data-frame.html"><a href="data-frame.html#데이터프레임추출하기"><i class="fa fa-check"></i><b>9.3</b> 데이터프레임추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="missing-value.html"><a href="missing-value.html"><i class="fa fa-check"></i><b>10</b> Missing Value</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="missing-value.html"><a href="missing-value.html#결측치-테스트"><i class="fa fa-check"></i><b>10.1</b> 결측치 테스트</a></li>
+<li class="chapter" data-level="10.2" data-path="missing-value.html"><a href="missing-value.html#결측치-제거"><i class="fa fa-check"></i><b>10.2</b> 결측치 제거</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="missing-value.html"><a href="missing-value.html#평균값-대체"><i class="fa fa-check"></i><b>10.2.1</b> 평균값 대체</a></li>
+<li class="chapter" data-level="10.2.2" data-path="missing-value.html"><a href="missing-value.html#데이터-제거"><i class="fa fa-check"></i><b>10.2.2</b> 데이터 제거</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="missing-value.html"><a href="missing-value.html#결측치-대체"><i class="fa fa-check"></i><b>10.3</b> 결측치 대체</a></li>
+</ul></li>
+<li class="part"><span><b>III 데이터 불러오기 및 내보내기</b></span></li>
+<li class="chapter" data-level="11" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>11</b> Import Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="import-data.html"><a href="import-data.html#csv-파일-불러오기"><i class="fa fa-check"></i><b>11.1</b> csv 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="import-data.html"><a href="import-data.html#기본함수"><i class="fa fa-check"></i><b>11.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="11.1.2" data-path="import-data.html"><a href="import-data.html#readr-패키지"><i class="fa fa-check"></i><b>11.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="import-data.html"><a href="import-data.html#텍스트-파일-불러오기"><i class="fa fa-check"></i><b>11.2</b> 텍스트 파일 불러오기</a></li>
+<li class="chapter" data-level="11.3" data-path="import-data.html"><a href="import-data.html#엑셀-파일-불러오기"><i class="fa fa-check"></i><b>11.3</b> 엑셀 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="import-data.html"><a href="import-data.html#openxlsx-패키지"><i class="fa fa-check"></i><b>11.3.1</b> <code>openxlsx</code> 패키지</a></li>
+<li class="chapter" data-level="11.3.2" data-path="import-data.html"><a href="import-data.html#readxl-패키지"><i class="fa fa-check"></i><b>11.3.2</b> <code>readxl</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="import-data.html"><a href="import-data.html#r-object-file"><i class="fa fa-check"></i><b>11.4</b> R object File</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exporting-data.html"><a href="exporting-data.html"><i class="fa fa-check"></i><b>12</b> Exporting Data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exporting-data.html"><a href="exporting-data.html#텍스트-csv-파일-저장하기"><i class="fa fa-check"></i><b>12.1</b> 텍스트, csv 파일 저장하기</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="exporting-data.html"><a href="exporting-data.html#기본함수-1"><i class="fa fa-check"></i><b>12.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="12.1.2" data-path="exporting-data.html"><a href="exporting-data.html#readr-패키지-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="exporting-data.html"><a href="exporting-data.html#엑셀-저장하기"><i class="fa fa-check"></i><b>12.2</b> 엑셀 저장하기</a></li>
+<li class="chapter" data-level="12.3" data-path="exporting-data.html"><a href="exporting-data.html#r-object-file-1"><i class="fa fa-check"></i><b>12.3</b> R object File</a></li>
+</ul></li>
+<li class="part"><span><b>IV 효율적이고 가독성 높은 코드</b></span></li>
+<li class="chapter" data-level="13" data-path="함수.html"><a href="함수.html"><i class="fa fa-check"></i><b>13</b> 함수</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="함수.html"><a href="함수.html#함수의-요소"><i class="fa fa-check"></i><b>13.1</b> 함수의 요소</a></li>
+<li class="chapter" data-level="13.2" data-path="함수.html"><a href="함수.html#인자"><i class="fa fa-check"></i><b>13.2</b> 인자</a></li>
+<li class="chapter" data-level="13.3" data-path="함수.html"><a href="함수.html#다중-결과값-출력"><i class="fa fa-check"></i><b>13.3</b> 다중 결과값 출력</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="loop-statement.html"><a href="loop-statement.html"><i class="fa fa-check"></i><b>14</b> Loop Statement</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="loop-statement.html"><a href="loop-statement.html#기본-제어-구문-if-for-while-등"><i class="fa fa-check"></i><b>14.1</b> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="loop-statement.html"><a href="loop-statement.html#if-구문"><i class="fa fa-check"></i><b>14.1.1</b> <code>if</code> 구문</a></li>
+<li class="chapter" data-level="14.1.2" data-path="loop-statement.html"><a href="loop-statement.html#if...else-구문"><i class="fa fa-check"></i><b>14.1.2</b> <code>if...else</code> 구문</a></li>
+<li class="chapter" data-level="14.1.3" data-path="loop-statement.html"><a href="loop-statement.html#for-loop"><i class="fa fa-check"></i><b>14.1.3</b> <code>for loop</code></a></li>
+<li class="chapter" data-level="14.1.4" data-path="loop-statement.html"><a href="loop-statement.html#while-loop"><i class="fa fa-check"></i><b>14.1.4</b> <code>while loop</code></a></li>
+<li class="chapter" data-level="14.1.5" data-path="loop-statement.html"><a href="loop-statement.html#next"><i class="fa fa-check"></i><b>14.1.5</b> <code>next</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="loop-statement.html"><a href="loop-statement.html#apply-계열-함수"><i class="fa fa-check"></i><b>14.2</b> Apply 계열 함수</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="loop-statement.html"><a href="loop-statement.html#apply"><i class="fa fa-check"></i><b>14.2.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="loop-statement.html"><a href="loop-statement.html#lapply"><i class="fa fa-check"></i><b>14.2.2</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="loop-statement.html"><a href="loop-statement.html#sapply"><i class="fa fa-check"></i><b>14.2.3</b> <code>sapply()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="loop-statement.html"><a href="loop-statement.html#기타-함수"><i class="fa fa-check"></i><b>14.3</b> 기타 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="pipe-operator.html"><a href="pipe-operator.html"><i class="fa fa-check"></i><b>15</b> Pipe Operator (<code>%&gt;%</code>)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="pipe-operator.html"><a href="pipe-operator.html#pipe-operator-1"><i class="fa fa-check"></i><b>15.1</b> Pipe Operator (<code>%&gt;%</code>)</a></li>
+</ul></li>
+<li class="part"><span><b>V 데이터 구조 변형하기</b></span></li>
+<li class="chapter" data-level="16" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html"><i class="fa fa-check"></i><b>16</b> <code>tidyr</code>을 이용한 데이터 모양 바꾸기</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#세로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.1</b> 세로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#가로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.2</b> 가로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.3" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#하나의-열을-여러-열로-나누기"><i class="fa fa-check"></i><b>16.3</b> 하나의 열을 여러 열로 나누기</a></li>
+<li class="chapter" data-level="16.4" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#여러-열을-하나로-합치기"><i class="fa fa-check"></i><b>16.4</b> 여러 열을 하나로 합치기</a></li>
+<li class="chapter" data-level="16.5" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#tidyr의-기타-함수"><i class="fa fa-check"></i><b>16.5</b> <code>tidyr</code>의 기타 함수</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#fill"><i class="fa fa-check"></i><b>16.5.1</b> <code>fill()</code></a></li>
+<li class="chapter" data-level="16.5.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#replce_na"><i class="fa fa-check"></i><b>16.5.2</b> <code>replce_na()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html"><i class="fa fa-check"></i><b>17</b> <code>dplyr</code>을 이용한 데이터 변형하기</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#select-원하는-열-선택하기"><i class="fa fa-check"></i><b>17.1</b> <code>select()</code>: 원하는 열 선택하기</a></li>
+<li class="chapter" data-level="17.2" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#rename-이름-새로-부여하기"><i class="fa fa-check"></i><b>17.2</b> <code>rename()</code>: 이름 새로 부여하기</a></li>
+<li class="chapter" data-level="17.3" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#filter-필터링"><i class="fa fa-check"></i><b>17.3</b> <code>filter()</code>: 필터링</a></li>
+<li class="chapter" data-level="17.4" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#group_by-원하는-조건으로-그룹화"><i class="fa fa-check"></i><b>17.4</b> <code>group_by()</code>: 원하는 조건으로 그룹화</a></li>
+<li class="chapter" data-level="17.5" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#summarize-요약값-계산하기"><i class="fa fa-check"></i><b>17.5</b> <code>summarize()</code>: 요약값 계산하기</a></li>
+<li class="chapter" data-level="17.6" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#arrange-데이터-정렬하기"><i class="fa fa-check"></i><b>17.6</b> <code>arrange()</code>: 데이터 정렬하기</a></li>
+<li class="chapter" data-level="17.7" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>17.7</b> join(): 데이터 합치기</a></li>
+<li class="chapter" data-level="17.8" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#mutate-새로운-열-생성하기"><i class="fa fa-check"></i><b>17.8</b> <code>mutate()</code>: 새로운 열 생성하기</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="함수" class="section level1" number="13">
-<h1>
-<span class="header-section-number">13</span> 함수<a class="anchor" aria-label="anchor" href="#%ED%95%A8%EC%88%98"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 데이터 랭글링</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="함수" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> 함수</h1>
 <p>반복되는 작업을 매번 복사-붙여넣기 하는 것은 매우 비효율적이며, 함수를 작성하여 사용할 경우 매우 효율적인 작업이 가능합니다.</p>
 <div id="함수의-요소" class="section level2" number="13.1">
-<h2>
-<span class="header-section-number">13.1</span> 함수의 요소<a class="anchor" aria-label="anchor" href="#%ED%95%A8%EC%88%98%EC%9D%98-%EC%9A%94%EC%86%8C"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">13.1</span> 함수의 요소</h2>
 <p>R에서 함수는 크게 3가지 요소로 구성됩니다.</p>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/base/body.html">body()</a></code>: 함수 내부의 코드</li>
-<li>
-<code><a href="https://rdrr.io/r/base/formals.html">formals()</a></code>: 인자(argument) 내역</li>
-<li>
-<code><a href="https://rdrr.io/r/base/environment.html">environment()</a></code>: 함수의 변수에 대한 위치</li>
+<li><code>body()</code>: 함수 내부의 코드</li>
+<li><code>formals()</code>: 인자(argument) 내역</li>
+<li><code>environment()</code>: 함수의 변수에 대한 위치</li>
 </ul>
 <p>예를 들어 금융 자산의 현재 가치는 다음과 같이 계산됩니다.</p>
 <p><span class="math display">\[PV = FV / (1+r)^n\]</span></p>
@@ -98,20 +344,17 @@
 <li>n: 기간</li>
 </ul>
 <p>이를 함수로 나타내면 다음과 같습니다.</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">PV</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">FV</span>, <span class="va">r</span>, <span class="va">n</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">PV</span> <span class="op">=</span> <span class="va">FV</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">r</span><span class="op">)</span><span class="op">^</span><span class="va">n</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">PV</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="함수.html#cb363-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(FV, r, n) {</span>
+<span id="cb363-2"><a href="함수.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span>r)<span class="sc">^</span>n</span>
+<span id="cb363-3"><a href="함수.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
+<span id="cb363-4"><a href="함수.html#cb363-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>3가지 요소를 확인해보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/body.html">body</a></span><span class="op">(</span><span class="va">PV</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="함수.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(PV)</span></code></pre></div>
 <pre><code>## {
 ##     PV = FV/(1 + r)^n
 ##     round(PV, 2)
 ## }</code></pre>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/formals.html">formals</a></span><span class="op">(</span><span class="va">PV</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="함수.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(PV)</span></code></pre></div>
 <pre><code>## $FV
 ## 
 ## 
@@ -119,107 +362,120 @@
 ## 
 ## 
 ## $n</code></pre>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span><span class="op">(</span><span class="va">PV</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="함수.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(PV)</span></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
 </div>
 <div id="인자" class="section level2" number="13.2">
-<h2>
-<span class="header-section-number">13.2</span> 인자<a class="anchor" aria-label="anchor" href="#%EC%9D%B8%EC%9E%90"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">13.2</span> 인자</h2>
 <p><code>PV()</code> 함수는 여러 방법으로 실행할 수 있습니다.</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">PV</span><span class="op">(</span>FV <span class="op">=</span> <span class="fl">1000</span>, r <span class="op">=</span> <span class="fl">0.08</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="함수.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>모든 인자 리스트와 이에 대응되는 값을 입력합니다.</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">PV</span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0.08</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="함수.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>인자 리스트를 생략하면, 순서대로 값이 입력됩니다.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">PV</span><span class="op">(</span>r <span class="op">=</span> <span class="fl">0.08</span>, FV <span class="op">=</span> <span class="fl">1000</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="함수.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>인자 내역을 순서대로 입력하지 않아도 됩니다.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">PV</span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0.08</span><span class="op">)</span></code></pre></div>
-<pre><code>## Error in PV(1000, 0.08): 기본값이 없는 인수 "n"가 누락되어 있습니다</code></pre>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="함수.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
+<pre><code>## Error in PV(1000, 0.08): 기본값이 없는 인수 &quot;n&quot;가 누락되어 있습니다</code></pre>
 <p><code>PV()</code> 함수에 필요한 인자는 3개인 반면, 2개만 입력하였으므로 에러가 발생합니다.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">PV</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">FV</span> <span class="op">=</span> <span class="fl">1000</span>, <span class="va">r</span> <span class="op">=</span> <span class="fl">.08</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">PV</span> <span class="op">=</span> <span class="va">FV</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">r</span><span class="op">)</span><span class="op">^</span><span class="va">n</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">PV</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu">PV</span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0.08</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="함수.html#cb378-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> .<span class="dv">08</span>, <span class="at">n =</span> <span class="dv">5</span>) {</span>
+<span id="cb378-2"><a href="함수.html#cb378-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> r)<span class="sc">^</span>n</span>
+<span id="cb378-3"><a href="함수.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
+<span id="cb378-4"><a href="함수.html#cb378-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb378-5"><a href="함수.html#cb378-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-6"><a href="함수.html#cb378-6" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>만일 함수의 인자에 디폴트 값이 입력되어 있다면, 함수 실행시 이를 생략하여도 디폴트 값이 입력됩니다. 위 예제에서 n값이 디폴트 값인 5가 적용되었습니다.</p>
 </div>
 <div id="다중-결과값-출력" class="section level2" number="13.3">
-<h2>
-<span class="header-section-number">13.3</span> 다중 결과값 출력<a class="anchor" aria-label="anchor" href="#%EB%8B%A4%EC%A4%91-%EA%B2%B0%EA%B3%BC%EA%B0%92-%EC%B6%9C%EB%A0%A5"><i class="fas fa-link"></i></a>
-</h2>
-<p>동일한 함수를 여러값에 적용하기 위해서는 함수 내부에 <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> 함수를 적용해야 합니다.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bad</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span>       <span class="co"># 1</span>
-  <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">y</span>       <span class="co"># 2</span>
-  <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">y</span>   <span class="co"># 3  </span>
-  <span class="va">x</span> <span class="op">/</span> <span class="va">y</span>           <span class="co"># 4</span>
-<span class="op">}</span>
-
-<span class="fu">bad</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<h2><span class="header-section-number">13.3</span> 다중 결과값 출력</h2>
+<p>동일한 함수를 여러값에 적용하기 위해서는 함수 내부에 <code>c()</code> 함수를 적용해야 합니다.</p>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="함수.html#cb380-1" aria-hidden="true" tabindex="-1"></a>bad <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb380-2"><a href="함수.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y       <span class="co"># 1</span></span>
+<span id="cb380-3"><a href="함수.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y       <span class="co"># 2</span></span>
+<span id="cb380-4"><a href="함수.html#cb380-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y   <span class="co"># 3  </span></span>
+<span id="cb380-5"><a href="함수.html#cb380-5" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">/</span> y           <span class="co"># 4</span></span>
+<span id="cb380-6"><a href="함수.html#cb380-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb380-7"><a href="함수.html#cb380-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb380-8"><a href="함수.html#cb380-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bad</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>1, 2, 3, 4번 모든 연산에 대한 출력을 원하지만, 맨 마지막 연산값 만이 출력됩니다.</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">good</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">output1</span> <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span>
-  <span class="va">output2</span> <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">y</span>
-  <span class="va">output3</span> <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">y</span>
-  <span class="va">output4</span> <span class="op">=</span> <span class="va">x</span> <span class="op">/</span> <span class="va">y</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output1</span>, <span class="va">output2</span>, <span class="va">output3</span>, <span class="va">output4</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu">good</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="함수.html#cb382-1" aria-hidden="true" tabindex="-1"></a>good <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb382-2"><a href="함수.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  output1 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
+<span id="cb382-3"><a href="함수.html#cb382-3" aria-hidden="true" tabindex="-1"></a>  output2 <span class="ot">=</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb382-4"><a href="함수.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  output3 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb382-5"><a href="함수.html#cb382-5" aria-hidden="true" tabindex="-1"></a>  output4 <span class="ot">=</span> x <span class="sc">/</span> y</span>
+<span id="cb382-6"><a href="함수.html#cb382-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(output1, output2, output3, output4)</span>
+<span id="cb382-7"><a href="함수.html#cb382-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb382-8"><a href="함수.html#cb382-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-9"><a href="함수.html#cb382-9" aria-hidden="true" tabindex="-1"></a><span class="fu">good</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.0 5.0 6.0 0.5</code></pre>
-<p>모든 결과를 output*에 저장한 후 <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> 함수를 통해 이를 묶어주면, 모든 연산값이 출력됩니다.</p>
+<p>모든 결과를 output*에 저장한 후 <code>c()</code> 함수를 통해 이를 묶어주면, 모든 연산값이 출력됩니다.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="exporting-data.html"><span class="header-section-number">12</span> Exporting Data</a></div>
-<div class="next"><a href="loop-statement.html"><span class="header-section-number">14</span> Loop Statement</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%ED%95%A8%EC%88%98"><span class="header-section-number">13</span> 함수</a></li>
-<li><a class="nav-link" href="#%ED%95%A8%EC%88%98%EC%9D%98-%EC%9A%94%EC%86%8C"><span class="header-section-number">13.1</span> 함수의 요소</a></li>
-<li><a class="nav-link" href="#%EC%9D%B8%EC%9E%90"><span class="header-section-number">13.2</span> 인자</a></li>
-<li><a class="nav-link" href="#%EB%8B%A4%EC%A4%91-%EA%B2%B0%EA%B3%BC%EA%B0%92-%EC%B6%9C%EB%A0%A5"><span class="header-section-number">13.3</span> 다중 결과값 출력</a></li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R을 이용한 데이터 랭글링</strong>" was written by 이현열 (Henry Lee). </p>
+          </div>
+        </div>
+      </div>
+<a href="exporting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loop-statement.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -231,22 +487,7 @@
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>

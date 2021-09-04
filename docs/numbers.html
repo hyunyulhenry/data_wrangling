@@ -1,180 +1,402 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Numbers | R을 이용한 데이터 랭글링</title>
-<meta name="author" content="이현열 (Henry Lee)">
-<meta name="description" content="R에서 숫자 형태는 크게 integer와 double로 나눌 수 있습니다. 이 중 integer는 정수를 의미하며, double은 부동소수점 실수를 의미합니다.  1.1 integer와 double의 vector 만들기 먼저 double 형태의 벡터를 만듭니다. dbl_var = c(1, 2.5, 4.5) dbl_var ## [1] 1.0 2.5...">
-<meta name="generator" content="bookdown 0.23 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/numbers.html">
-<meta property="og:description" content="R에서 숫자 형태는 크게 integer와 double로 나눌 수 있습니다. 이 중 integer는 정수를 의미하며, double은 부동소수점 실수를 의미합니다.  1.1 integer와 double의 vector 만들기 먼저 double 형태의 벡터를 만듭니다. dbl_var = c(1, 2.5, 4.5) dbl_var ## [1] 1.0 2.5...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링">
-<meta name="twitter:description" content="R에서 숫자 형태는 크게 integer와 double로 나눌 수 있습니다. 이 중 integer는 정수를 의미하며, double은 부동소수점 실수를 의미합니다.  1.1 integer와 double의 vector 만들기 먼저 double 형태의 벡터를 만듭니다. dbl_var = c(1, 2.5, 4.5) dbl_var ## [1] 1.0 2.5...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Numbers | R을 이용한 데이터 랭글링</title>
+  <meta name="description" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://hyunyulhenry.github.io/data_wrangling/" />
+  
+  <meta property="og:description" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  <meta name="github-repo" content="hyunyulhenry/data_wrangling" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링" />
+  
+  <meta name="twitter:description" content="Chapter 1 Numbers | R을 이용한 데이터 랭글링 강의교재 입니다." />
+  
+
+<meta name="author" content="이현열 (Henry Lee)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="character-strings.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">R을 이용한 데이터 랭글링</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li class="book-part">데이터 타입별 다루기</li>
-<li><a class="active" href="numbers.html"><span class="header-section-number">1</span> Numbers</a></li>
-<li><a class="" href="character-strings.html"><span class="header-section-number">2</span> Character Strings</a></li>
-<li><a class="" href="factors.html"><span class="header-section-number">3</span> Factors</a></li>
-<li><a class="" href="date.html"><span class="header-section-number">4</span> Date</a></li>
-<li class="book-part">데이터 구조 다루기</li>
-<li><a class="" href="data-structure-basics.html"><span class="header-section-number">5</span> Data Structure Basics</a></li>
-<li><a class="" href="vector.html"><span class="header-section-number">6</span> Vector</a></li>
-<li><a class="" href="list.html"><span class="header-section-number">7</span> List</a></li>
-<li><a class="" href="matrix.html"><span class="header-section-number">8</span> Matrix</a></li>
-<li><a class="" href="data-frame.html"><span class="header-section-number">9</span> Data Frame</a></li>
-<li><a class="" href="missing-value.html"><span class="header-section-number">10</span> Missing Value</a></li>
-<li class="book-part">데이터 불러오기 및 내보내기</li>
-<li><a class="" href="import-data.html"><span class="header-section-number">11</span> Import Data</a></li>
-<li><a class="" href="exporting-data.html"><span class="header-section-number">12</span> Exporting Data</a></li>
-<li class="book-part">효율적이고 가독성 높은 코드</li>
-<li><a class="" href="%ED%95%A8%EC%88%98.html"><span class="header-section-number">13</span> 함수</a></li>
-<li><a class="" href="loop-statement.html"><span class="header-section-number">14</span> Loop Statement</a></li>
-<li><a class="" href="pipe-operator.html"><span class="header-section-number">15</span> Pipe Operator (%&gt;%)</a></li>
-<li class="book-part">데이터 구조 변형하기</li>
-<li><a class="" href="tidyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EC%96%91-%EB%B0%94%EA%BE%B8%EA%B8%B0.html"><span class="header-section-number">16</span> tidyr을 이용한 데이터 모양 바꾸기</a></li>
-<li><a class="" href="dplyr%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%80%ED%98%95%ED%95%98%EA%B8%B0.html"><span class="header-section-number">17</span> dplyr을 이용한 데이터 변형하기</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R을 이용한 데이터 랭글링</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i>Contact Information</a></li>
+</ul></li>
+<li class="part"><span><b>I 데이터 타입별 다루기</b></span></li>
+<li class="chapter" data-level="1" data-path="numbers.html"><a href="numbers.html"><i class="fa fa-check"></i><b>1</b> Numbers</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="numbers.html"><a href="numbers.html#integer와-double의-vector-만들기"><i class="fa fa-check"></i><b>1.1</b> integer와 double의 vector 만들기</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="numbers.html"><a href="numbers.html#둘-간의-형태-바꾸기"><i class="fa fa-check"></i><b>1.1.1</b> 둘 간의 형태 바꾸기</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="numbers.html"><a href="numbers.html#비임의non-random-숫자-생성하기"><i class="fa fa-check"></i><b>1.2</b> 비임의(Non-random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="numbers.html"><a href="numbers.html#seq-함수-이용"><i class="fa fa-check"></i><b>1.2.1</b> <code>seq()</code> 함수 이용</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="numbers.html"><a href="numbers.html#임의random-숫자-생성하기"><i class="fa fa-check"></i><b>1.3</b> 임의(Random) 숫자 생성하기</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="numbers.html"><a href="numbers.html#uniform-numbers"><i class="fa fa-check"></i><b>1.3.1</b> Uniform Numbers</a></li>
+<li class="chapter" data-level="1.3.2" data-path="numbers.html"><a href="numbers.html#non-uniform-numbers"><i class="fa fa-check"></i><b>1.3.2</b> Non-Uniform Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="numbers.html"><a href="numbers.html#반올림"><i class="fa fa-check"></i><b>1.4</b> 반올림</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="character-strings.html"><a href="character-strings.html"><i class="fa fa-check"></i><b>2</b> Character Strings</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="character-strings.html"><a href="character-strings.html#문자열-기본"><i class="fa fa-check"></i><b>2.1</b> 문자열 기본</a></li>
+<li class="chapter" data-level="2.2" data-path="character-strings.html"><a href="character-strings.html#문자열-출력"><i class="fa fa-check"></i><b>2.2</b> 문자열 출력</a></li>
+<li class="chapter" data-level="2.3" data-path="character-strings.html"><a href="character-strings.html#문자열-갯수-확인"><i class="fa fa-check"></i><b>2.3</b> 문자열 갯수 확인</a></li>
+<li class="chapter" data-level="2.4" data-path="character-strings.html"><a href="character-strings.html#stringr-패키지를-이용한-문자열-다루기"><i class="fa fa-check"></i><b>2.4</b> <code>stringr</code> 패키지를 이용한 문자열 다루기</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="character-strings.html"><a href="character-strings.html#기본-사용법"><i class="fa fa-check"></i><b>2.4.1</b> 기본 사용법</a></li>
+<li class="chapter" data-level="2.4.2" data-path="character-strings.html"><a href="character-strings.html#공백whitespace-제거"><i class="fa fa-check"></i><b>2.4.2</b> 공백(Whitespace) 제거</a></li>
+<li class="chapter" data-level="2.4.3" data-path="character-strings.html"><a href="character-strings.html#문자열-자리수-채우기"><i class="fa fa-check"></i><b>2.4.3</b> 문자열 자리수 채우기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>3</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="factors.html"><a href="factors.html#팩터-생성-및-탐색"><i class="fa fa-check"></i><b>3.1</b> 팩터 생성 및 탐색</a></li>
+<li class="chapter" data-level="3.2" data-path="factors.html"><a href="factors.html#레벨에-순서-부여하기"><i class="fa fa-check"></i><b>3.2</b> 레벨에 순서 부여하기</a></li>
+<li class="chapter" data-level="3.3" data-path="factors.html"><a href="factors.html#순서-재정의"><i class="fa fa-check"></i><b>3.3</b> 순서 재정의</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="date.html"><a href="date.html"><i class="fa fa-check"></i><b>4</b> Date</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="date.html"><a href="date.html#현재-날짜-및-시간"><i class="fa fa-check"></i><b>4.1</b> 현재 날짜 및 시간</a></li>
+<li class="chapter" data-level="4.2" data-path="date.html"><a href="date.html#문자열을-날짜로-변경하기"><i class="fa fa-check"></i><b>4.2</b> 문자열을 날짜로 변경하기</a></li>
+<li class="chapter" data-level="4.3" data-path="date.html"><a href="date.html#날짜-관련-정보-추출"><i class="fa fa-check"></i><b>4.3</b> 날짜 관련 정보 추출</a></li>
+<li class="chapter" data-level="4.4" data-path="date.html"><a href="date.html#날짜-순서-생성하기"><i class="fa fa-check"></i><b>4.4</b> 날짜 순서 생성하기</a></li>
+</ul></li>
+<li class="part"><span><b>II 데이터 구조 다루기</b></span></li>
+<li class="chapter" data-level="5" data-path="data-structure-basics.html"><a href="data-structure-basics.html"><i class="fa fa-check"></i><b>5</b> Data Structure Basics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-structure-basics.html"><a href="data-structure-basics.html#구조-파악하기"><i class="fa fa-check"></i><b>5.1</b> 구조 파악하기</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="vector.html"><a href="vector.html#벡터-만들기"><i class="fa fa-check"></i><b>6.1</b> 벡터 만들기</a></li>
+<li class="chapter" data-level="6.2" data-path="vector.html"><a href="vector.html#벡터에-값-추가하기"><i class="fa fa-check"></i><b>6.2</b> 벡터에 값 추가하기</a></li>
+<li class="chapter" data-level="6.3" data-path="vector.html"><a href="vector.html#벡터-추출하기"><i class="fa fa-check"></i><b>6.3</b> 벡터 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="list.html"><a href="list.html"><i class="fa fa-check"></i><b>7</b> List</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="list.html"><a href="list.html#리스트-생성하기"><i class="fa fa-check"></i><b>7.1</b> 리스트 생성하기</a></li>
+<li class="chapter" data-level="7.2" data-path="list.html"><a href="list.html#기존-리스트에-데이터-추가하기"><i class="fa fa-check"></i><b>7.2</b> 기존 리스트에 데이터 추가하기</a></li>
+<li class="chapter" data-level="7.3" data-path="list.html"><a href="list.html#리스트-추출하기"><i class="fa fa-check"></i><b>7.3</b> 리스트 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="matrix.html"><a href="matrix.html"><i class="fa fa-check"></i><b>8</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="matrix.html"><a href="matrix.html#행렬-생성하기"><i class="fa fa-check"></i><b>8.1</b> 행렬 생성하기</a></li>
+<li class="chapter" data-level="8.2" data-path="matrix.html"><a href="matrix.html#기존-행렬에-데이터-추가하기"><i class="fa fa-check"></i><b>8.2</b> 기존 행렬에 데이터 추가하기</a></li>
+<li class="chapter" data-level="8.3" data-path="matrix.html"><a href="matrix.html#행이름-및-열이름-추가하기"><i class="fa fa-check"></i><b>8.3</b> 행이름 및 열이름 추가하기</a></li>
+<li class="chapter" data-level="8.4" data-path="matrix.html"><a href="matrix.html#행렬-추출하기"><i class="fa fa-check"></i><b>8.4</b> 행렬 추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="data-frame.html"><a href="data-frame.html"><i class="fa fa-check"></i><b>9</b> Data Frame</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="data-frame.html"><a href="data-frame.html#데이터프레임-생성하기"><i class="fa fa-check"></i><b>9.1</b> 데이터프레임 생성하기</a></li>
+<li class="chapter" data-level="9.2" data-path="data-frame.html"><a href="data-frame.html#기존-데이터프레임에-데이터-추가하기"><i class="fa fa-check"></i><b>9.2</b> 기존 데이터프레임에 데이터 추가하기</a></li>
+<li class="chapter" data-level="9.3" data-path="data-frame.html"><a href="data-frame.html#데이터프레임추출하기"><i class="fa fa-check"></i><b>9.3</b> 데이터프레임추출하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="missing-value.html"><a href="missing-value.html"><i class="fa fa-check"></i><b>10</b> Missing Value</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="missing-value.html"><a href="missing-value.html#결측치-테스트"><i class="fa fa-check"></i><b>10.1</b> 결측치 테스트</a></li>
+<li class="chapter" data-level="10.2" data-path="missing-value.html"><a href="missing-value.html#결측치-제거"><i class="fa fa-check"></i><b>10.2</b> 결측치 제거</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="missing-value.html"><a href="missing-value.html#평균값-대체"><i class="fa fa-check"></i><b>10.2.1</b> 평균값 대체</a></li>
+<li class="chapter" data-level="10.2.2" data-path="missing-value.html"><a href="missing-value.html#데이터-제거"><i class="fa fa-check"></i><b>10.2.2</b> 데이터 제거</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="missing-value.html"><a href="missing-value.html#결측치-대체"><i class="fa fa-check"></i><b>10.3</b> 결측치 대체</a></li>
+</ul></li>
+<li class="part"><span><b>III 데이터 불러오기 및 내보내기</b></span></li>
+<li class="chapter" data-level="11" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>11</b> Import Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="import-data.html"><a href="import-data.html#csv-파일-불러오기"><i class="fa fa-check"></i><b>11.1</b> csv 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="import-data.html"><a href="import-data.html#기본함수"><i class="fa fa-check"></i><b>11.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="11.1.2" data-path="import-data.html"><a href="import-data.html#readr-패키지"><i class="fa fa-check"></i><b>11.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="import-data.html"><a href="import-data.html#텍스트-파일-불러오기"><i class="fa fa-check"></i><b>11.2</b> 텍스트 파일 불러오기</a></li>
+<li class="chapter" data-level="11.3" data-path="import-data.html"><a href="import-data.html#엑셀-파일-불러오기"><i class="fa fa-check"></i><b>11.3</b> 엑셀 파일 불러오기</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="import-data.html"><a href="import-data.html#openxlsx-패키지"><i class="fa fa-check"></i><b>11.3.1</b> <code>openxlsx</code> 패키지</a></li>
+<li class="chapter" data-level="11.3.2" data-path="import-data.html"><a href="import-data.html#readxl-패키지"><i class="fa fa-check"></i><b>11.3.2</b> <code>readxl</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="import-data.html"><a href="import-data.html#r-object-file"><i class="fa fa-check"></i><b>11.4</b> R object File</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exporting-data.html"><a href="exporting-data.html"><i class="fa fa-check"></i><b>12</b> Exporting Data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exporting-data.html"><a href="exporting-data.html#텍스트-csv-파일-저장하기"><i class="fa fa-check"></i><b>12.1</b> 텍스트, csv 파일 저장하기</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="exporting-data.html"><a href="exporting-data.html#기본함수-1"><i class="fa fa-check"></i><b>12.1.1</b> 기본함수</a></li>
+<li class="chapter" data-level="12.1.2" data-path="exporting-data.html"><a href="exporting-data.html#readr-패키지-1"><i class="fa fa-check"></i><b>12.1.2</b> <code>readr</code> 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="exporting-data.html"><a href="exporting-data.html#엑셀-저장하기"><i class="fa fa-check"></i><b>12.2</b> 엑셀 저장하기</a></li>
+<li class="chapter" data-level="12.3" data-path="exporting-data.html"><a href="exporting-data.html#r-object-file-1"><i class="fa fa-check"></i><b>12.3</b> R object File</a></li>
+</ul></li>
+<li class="part"><span><b>IV 효율적이고 가독성 높은 코드</b></span></li>
+<li class="chapter" data-level="13" data-path="함수.html"><a href="함수.html"><i class="fa fa-check"></i><b>13</b> 함수</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="함수.html"><a href="함수.html#함수의-요소"><i class="fa fa-check"></i><b>13.1</b> 함수의 요소</a></li>
+<li class="chapter" data-level="13.2" data-path="함수.html"><a href="함수.html#인자"><i class="fa fa-check"></i><b>13.2</b> 인자</a></li>
+<li class="chapter" data-level="13.3" data-path="함수.html"><a href="함수.html#다중-결과값-출력"><i class="fa fa-check"></i><b>13.3</b> 다중 결과값 출력</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="loop-statement.html"><a href="loop-statement.html"><i class="fa fa-check"></i><b>14</b> Loop Statement</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="loop-statement.html"><a href="loop-statement.html#기본-제어-구문-if-for-while-등"><i class="fa fa-check"></i><b>14.1</b> 기본 제어 구문 (<code>if</code>, <code>for</code>, <code>while</code> 등)</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="loop-statement.html"><a href="loop-statement.html#if-구문"><i class="fa fa-check"></i><b>14.1.1</b> <code>if</code> 구문</a></li>
+<li class="chapter" data-level="14.1.2" data-path="loop-statement.html"><a href="loop-statement.html#if...else-구문"><i class="fa fa-check"></i><b>14.1.2</b> <code>if...else</code> 구문</a></li>
+<li class="chapter" data-level="14.1.3" data-path="loop-statement.html"><a href="loop-statement.html#for-loop"><i class="fa fa-check"></i><b>14.1.3</b> <code>for loop</code></a></li>
+<li class="chapter" data-level="14.1.4" data-path="loop-statement.html"><a href="loop-statement.html#while-loop"><i class="fa fa-check"></i><b>14.1.4</b> <code>while loop</code></a></li>
+<li class="chapter" data-level="14.1.5" data-path="loop-statement.html"><a href="loop-statement.html#next"><i class="fa fa-check"></i><b>14.1.5</b> <code>next</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="loop-statement.html"><a href="loop-statement.html#apply-계열-함수"><i class="fa fa-check"></i><b>14.2</b> Apply 계열 함수</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="loop-statement.html"><a href="loop-statement.html#apply"><i class="fa fa-check"></i><b>14.2.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="14.2.2" data-path="loop-statement.html"><a href="loop-statement.html#lapply"><i class="fa fa-check"></i><b>14.2.2</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="14.2.3" data-path="loop-statement.html"><a href="loop-statement.html#sapply"><i class="fa fa-check"></i><b>14.2.3</b> <code>sapply()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="loop-statement.html"><a href="loop-statement.html#기타-함수"><i class="fa fa-check"></i><b>14.3</b> 기타 함수</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="pipe-operator.html"><a href="pipe-operator.html"><i class="fa fa-check"></i><b>15</b> Pipe Operator (<code>%&gt;%</code>)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="pipe-operator.html"><a href="pipe-operator.html#pipe-operator-1"><i class="fa fa-check"></i><b>15.1</b> Pipe Operator (<code>%&gt;%</code>)</a></li>
+</ul></li>
+<li class="part"><span><b>V 데이터 구조 변형하기</b></span></li>
+<li class="chapter" data-level="16" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html"><i class="fa fa-check"></i><b>16</b> <code>tidyr</code>을 이용한 데이터 모양 바꾸기</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#세로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.1</b> 세로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#가로로-긴-데이터-만들기"><i class="fa fa-check"></i><b>16.2</b> 가로로 긴 데이터 만들기</a></li>
+<li class="chapter" data-level="16.3" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#하나의-열을-여러-열로-나누기"><i class="fa fa-check"></i><b>16.3</b> 하나의 열을 여러 열로 나누기</a></li>
+<li class="chapter" data-level="16.4" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#여러-열을-하나로-합치기"><i class="fa fa-check"></i><b>16.4</b> 여러 열을 하나로 합치기</a></li>
+<li class="chapter" data-level="16.5" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#tidyr의-기타-함수"><i class="fa fa-check"></i><b>16.5</b> <code>tidyr</code>의 기타 함수</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#fill"><i class="fa fa-check"></i><b>16.5.1</b> <code>fill()</code></a></li>
+<li class="chapter" data-level="16.5.2" data-path="tidyr을-이용한-데이터-모양-바꾸기.html"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#replce_na"><i class="fa fa-check"></i><b>16.5.2</b> <code>replce_na()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html"><i class="fa fa-check"></i><b>17</b> <code>dplyr</code>을 이용한 데이터 변형하기</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#select-원하는-열-선택하기"><i class="fa fa-check"></i><b>17.1</b> <code>select()</code>: 원하는 열 선택하기</a></li>
+<li class="chapter" data-level="17.2" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#rename-이름-새로-부여하기"><i class="fa fa-check"></i><b>17.2</b> <code>rename()</code>: 이름 새로 부여하기</a></li>
+<li class="chapter" data-level="17.3" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#filter-필터링"><i class="fa fa-check"></i><b>17.3</b> <code>filter()</code>: 필터링</a></li>
+<li class="chapter" data-level="17.4" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#group_by-원하는-조건으로-그룹화"><i class="fa fa-check"></i><b>17.4</b> <code>group_by()</code>: 원하는 조건으로 그룹화</a></li>
+<li class="chapter" data-level="17.5" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#summarize-요약값-계산하기"><i class="fa fa-check"></i><b>17.5</b> <code>summarize()</code>: 요약값 계산하기</a></li>
+<li class="chapter" data-level="17.6" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#arrange-데이터-정렬하기"><i class="fa fa-check"></i><b>17.6</b> <code>arrange()</code>: 데이터 정렬하기</a></li>
+<li class="chapter" data-level="17.7" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>17.7</b> join(): 데이터 합치기</a></li>
+<li class="chapter" data-level="17.8" data-path="dplyr을-이용한-데이터-변형하기.html"><a href="dplyr을-이용한-데이터-변형하기.html#mutate-새로운-열-생성하기"><i class="fa fa-check"></i><b>17.8</b> <code>mutate()</code>: 새로운 열 생성하기</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="numbers" class="section level1" number="1">
-<h1>
-<span class="header-section-number">1</span> Numbers<a class="anchor" aria-label="anchor" href="#numbers"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 데이터 랭글링</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="numbers" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Numbers</h1>
 <p>R에서 숫자 형태는 크게 integer와 double로 나눌 수 있습니다. 이 중 integer는 정수를 의미하며, double은 부동소수점 실수를 의미합니다.</p>
 <div id="integer와-double의-vector-만들기" class="section level2" number="1.1">
-<h2>
-<span class="header-section-number">1.1</span> integer와 double의 vector 만들기<a class="anchor" aria-label="anchor" href="#integer%EC%99%80-double%EC%9D%98-vector-%EB%A7%8C%EB%93%A4%EA%B8%B0"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">1.1</span> integer와 double의 vector 만들기</h2>
 <p>먼저 double 형태의 벡터를 만듭니다.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dbl_var</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2.5</span>, <span class="fl">4.5</span><span class="op">)</span>
-<span class="va">dbl_var</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="numbers.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dbl_var <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">2.5</span>, <span class="fl">4.5</span>)</span>
+<span id="cb1-2"><a href="numbers.html#cb1-2" aria-hidden="true" tabindex="-1"></a>dbl_var</span></code></pre></div>
 <pre><code>## [1] 1.0 2.5 4.5</code></pre>
 <p>숫자 뒤에 L을 붙이면 integer(정수) 형태로 입력됩니다.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">int_var</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">6L</span>, <span class="fl">10L</span><span class="op">)</span>
-<span class="va">int_var</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="numbers.html#cb3-1" aria-hidden="true" tabindex="-1"></a>int_var <span class="ot">=</span> <span class="fu">c</span>(1L, 6L, 10L)</span>
+<span id="cb3-2"><a href="numbers.html#cb3-2" aria-hidden="true" tabindex="-1"></a>int_var</span></code></pre></div>
 <pre><code>## [1]  1  6 10</code></pre>
 <div id="둘-간의-형태-바꾸기" class="section level3" number="1.1.1">
-<h3>
-<span class="header-section-number">1.1.1</span> 둘 간의 형태 바꾸기<a class="anchor" aria-label="anchor" href="#%EB%91%98-%EA%B0%84%EC%9D%98-%ED%98%95%ED%83%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">1.1.1</span> 둘 간의 형태 바꾸기</h3>
 <p><code>as.*()</code> 함수를 이용해 각 데이터의 형태(Type)을 바꿀 수 있습니다.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">int_var</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="numbers.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.double</span>(int_var)</span></code></pre></div>
 <pre><code>## [1]  1  6 10</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># as.numeric(int_var)</span></code></pre></div>
-<p><code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code> 함수를 통해 integer 형태를 double 형태로 바꿀 수 있습니다. <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> 함수는 <code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code>과 동일한 역할을 합니다.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">dbl_var</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="numbers.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as.numeric(int_var)</span></span></code></pre></div>
+<p><code>as.double()</code> 함수를 통해 integer 형태를 double 형태로 바꿀 수 있습니다. <code>as.numeric()</code> 함수는 <code>as.double()</code>과 동일한 역할을 합니다.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="numbers.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(dbl_var)</span></code></pre></div>
 <pre><code>## [1] 1 2 4</code></pre>
-<p><code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code> 함수를 통해 double 형태를 integer 형태로 바꿀 수 있습니다. 소수점이 사라지고 정수형태로 바뀌었습니다.</p>
+<p><code>as.integer()</code> 함수를 통해 double 형태를 integer 형태로 바꿀 수 있습니다. 소수점이 사라지고 정수형태로 바뀌었습니다.</p>
 </div>
 </div>
 <div id="비임의non-random-숫자-생성하기" class="section level2" number="1.2">
-<h2>
-<span class="header-section-number">1.2</span> 비임의(Non-random) 숫자 생성하기<a class="anchor" aria-label="anchor" href="#%EB%B9%84%EC%9E%84%EC%9D%98non-random-%EC%88%AB%EC%9E%90-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0"><i class="fas fa-link"></i></a>
-</h2>
-<p>콜론(:)과 <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> 함수를 통해 순서가 있는 숫자 벡터를 생성할 수 있습니다.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">10</span></code></pre></div>
+<h2><span class="header-section-number">1.2</span> 비임의(Non-random) 숫자 생성하기</h2>
+<p>콜론(:)과 <code>c()</code> 함수를 통해 순서가 있는 숫자 벡터를 생성할 수 있습니다.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="numbers.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>콜론을 통해 1에서 10까지 숫자가 생성됩니다.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="numbers.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1]  1  5 10</code></pre>
-<p><code><a href="https://rdrr.io/r/base/c.html">c()</a></code> 함수 내부에 입력한 숫자로 벡터가 생성됩니다.</p>
+<p><code>c()</code> 함수 내부에 입력한 숫자로 벡터가 생성됩니다.</p>
 <div id="seq-함수-이용" class="section level3" number="1.2.1">
-<h3>
-<span class="header-section-number">1.2.1</span> <code>seq()</code> 함수 이용<a class="anchor" aria-label="anchor" href="#seq-%ED%95%A8%EC%88%98-%EC%9D%B4%EC%9A%A9"><i class="fas fa-link"></i></a>
-</h3>
-<p><code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> 함수를 이용할 경우 더욱 다양하게 숫자 벡터를 생성할 수 있습니다.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="fl">21</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<h3><span class="header-section-number">1.2.1</span> <code>seq()</code> 함수 이용</h3>
+<p><code>seq()</code> 함수를 이용할 경우 더욱 다양하게 숫자 벡터를 생성할 수 있습니다.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="numbers.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">21</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  [1]  1  3  5  7  9 11 13 15 17 19 21</code></pre>
 <p>from에는 시작 숫자, to에는 종료 숫자, by에는 간격을 입력합니다. 즉 1에서 21까지 2 단위로 숫자가 생성됩니다.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">21</span>, length.out <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="numbers.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">21</span>, <span class="at">length.out =</span> <span class="dv">15</span>)</span></code></pre></div>
 <pre><code>##  [1]  0.0  1.5  3.0  4.5  6.0  7.5  9.0 10.5 12.0 13.5 15.0 16.5 18.0 19.5 21.0</code></pre>
 <p>인자에 length.out을 쓸 경우 from에서 to까지 동일한 증가폭으로 15개의 숫자를 생성합니다.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="numbers.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<p><code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> 함수 역시 <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> 함수와 비슷한 역할을 합니다.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, times <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><code>rep()</code> 함수 역시 <code>seq()</code> 함수와 비슷한 역할을 합니다.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="numbers.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 1 2 3 4</code></pre>
 <p>times 인자를 추가해줄 경우, 해당 숫자만큼 반복되어 벡터가 생성됩니다.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="numbers.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1 1 2 2 3 3 4 4</code></pre>
 <p>each 인자를 추가할 경우, 각 숫자를 n번 반복하여 벡터가 생성됩니다.</p>
 </div>
 </div>
 <div id="임의random-숫자-생성하기" class="section level2" number="1.3">
-<h2>
-<span class="header-section-number">1.3</span> 임의(Random) 숫자 생성하기<a class="anchor" aria-label="anchor" href="#%EC%9E%84%EC%9D%98random-%EC%88%AB%EC%9E%90-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">1.3</span> 임의(Random) 숫자 생성하기</h2>
 <p>이번에는 임의의 숫자를 생성하는 방법에 대해 알아보겠습니다.</p>
 <div id="uniform-numbers" class="section level3" number="1.3.1">
-<h3>
-<span class="header-section-number">1.3.1</span> Uniform Numbers<a class="anchor" aria-label="anchor" href="#uniform-numbers"><i class="fas fa-link"></i></a>
-</h3>
-<p>균등 분포(Uniform distribution)에서 임의의 숫자를 생성하기 위해서는 <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수를 사용합니다.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<h3><span class="header-section-number">1.3.1</span> Uniform Numbers</h3>
+<p>균등 분포(Uniform distribution)에서 임의의 숫자를 생성하기 위해서는 <code>runif()</code> 함수를 사용합니다.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="numbers.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2876 0.7883 0.4090 0.8830 0.9405</code></pre>
-<p>기본적으로 <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> 함수는 0과 1사이에서 임의의 숫자를 생성하며, 괄호 안에 입력된 숫자만큼의 갯수의 난수를 생성합니다.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">5</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></code></pre></div>
+<p>기본적으로 <code>runif()</code> 함수는 0과 1사이에서 임의의 숫자를 생성하며, 괄호 안에 입력된 숫자만큼의 갯수의 난수를 생성합니다.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="numbers.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">25</span>)</span></code></pre></div>
 <pre><code>## [1]  1.139 13.203 22.310 13.786 11.415</code></pre>
 <p>min과 max인자를 추가할 경우 해당 값 사이에서 난수를 생성합니다.</p>
-<p><code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> 함수 역시 Uniform Number를 생성할 수 있습니다.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">25</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><code>sample()</code> 함수 역시 Uniform Number를 생성할 수 있습니다.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="numbers.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##  [1] 19 13 21 24 25  4 18 24 24  8</code></pre>
 <p>0에서 25까지 숫자중에서 10개의 숫자를 선택하며, replace를 TRUE로 할 경우 복원추출, FALSE로 할 경우 비복원추출을 시행합니다.</p>
 </div>
 <div id="non-uniform-numbers" class="section level3" number="1.3.2">
-<h3>
-<span class="header-section-number">1.3.2</span> Non-Uniform Numbers<a class="anchor" aria-label="anchor" href="#non-uniform-numbers"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">1.3.2</span> Non-Uniform Numbers</h3>
 <p>비균등 확률 분포에서 난수를 생성하기 위해서는 크게 4가지 함수가 있습니다.</p>
 <ul>
 <li>r*: 난수 생성</li>
@@ -183,33 +405,25 @@
 <li>q*: 분위수(Quantile)</li>
 </ul>
 <div id="정규-분포normal-distribution" class="section level4" number="1.3.2.1">
-<h4>
-<span class="header-section-number">1.3.2.1</span> 정규 분포(Normal Distribution)<a class="anchor" aria-label="anchor" href="#%EC%A0%95%EA%B7%9C-%EB%B6%84%ED%8F%ACnormal-distribution"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">1.3.2.1</span> 정규 분포(Normal Distribution)</h4>
 <p>R에서 정규 분포 관련 함수는 <code>*norm()</code> 입니다.</p>
-<div class="inline-figure"><img src="data_wrangling_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="numbers.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##  [1]  0.4008  0.1107 -0.5558  1.7869  0.4979 -1.9666  0.7014 -0.4728 -1.0678
 ## [10] -0.2180</code></pre>
-<p><code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> 함수를 이용하여 평균이 0, 표준편차가 1인 정규분포 함수에서 난수 10개를 생성합니다.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="fl">0</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><code>rnorm()</code> 함수를 이용하여 평균이 0, 표준편차가 1인 정규분포 함수에서 난수 10개를 생성합니다.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="numbers.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3989</code></pre>
 <p>d = 0인 지점의 밀도를 계산합니다.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">0</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="numbers.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>d = 0인 지점의 누적 분포를 구합니다.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.5</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="numbers.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>누적 분포가 0.5인 지점의 분위수를 구합니다.</p>
 </div>
 <div id="기타-분포" class="section level4" number="1.3.2.2">
-<h4>
-<span class="header-section-number">1.3.2.2</span> 기타 분포<a class="anchor" aria-label="anchor" href="#%EA%B8%B0%ED%83%80-%EB%B6%84%ED%8F%AC"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">1.3.2.2</span> 기타 분포</h4>
 <p>정규 분포 외에도 여러 분포에서 난수를 생성할 수 있습니다. 각 함수별 인자는 <code>help()</code>를 통해 확인할 수 있습니다.</p>
 <ul>
 <li>이항 분포: rbinom, dbinom, pbinom, qbinom</li>
@@ -221,77 +435,85 @@
 </div>
 </div>
 <div id="반올림" class="section level2" number="1.4">
-<h2>
-<span class="header-section-number">1.4</span> 반올림<a class="anchor" aria-label="anchor" href="#%EB%B0%98%EC%98%AC%EB%A6%BC"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">1.4</span> 반올림</h2>
 <p>숫자의 올림, 내림, 반올림 등을 실행합니다. 먼저 다음과 같이 숫자를 입력합니다.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.35</span>, <span class="fl">1.7</span>, <span class="fl">2.05</span>, <span class="fl">2.4</span>, <span class="fl">2.75</span>, <span class="fl">3.1</span>, <span class="fl">3.45</span>, <span class="fl">3.8</span>, <span class="fl">4.15</span>, 
-      <span class="fl">4.5</span>, <span class="fl">4.85</span>, <span class="fl">5.2</span>, <span class="fl">5.55</span>, <span class="fl">5.9</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="numbers.html#cb38-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.35</span>, <span class="fl">1.7</span>, <span class="fl">2.05</span>, <span class="fl">2.4</span>, <span class="fl">2.75</span>, <span class="fl">3.1</span>, <span class="fl">3.45</span>, <span class="fl">3.8</span>, <span class="fl">4.15</span>, </span>
+<span id="cb38-2"><a href="numbers.html#cb38-2" aria-hidden="true" tabindex="-1"></a>      <span class="fl">4.5</span>, <span class="fl">4.85</span>, <span class="fl">5.2</span>, <span class="fl">5.55</span>, <span class="fl">5.9</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="numbers.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x)</span></code></pre></div>
 <pre><code>##  [1] 1 1 2 2 2 3 3 3 4 4 4 5 5 6 6</code></pre>
-<p><code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> 함수는 가장 가까운 정수로 반올림을 합니다.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><code>round()</code> 함수는 가장 가까운 정수로 반올림을 합니다.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="numbers.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##  [1] 1.00 1.35 1.70 2.05 2.40 2.75 3.10 3.45 3.80 4.15 4.50 4.85 5.20 5.55 5.90</code></pre>
 <p>함수 내부에 digits 인자를 추가해 줄 경우, 해당 자리수 만큼 반올림을 합니다.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="numbers.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(x)</span></code></pre></div>
 <pre><code>##  [1] 1 2 2 3 3 3 4 4 4 5 5 5 6 6 6</code></pre>
-<p><code><a href="https://rdrr.io/r/base/Round.html">ceiling()</a></code> 함수는 올림을 실행합니다.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<p><code>ceiling()</code> 함수는 올림을 실행합니다.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="numbers.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(x)</span></code></pre></div>
 <pre><code>##  [1] 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5</code></pre>
-<p><code><a href="https://rdrr.io/r/base/Round.html">floor()</a></code> 함수는 내림을 실행합니다.</p>
+<p><code>floor()</code> 함수는 내림을 실행합니다.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="index.html">Welcome</a></div>
-<div class="next"><a href="character-strings.html"><span class="header-section-number">2</span> Character Strings</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#numbers"><span class="header-section-number">1</span> Numbers</a></li>
-<li>
-<a class="nav-link" href="#integer%EC%99%80-double%EC%9D%98-vector-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="header-section-number">1.1</span> integer와 double의 vector 만들기</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%EB%91%98-%EA%B0%84%EC%9D%98-%ED%98%95%ED%83%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0"><span class="header-section-number">1.1.1</span> 둘 간의 형태 바꾸기</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#%EB%B9%84%EC%9E%84%EC%9D%98non-random-%EC%88%AB%EC%9E%90-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0"><span class="header-section-number">1.2</span> 비임의(Non-random) 숫자 생성하기</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#seq-%ED%95%A8%EC%88%98-%EC%9D%B4%EC%9A%A9"><span class="header-section-number">1.2.1</span> seq() 함수 이용</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#%EC%9E%84%EC%9D%98random-%EC%88%AB%EC%9E%90-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0"><span class="header-section-number">1.3</span> 임의(Random) 숫자 생성하기</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#uniform-numbers"><span class="header-section-number">1.3.1</span> Uniform Numbers</a></li>
-<li><a class="nav-link" href="#non-uniform-numbers"><span class="header-section-number">1.3.2</span> Non-Uniform Numbers</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#%EB%B0%98%EC%98%AC%EB%A6%BC"><span class="header-section-number">1.4</span> 반올림</a></li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R을 이용한 데이터 랭글링</strong>" was written by 이현열 (Henry Lee). </p>
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="character-strings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -303,22 +525,7 @@
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>

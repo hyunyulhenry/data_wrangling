@@ -1,10 +1,6 @@
-bookdown::bs4_book:
-  theme:
-    primary: "#637238"
-
 bookdown::gitbook:
   css: style.css
-  split_by: section
+  split_by: chapter
   config:
     toc:
       collapse: section
@@ -14,6 +10,3 @@ bookdown::gitbook:
         <li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
     edit: null
     download: no
-    
-bookdown::pdf_book:
-  latex_engine: "xelatex"    
