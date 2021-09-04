@@ -1,12 +1,13 @@
 --- 
-knit: "bookdown::render_book"
 title: "R을 이용한 데이터 랭글링"
 author: "이현열 (Henry Lee)"
-description: "R을 이용한 데이터 랭글링 강의교재 입니다."
-url: "https://hyunyulhenry.github.io/data_wrangling/"
-github-repo: hyunyulhenry/data_wrangling
 site: bookdown::bookdown_site
+output: bookdown::bs4_book
 documentclass: book
+fontsize: 12pt
+link-citations: yes
+latex_engine: xelatex
+github-repo: hyunyulhenry/data_wrangling
 ---
 
 # Welcome {-}
@@ -40,9 +41,7 @@ documentclass: book
 
 https://www.amazon.com/Data-Wrangling-R-Use/dp/3319455982
 
-```{r echo = FALSE, out.width = '30%'}
-knitr::include_graphics('images/user_cover.jpg')
-```
+<img src="images/user_cover.jpg" width="30%" style="display: block; margin: auto;" />
 
 ## Contact Information {-}
 

@@ -14,3 +14,6 @@ bookdown::gitbook:
         <li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
     edit: null
     download: no
+    
+bookdown::pdf_book:
+  latex_engine: "xelatex"    
