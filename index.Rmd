@@ -2,7 +2,7 @@
 title: "R을 이용한 데이터 랭글링"
 author: "이현열 (Henry Lee)"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: bookdown::bs4_book
 documentclass: book
 fontsize: 12pt
 link-citations: yes

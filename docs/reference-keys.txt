@@ -1,5 +1,5 @@
 tab:mag
-fig:unnamed-chunk-204
+fig:unnamed-chunk-203
 numbers
 integer와-double의-vector-만들기
 둘-간의-형태-바꾸기
