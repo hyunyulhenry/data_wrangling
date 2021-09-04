@@ -4,7 +4,7 @@ bookdown::bs4_book:
 
 bookdown::gitbook:
   css: style.css
-  split_by: chapter
+  split_by: section
   config:
     toc:
       collapse: section
@@ -13,5 +13,9 @@ bookdown::gitbook:
       after: |
         <li><a href="https://blog.naver.com/leebisu" target="blank">Henry's Quantopia</a></li>
     edit: null
+<<<<<<< HEAD
     download: no
     
+=======
+    download: no
+>>>>>>> ba488a07f1f46c1ee640240860f3e4cb0192611c
