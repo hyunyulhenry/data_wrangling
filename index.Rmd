@@ -5,6 +5,10 @@ author: "이현열 (Henry Lee)"
 description: "R을 이용한 데이터 랭글링 강의교재 입니다."
 url: "https://hyunyulhenry.github.io/data_wrangling/"
 github-repo: hyunyulhenry/data_wrangling
+output:
+  bookdown::gitbook:
+    includes:
+      after_body: disqus.html
 site: bookdown::bookdown_site
 documentclass: book
 ---
