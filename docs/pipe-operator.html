@@ -366,8 +366,8 @@ x %&gt;% F %&gt;% G
 </tbody>
 </table>
 <p>간단한 예제를 통해 파이프 오퍼레이터의 사용법을 살펴보겠습니다. 먼저 다음과 같은 10개의 숫자가 있다고 가정합니다.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="pipe-operator.html#cb433-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.3078</span>, <span class="fl">0.2577</span>, <span class="fl">0.5523</span>, <span class="fl">0.0564</span>, <span class="fl">0.4685</span>,</span>
-<span id="cb433-2"><a href="pipe-operator.html#cb433-2" aria-hidden="true" tabindex="-1"></a>      <span class="fl">0.4838</span>, <span class="fl">0.8124</span>, <span class="fl">0.3703</span>, <span class="fl">0.5466</span>, <span class="fl">0.1703</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="pipe-operator.html#cb431-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.3078</span>, <span class="fl">0.2577</span>, <span class="fl">0.5523</span>, <span class="fl">0.0564</span>, <span class="fl">0.4685</span>,</span>
+<span id="cb431-2"><a href="pipe-operator.html#cb431-2" aria-hidden="true" tabindex="-1"></a>      <span class="fl">0.4838</span>, <span class="fl">0.8124</span>, <span class="fl">0.3703</span>, <span class="fl">0.5466</span>, <span class="fl">0.1703</span>)</span></code></pre></div>
 <p>우리가 원하는 과정은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
 <li>각 값들의 로그값을 구할 것</li>
@@ -376,17 +376,17 @@ x %&gt;% F %&gt;% G
 <li>소수 둘째 자리까지 반올림할 것</li>
 </ol>
 <p>입니다. 즉 <code>log()</code>, <code>diff()</code>, <code>exp()</code>, <code>round()</code>에 대한 값을 순차적으로 구하고자 합니다.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="pipe-operator.html#cb434-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">log</span>(x)</span>
-<span id="cb434-2"><a href="pipe-operator.html#cb434-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">diff</span>(x1)</span>
-<span id="cb434-3"><a href="pipe-operator.html#cb434-3" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">exp</span>(x2)</span>
-<span id="cb434-4"><a href="pipe-operator.html#cb434-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x3, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="pipe-operator.html#cb432-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">log</span>(x)</span>
+<span id="cb432-2"><a href="pipe-operator.html#cb432-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">diff</span>(x1)</span>
+<span id="cb432-3"><a href="pipe-operator.html#cb432-3" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">exp</span>(x2)</span>
+<span id="cb432-4"><a href="pipe-operator.html#cb432-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x3, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>첫 번째 방법은 단계별 함수의 결괏값을 변수에 저장하고 저장된 변수를 다시 불러와 함수에 넣고 계산하는 방법입니다. 전반적인 계산 과정을 확인하기에는 좋지만 매번 변수에 저장하고 불러오는 과정이 매우 비효율적이며 코드도 불필요하게 길어집니다.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="pipe-operator.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">diff</span>(<span class="fu">log</span>(x))), <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="pipe-operator.html#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">diff</span>(<span class="fu">log</span>(x))), <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>두 번째는 괄호를 통해 감싸는 방법입니다. 앞선 방법에 비해 코드는 짧아졌지만, 계산 과정을 알아보기에는 매우 불편한 방법으로 코드가 짜여 있습니다.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="pipe-operator.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb438-2"><a href="pipe-operator.html#cb438-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="sc">%&gt;%</span> <span class="fu">exp</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(., <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="pipe-operator.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb436-2"><a href="pipe-operator.html#cb436-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="sc">%&gt;%</span> <span class="fu">exp</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(., <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>마지막으로 파이프 오퍼레이터를 사용하는 방법입니다. 코드도 짧으며 계산 과정을 한눈에 파악하기도 좋습니다. 맨 왼쪽에는 원하는 변수를 입력하며, %&gt;% 뒤에는 차례대로 계산하고자 하는 함수를 입력합니다. 변수의 입력값을 ()로 비워둘 경우, 오퍼레이터의 왼쪽에 있는 값이 입력 변수가 됩니다. 반면 <code>round()</code>와 같이 입력값이 두 개 이상 필요하면 마침표(.)가 오퍼레이터의 왼쪽 값으로 입력됩니다.</p>
 <p>파이프 오퍼레이터는 크롤링뿐만 아니라 모든 코드에 사용할 수 있습니다. 이를 통해 훨씬 깔끔하면서도 데이터 처리 과정을 직관적으로 이해할 수 있습니다.</p>

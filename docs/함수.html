@@ -344,17 +344,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>n: 기간</li>
 </ul>
 <p>이를 함수로 나타내면 다음과 같습니다.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="함수.html#cb363-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(FV, r, n) {</span>
-<span id="cb363-2"><a href="함수.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span>r)<span class="sc">^</span>n</span>
-<span id="cb363-3"><a href="함수.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
-<span id="cb363-4"><a href="함수.html#cb363-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="함수.html#cb361-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(FV, r, n) {</span>
+<span id="cb361-2"><a href="함수.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span>r)<span class="sc">^</span>n</span>
+<span id="cb361-3"><a href="함수.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
+<span id="cb361-4"><a href="함수.html#cb361-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>3가지 요소를 확인해보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="함수.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(PV)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="함수.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(PV)</span></code></pre></div>
 <pre><code>## {
 ##     PV = FV/(1 + r)^n
 ##     round(PV, 2)
 ## }</code></pre>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="함수.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(PV)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="함수.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(PV)</span></code></pre></div>
 <pre><code>## $FV
 ## 
 ## 
@@ -362,55 +362,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## 
 ## $n</code></pre>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="함수.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(PV)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="함수.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(PV)</span></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
 </div>
 <div id="인자" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> 인자</h2>
 <p><code>PV()</code> 함수는 여러 방법으로 실행할 수 있습니다.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="함수.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="함수.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>모든 인자 리스트와 이에 대응되는 값을 입력합니다.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="함수.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="함수.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>인자 리스트를 생략하면, 순서대로 값이 입력됩니다.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="함수.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="함수.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="at">r =</span> <span class="fl">0.08</span>, <span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>인자 내역을 순서대로 입력하지 않아도 됩니다.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="함수.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="함수.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
 <pre><code>## Error in PV(1000, 0.08): 기본값이 없는 인수 &quot;n&quot;가 누락되어 있습니다</code></pre>
 <p><code>PV()</code> 함수에 필요한 인자는 3개인 반면, 2개만 입력하였으므로 에러가 발생합니다.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="함수.html#cb378-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> .<span class="dv">08</span>, <span class="at">n =</span> <span class="dv">5</span>) {</span>
-<span id="cb378-2"><a href="함수.html#cb378-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> r)<span class="sc">^</span>n</span>
-<span id="cb378-3"><a href="함수.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
-<span id="cb378-4"><a href="함수.html#cb378-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb378-5"><a href="함수.html#cb378-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-6"><a href="함수.html#cb378-6" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="함수.html#cb376-1" aria-hidden="true" tabindex="-1"></a>PV <span class="ot">=</span> <span class="cf">function</span>(<span class="at">FV =</span> <span class="dv">1000</span>, <span class="at">r =</span> .<span class="dv">08</span>, <span class="at">n =</span> <span class="dv">5</span>) {</span>
+<span id="cb376-2"><a href="함수.html#cb376-2" aria-hidden="true" tabindex="-1"></a>  PV <span class="ot">=</span> FV <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> r)<span class="sc">^</span>n</span>
+<span id="cb376-3"><a href="함수.html#cb376-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(PV, <span class="dv">2</span>)</span>
+<span id="cb376-4"><a href="함수.html#cb376-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb376-5"><a href="함수.html#cb376-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb376-6"><a href="함수.html#cb376-6" aria-hidden="true" tabindex="-1"></a><span class="fu">PV</span>(<span class="dv">1000</span>, <span class="fl">0.08</span>)</span></code></pre></div>
 <pre><code>## [1] 680.6</code></pre>
 <p>만일 함수의 인자에 디폴트 값이 입력되어 있다면, 함수 실행시 이를 생략하여도 디폴트 값이 입력됩니다. 위 예제에서 n값이 디폴트 값인 5가 적용되었습니다.</p>
 </div>
 <div id="다중-결과값-출력" class="section level2" number="13.3">
 <h2><span class="header-section-number">13.3</span> 다중 결과값 출력</h2>
 <p>동일한 함수를 여러값에 적용하기 위해서는 함수 내부에 <code>c()</code> 함수를 적용해야 합니다.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="함수.html#cb380-1" aria-hidden="true" tabindex="-1"></a>bad <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb380-2"><a href="함수.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y       <span class="co"># 1</span></span>
-<span id="cb380-3"><a href="함수.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y       <span class="co"># 2</span></span>
-<span id="cb380-4"><a href="함수.html#cb380-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y   <span class="co"># 3  </span></span>
-<span id="cb380-5"><a href="함수.html#cb380-5" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">/</span> y           <span class="co"># 4</span></span>
-<span id="cb380-6"><a href="함수.html#cb380-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb380-7"><a href="함수.html#cb380-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-8"><a href="함수.html#cb380-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bad</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="함수.html#cb378-1" aria-hidden="true" tabindex="-1"></a>bad <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb378-2"><a href="함수.html#cb378-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y       <span class="co"># 1</span></span>
+<span id="cb378-3"><a href="함수.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y       <span class="co"># 2</span></span>
+<span id="cb378-4"><a href="함수.html#cb378-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y   <span class="co"># 3  </span></span>
+<span id="cb378-5"><a href="함수.html#cb378-5" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">/</span> y           <span class="co"># 4</span></span>
+<span id="cb378-6"><a href="함수.html#cb378-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb378-7"><a href="함수.html#cb378-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-8"><a href="함수.html#cb378-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bad</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>1, 2, 3, 4번 모든 연산에 대한 출력을 원하지만, 맨 마지막 연산값 만이 출력됩니다.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="함수.html#cb382-1" aria-hidden="true" tabindex="-1"></a>good <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb382-2"><a href="함수.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  output1 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
-<span id="cb382-3"><a href="함수.html#cb382-3" aria-hidden="true" tabindex="-1"></a>  output2 <span class="ot">=</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb382-4"><a href="함수.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  output3 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb382-5"><a href="함수.html#cb382-5" aria-hidden="true" tabindex="-1"></a>  output4 <span class="ot">=</span> x <span class="sc">/</span> y</span>
-<span id="cb382-6"><a href="함수.html#cb382-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(output1, output2, output3, output4)</span>
-<span id="cb382-7"><a href="함수.html#cb382-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb382-8"><a href="함수.html#cb382-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb382-9"><a href="함수.html#cb382-9" aria-hidden="true" tabindex="-1"></a><span class="fu">good</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="함수.html#cb380-1" aria-hidden="true" tabindex="-1"></a>good <span class="ot">=</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb380-2"><a href="함수.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  output1 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
+<span id="cb380-3"><a href="함수.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  output2 <span class="ot">=</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb380-4"><a href="함수.html#cb380-4" aria-hidden="true" tabindex="-1"></a>  output3 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb380-5"><a href="함수.html#cb380-5" aria-hidden="true" tabindex="-1"></a>  output4 <span class="ot">=</span> x <span class="sc">/</span> y</span>
+<span id="cb380-6"><a href="함수.html#cb380-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(output1, output2, output3, output4)</span>
+<span id="cb380-7"><a href="함수.html#cb380-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb380-8"><a href="함수.html#cb380-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb380-9"><a href="함수.html#cb380-9" aria-hidden="true" tabindex="-1"></a><span class="fu">good</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.0 5.0 6.0 0.5</code></pre>
 <p>모든 결과를 output*에 저장한 후 <code>c()</code> 함수를 통해 이를 묶어주면, 모든 연산값이 출력됩니다.</p>
 

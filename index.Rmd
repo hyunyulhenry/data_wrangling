@@ -15,6 +15,8 @@ documentclass: book
 
 # Welcome {-}
 
+**질문사항이 있으시면 먼저 하단의 Comments에 남겨주시기 바랍니다.**
+
 본 페이지는 **R을 이용한 데이터 랭글링** 강의 페이지이며, 다음과 같은 내용으로 구성되었습니다.
 
 - Part 1: 데이터 타입별 다루기
@@ -39,14 +41,6 @@ documentclass: book
 - Part 5: 데이터 구조 변형하기
   - Chapter 16: tidyr을 이용한 데이터 모양 바꾸기
   - Chapter 17: dplyr을 이용한 데이터 변형하기
-
-본 강의록의 대부분 내용은 *Bradley C. Boehmke*의 **Data Wrangling with R (Use R!)**을 참조하였습니다.
-
-https://www.amazon.com/Data-Wrangling-R-Use/dp/3319455982
-
-```{r echo = FALSE, out.width = '30%'}
-knitr::include_graphics('images/user_cover.jpg')
-```
 
 ## Contact Information {-}
 

@@ -330,12 +330,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="텍스트-csv-파일-저장하기" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> 텍스트, csv 파일 저장하기</h2>
 <p>먼저 R의 기본함수와 <code>readr</code> 패키지를 이용하여 텍스트 파일과 csv 파일로 저장하는 법에 대해 살펴보겠습니다. 먼저 다음과 같이 예제로 사용될 데이터프레임을 만들도록 합니다.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="exporting-data.html#cb355-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">var1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>),</span>
-<span id="cb355-2"><a href="exporting-data.html#cb355-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">var2 =</span> <span class="fu">c</span>(<span class="st">&#39;beer&#39;</span>, <span class="st">&#39;wine&#39;</span>, <span class="st">&#39;cheese&#39;</span>),</span>
-<span id="cb355-3"><a href="exporting-data.html#cb355-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">var3 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb355-4"><a href="exporting-data.html#cb355-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&#39;billy&#39;</span>, <span class="st">&#39;bob&#39;</span>, <span class="st">&#39;thornton&#39;</span>))</span>
-<span id="cb355-5"><a href="exporting-data.html#cb355-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-6"><a href="exporting-data.html#cb355-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="exporting-data.html#cb353-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">var1 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>),</span>
+<span id="cb353-2"><a href="exporting-data.html#cb353-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">var2 =</span> <span class="fu">c</span>(<span class="st">&#39;beer&#39;</span>, <span class="st">&#39;wine&#39;</span>, <span class="st">&#39;cheese&#39;</span>),</span>
+<span id="cb353-3"><a href="exporting-data.html#cb353-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">var3 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb353-4"><a href="exporting-data.html#cb353-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&#39;billy&#39;</span>, <span class="st">&#39;bob&#39;</span>, <span class="st">&#39;thornton&#39;</span>))</span>
+<span id="cb353-5"><a href="exporting-data.html#cb353-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-6"><a href="exporting-data.html#cb353-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>##          var1   var2  var3
 ## billy      10   beer  TRUE
 ## bob        25   wine  TRUE
@@ -343,33 +343,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="기본함수-1" class="section level3" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> 기본함수</h3>
 <p><code>write.csv()</code> 함수를 통해 csv 파일로 저장할 수 있습니다.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="exporting-data.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="at">file =</span> <span class="st">&#39;export.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="exporting-data.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="at">file =</span> <span class="st">&#39;export.csv&#39;</span>)</span></code></pre></div>
 <p><code>write.delim()</code> 함수를 사용하여 텍스트 파일로 저장할 수 있습니다.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="exporting-data.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, <span class="at">file =</span> <span class="st">&#39;export.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;</span><span class="sc">\t</span><span class="st">&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="exporting-data.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(df, <span class="at">file =</span> <span class="st">&#39;export.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;</span><span class="sc">\t</span><span class="st">&#39;</span>)</span></code></pre></div>
 <p>sep를 통해 탭을 구분자로 지정하였습니다.</p>
 </div>
 <div id="readr-패키지-1" class="section level3" number="12.1.2">
 <h3><span class="header-section-number">12.1.2</span> <code>readr</code> 패키지</h3>
 <p><code>readr</code> 패키지의 경우 기본 함수에 비해 2배 이상 빠르며, 행 이름을 저장하지 않습니다.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="exporting-data.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb359-2"><a href="exporting-data.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb359-3"><a href="exporting-data.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="st">&#39;export2.csv&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="exporting-data.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="st">&#39;export3.csv&#39;</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="exporting-data.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb357-2"><a href="exporting-data.html#cb357-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb357-3"><a href="exporting-data.html#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="st">&#39;export2.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="exporting-data.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="st">&#39;export3.csv&#39;</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>col_names 인자를 FALSE로 지정할 경우 열 이름 역시 저장되지 않습니다.</p>
 </div>
 </div>
 <div id="엑셀-저장하기" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> 엑셀 저장하기</h2>
 <p><code>openxlsx</code> 패키지를 이용해 엑셀 파일로 저장할 수 있습니다.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="exporting-data.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb361-2"><a href="exporting-data.html#cb361-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb361-3"><a href="exporting-data.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(df, <span class="at">file =</span> <span class="st">&#39;output_example.xlsx&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="exporting-data.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb359-2"><a href="exporting-data.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb359-3"><a href="exporting-data.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(df, <span class="at">file =</span> <span class="st">&#39;output_example.xlsx&#39;</span>)</span></code></pre></div>
 <p><code>openxlsx</code> 패키지를 이용할 경우 R 내에서 다양한 형식으로 엑셀을 꾸민 후 파일을 저장할 수 있습니다. 자세한 내용은 다음 url을 참조하시기 바랍니다.</p>
 </div>
 <div id="r-object-file-1" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> R object File</h2>
 <p><code>saveRDS()</code> 함수를 통해 작업중인 내용을 RDS 파일로 저장할 수 있습니다.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="exporting-data.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df, <span class="st">&#39;df.rds&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="exporting-data.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df, <span class="st">&#39;df.rds&#39;</span>)</span></code></pre></div>
 
 </div>
 </div>

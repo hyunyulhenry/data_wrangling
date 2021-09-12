@@ -360,37 +360,30 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ##  $ variable.2: chr  &quot;beer&quot; &quot;wine&quot; &quot;cheese&quot;
 ##  $ variable.3: logi  TRUE TRUE FALSE</code></pre>
 <p>먼저 열이름인 variable 다음에 점(.)이 붙은 것이 확인됩니다. 이처럼 기본함수를 사용할 경우 열 이름의 공백은 점으로 바뀌게 됩니다.</p>
-<p>또한 variable 2의 문자열이 자동으로 팩터 형태로 바뀌게 되었습니다. 이를 방지하기 위해서는 stringAsFactors를 FALSE로 지정해주어야 합니다.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="import-data.html#cb307-1" aria-hidden="true" tabindex="-1"></a>mydata2 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb307-2"><a href="import-data.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata2)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
-##  $ variable.1: int  10 25 8
-##  $ variable.2: chr  &quot;beer&quot; &quot;wine&quot; &quot;cheese&quot;
-##  $ variable.3: logi  TRUE TRUE FALSE</code></pre>
 <p><code>read.table()</code> 함수를 이용하여 csv 데이터를 불러올 수도 있습니다.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="import-data.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="import-data.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##   variable.1 variable.2 variable.3
 ## 1         10       beer       TRUE
 ## 2         25       wine       TRUE
 ## 3          8     cheese      FALSE</code></pre>
 <p>구분자에 해당하는 sep를 ’,’로 지정해 주며, 열이름에 해당하는 header를 TRUE로 지정해줍니다.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="import-data.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb311-2"><a href="import-data.html#cb311-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&#39;Row 1&#39;</span>, <span class="st">&#39;Row 2&#39;</span>, <span class="st">&#39;Row 3&#39;</span>),</span>
-<span id="cb311-3"><a href="import-data.html#cb311-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&#39;Var 1&#39;</span>, <span class="st">&#39;Var 2&#39;</span>, <span class="st">&#39;Var 3&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="import-data.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb309-2"><a href="import-data.html#cb309-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&#39;Row 1&#39;</span>, <span class="st">&#39;Row 2&#39;</span>, <span class="st">&#39;Row 3&#39;</span>),</span>
+<span id="cb309-3"><a href="import-data.html#cb309-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&#39;Var 1&#39;</span>, <span class="st">&#39;Var 2&#39;</span>, <span class="st">&#39;Var 3&#39;</span>))</span></code></pre></div>
 <pre><code>##       Var.1  Var.2 Var.3
 ## Row 1    10   beer  TRUE
 ## Row 2    25   wine  TRUE
 ## Row 3     8 cheese FALSE</code></pre>
 <p>row.names와 col.names 인자를 통해 행 및 열이름을 직접 지정할 수도 있습니다.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="import-data.html#cb313-1" aria-hidden="true" tabindex="-1"></a>set_classes <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb313-2"><a href="import-data.html#cb313-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;character&#39;</span>, <span class="st">&#39;character&#39;</span>))</span>
-<span id="cb313-3"><a href="import-data.html#cb313-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(set_classes)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="import-data.html#cb311-1" aria-hidden="true" tabindex="-1"></a>set_classes <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb311-2"><a href="import-data.html#cb311-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;character&#39;</span>, <span class="st">&#39;character&#39;</span>))</span>
+<span id="cb311-3"><a href="import-data.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(set_classes)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ variable.1: num  10 25 8
 ##  $ variable.2: chr  &quot;beer&quot; &quot;wine&quot; &quot;cheese&quot;
 ##  $ variable.3: chr  &quot;TRUE&quot; &quot;TRUE&quot; &quot;FALSE&quot;</code></pre>
 <p>colClasses 인자를 통해 각 열에 해당하는 클래스를 직접 지정해줄 수도 있으며, 2번째 열이 팩터가 아닌 문자 형태로 입력됩니다.</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="import-data.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">nrows =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="import-data.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">nrows =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##   variable.1 variable.2 variable.3
 ## 1         10       beer       TRUE
 ## 2         25       wine       TRUE</code></pre>
@@ -399,9 +392,9 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 <div id="readr-패키지" class="section level3" number="11.1.2">
 <h3><span class="header-section-number">11.1.2</span> <code>readr</code> 패키지</h3>
 <p>기본 함수 대비 readr 패키지를 이용할 경우 10배 정도 빠르게 데이터를 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="import-data.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb317-2"><a href="import-data.html#cb317-2" aria-hidden="true" tabindex="-1"></a>mydata3 <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>)</span>
-<span id="cb317-3"><a href="import-data.html#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata3)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="import-data.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb315-2"><a href="import-data.html#cb315-2" aria-hidden="true" tabindex="-1"></a>mydata3 <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>)</span>
+<span id="cb315-3"><a href="import-data.html#cb315-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata3)</span></code></pre></div>
 <pre><code>## spec_tbl_df [3 x 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ variable 1: num [1:3] 10 25 8
 ##  $ variable 2: chr [1:3] &quot;beer&quot; &quot;wine&quot; &quot;cheese&quot;
@@ -414,9 +407,9 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ##   .. )
 ##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
 <p><code>read_csv()</code> 함수를 이용해 csv 파일을 불러올 수 있습니다. 열이름의 공백이 그대로 유지되며, 문자 형태 역시 팩터가 아닌 원래 형식이 그대로 유지됩니다.</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="import-data.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">col_types =</span> <span class="fu">list</span>(<span class="fu">col_double</span>(),</span>
-<span id="cb319-2"><a href="import-data.html#cb319-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">col_character</span>(),</span>
-<span id="cb319-3"><a href="import-data.html#cb319-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">col_character</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="import-data.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">col_types =</span> <span class="fu">list</span>(<span class="fu">col_double</span>(),</span>
+<span id="cb317-2"><a href="import-data.html#cb317-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">col_character</span>(),</span>
+<span id="cb317-3"><a href="import-data.html#cb317-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">col_character</span>()))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   `variable 1` `variable 2` `variable 3`
 ##          &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       
@@ -424,8 +417,8 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ## 2           25 wine         TRUE        
 ## 3            8 cheese       FALSE</code></pre>
 <p>col_types 인자를 통해 원하는 타입을 직접 입력할 수도 있습니다.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="import-data.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;Var 1&#39;</span>, <span class="st">&#39;Var 2&#39;</span>, <span class="st">&#39;Var 3&#39;</span>),</span>
-<span id="cb321-2"><a href="import-data.html#cb321-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">skip =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="import-data.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;Var 1&#39;</span>, <span class="st">&#39;Var 2&#39;</span>, <span class="st">&#39;Var 3&#39;</span>),</span>
+<span id="cb319-2"><a href="import-data.html#cb319-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">skip =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   `Var 1` `Var 2` `Var 3`
 ##     &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt;  
@@ -433,7 +426,7 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ## 2      25 wine    TRUE   
 ## 3       8 cheese  FALSE</code></pre>
 <p>col_names 인자를 통해 열이름을 입력할 수 있으며, skip을 통해 위에서 n번째 행을 건너뛰고 데이터를 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="import-data.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="import-data.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&#39;mydata.csv&#39;</span>, <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   `variable 1` `variable 2` `variable 3`
 ##          &lt;dbl&gt; &lt;chr&gt;        &lt;lgl&gt;       
@@ -445,12 +438,12 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 <div id="텍스트-파일-불러오기" class="section level2" number="11.2">
 <h2><span class="header-section-number">11.2</span> 텍스트 파일 불러오기</h2>
 <p><code>.txt</code> 파일로 저장된 텍스트 파일 역시 <code>read.delim()</code> 혹은 <code>read.table()</code> 함수를 이용해 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="import-data.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.delim</span>(<span class="st">&#39;mydata.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="import-data.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.delim</span>(<span class="st">&#39;mydata.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>)</span></code></pre></div>
 <pre><code>##   variable.1 variable.2 variable.3
 ## 1         10       beer       TRUE
 ## 2         25       wine       TRUE
 ## 3          8     cheese      FALSE</code></pre>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="import-data.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="import-data.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&#39;mydata.txt&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##   variable.1 variable.2 variable.3
 ## 1         10       beer       TRUE
 ## 2         25       wine       TRUE
@@ -458,25 +451,25 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 </div>
 <div id="엑셀-파일-불러오기" class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> 엑셀 파일 불러오기</h2>
-<p>엑셀 파일을 불러오기 위한 패키지는 매우 많으며, 이 중 <code>xlsx</code>와 <code>readxl</code> 패키지를 살펴보도록 하겠습니다.</p>
+<p>엑셀 파일을 불러오기 위한 패키지는 매우 많으며, 이 중 <code>openxlsx</code>와 <code>readxl</code> 패키지를 살펴보도록 하겠습니다.</p>
 <div id="openxlsx-패키지" class="section level3" number="11.3.1">
 <h3><span class="header-section-number">11.3.1</span> <code>openxlsx</code> 패키지</h3>
 <p><code>openxlsx</code> 패캐지의 <code>read.xlsx()</code> 함수를 이용해 엑셀 데이터를 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="import-data.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb329-2"><a href="import-data.html#cb329-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-3"><a href="import-data.html#cb329-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet1&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="import-data.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb327-2"><a href="import-data.html#cb327-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-3"><a href="import-data.html#cb327-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet1&#39;</span>)</span></code></pre></div>
 <pre><code>##   variable.1 variable.2 variable.3
 ## 1         10       beer       TRUE
 ## 2         25       wine       TRUE
 ## 3          8     cheese      FALSE</code></pre>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="import-data.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet2&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="import-data.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet2&#39;</span>)</span></code></pre></div>
 <pre><code>##   variable.4 variable.5
 ## 1     Dayton     johnny
 ## 2   Columbus      amber
 ## 3  Cleveland       tony
 ## 4 Cincinnati      alice</code></pre>
 <p>엑셀은 여러 시트로 구성되어 있으므로, sheet 인자를 통해 원하는 시트명의 내용만 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="import-data.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="import-data.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>)</span></code></pre></div>
 <pre><code>##                                          Header.Company.A         X2
 ## 1 What if we want to disregard header text in Excel file?       &lt;NA&gt;
 ## 2                                              variable 6 variable 7
@@ -485,14 +478,14 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ## 5                                                     400     Female
 ## 6                                                     310       Male</code></pre>
 <p>간혹 엑셀 파일에는 데이터가 아닌 설명을 위한 텍스트가 적힌 경우도 있으므로, 이를 제외하고 데이터를 불러올 필요가 있습니다.</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="import-data.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>, <span class="at">startRow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="import-data.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>, <span class="at">startRow =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##   variable.6 variable.7
 ## 1        200       Male
 ## 2        225     Female
 ## 3        400     Female
 ## 4        310       Male</code></pre>
 <p>startRow 인자를 통해 3번째 행부터 데이터를 불러오게 되어, 불필요한 텍스트가 제거되었습니다.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="import-data.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>, <span class="at">rows =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="import-data.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xlsx</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet3&#39;</span>, <span class="at">rows =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##   variable.6 variable.7
 ## 1        200       Male
 ## 2        225     Female</code></pre>
@@ -501,17 +494,17 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 <div id="readxl-패키지" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">11.3.2</span> <code>readxl</code> 패키지</h3>
 <p><code>readxl</code> 패키지는 <code>readr</code> 패키지와 거의 비슷하며, C++을 기반으로 하여 매우 빠른 속도를 자랑합니다.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="import-data.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb339-2"><a href="import-data.html#cb339-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-3"><a href="import-data.html#cb339-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>)</span>
-<span id="cb339-4"><a href="import-data.html#cb339-4" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="import-data.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb337-2"><a href="import-data.html#cb337-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-3"><a href="import-data.html#cb337-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>)</span>
+<span id="cb337-4"><a href="import-data.html#cb337-4" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   `Variable 1` `Variable 2` `Variable 3` `Variable 4`        `Variable 5`       
 ##          &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
 ## 1           10 beer                    1 2015-11-20 00:00:00 2015-11-20 13:30:00
 ## 2           25 wine                    1 NA                  2015-11-21 16:30:00
 ## 3            8 &lt;NA&gt;                    0 2015-11-22 00:00:00 2015-11-22 14:45:00</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="import-data.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="import-data.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata)</span></code></pre></div>
 <pre><code>## tibble [3 x 5] (S3: tbl_df/tbl/data.frame)
 ##  $ Variable 1: num [1:3] 10 25 8
 ##  $ Variable 2: chr [1:3] &quot;beer&quot; &quot;wine&quot; NA
@@ -519,8 +512,8 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ##  $ Variable 4: POSIXct[1:3], format: &quot;2015-11-20&quot; NA ...
 ##  $ Variable 5: POSIXct[1:3], format: &quot;2015-11-20 13:30:00&quot; &quot;2015-11-21 16:30:00&quot; ...</code></pre>
 <p><code>read_excel()</code> 함수 역시 sheet 인자를 통해 원하는 시트의 데이터를 불러올 수 있습니다. 빈 칸의 경우 결측치(NA)로 변형되며, 날짜의 경우 POSIXct 형식으로 불러옵니다.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="import-data.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>, <span class="at">skip =</span> <span class="dv">1</span>,</span>
-<span id="cb343-2"><a href="import-data.html#cb343-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_names =</span> <span class="fu">paste</span>(<span class="st">&#39;Var&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="import-data.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>, <span class="at">skip =</span> <span class="dv">1</span>,</span>
+<span id="cb341-2"><a href="import-data.html#cb341-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_names =</span> <span class="fu">paste</span>(<span class="st">&#39;Var&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   `Var 1` `Var 2` `Var 3` `Var 4`             `Var 5`            
 ##     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
@@ -529,14 +522,14 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ## 3       8 &lt;NA&gt;          0 2015-11-22 00:00:00 2015-11-22 14:45:00</code></pre>
 <p>skip 인자를 통해 위에서 n 번째까지 행을 건너뛸 수 있으며, col_names 인자를 통해 원하는 열이름을 직접 입력할 수 있습니다.</p>
 <p>간혹 결측치가 NA가 아닌 999와 같은 특정 값으로 입력되는 경우도 있으므로, 이를 찾아 NA로 변형해주어야 합니다.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="import-data.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet6&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="import-data.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet6&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   `variable 1` `variable 2` `variable 3` `variable 4`
 ##          &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;        &lt;dbl&gt;
 ## 1           10 beer                    3        42328
 ## 2           25 wine                    1          999
 ## 3            8 999                     0        42330</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="import-data.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet6&#39;</span>, <span class="at">na =</span> <span class="st">&#39;999&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="import-data.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet6&#39;</span>, <span class="at">na =</span> <span class="st">&#39;999&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   `variable 1` `variable 2` `variable 3` `variable 4`
 ##          &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;        &lt;dbl&gt;
@@ -544,15 +537,15 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 ## 2           25 wine                    1           NA
 ## 3            8 &lt;NA&gt;                    0        42330</code></pre>
 <p>NA로 지정하고 싶은 값을 직접 입력할 수 있습니다.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="import-data.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="import-data.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   `Variable 1` `Variable 2` `Variable 3` `Variable 4`        `Variable 5`       
 ##          &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
 ## 1           10 beer                    1 2015-11-20 00:00:00 2015-11-20 13:30:00
 ## 2           25 wine                    1 NA                  2015-11-21 16:30:00
 ## 3            8 &lt;NA&gt;                    0 2015-11-22 00:00:00 2015-11-22 14:45:00</code></pre>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="import-data.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>,</span>
-<span id="cb351-2"><a href="import-data.html#cb351-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_type =</span> <span class="fu">c</span>(<span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;blank&#39;</span>, <span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;blank&#39;</span>, <span class="st">&#39;date&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="import-data.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&#39;mydata.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;Sheet5&#39;</span>,</span>
+<span id="cb349-2"><a href="import-data.html#cb349-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_type =</span> <span class="fu">c</span>(<span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;blank&#39;</span>, <span class="st">&#39;numeric&#39;</span>, <span class="st">&#39;blank&#39;</span>, <span class="st">&#39;date&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   `Variable 1` `Variable 3` `Variable 5`       
 ##          &lt;dbl&gt;        &lt;dbl&gt; &lt;dttm&gt;             
@@ -565,7 +558,7 @@ rds: https://github.com/hyunyulhenry/data_wrangling/blob/master/mydata.rds</code
 <div id="r-object-file" class="section level2" number="11.4">
 <h2><span class="header-section-number">11.4</span> R object File</h2>
 <p>R을 통해 작업한 내용을 csv나 excel 파일이 아닌 Rdata/object 형식(.RData, .rda, .rds)으로 저장하여 공유하는 경우가 있습니다.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="import-data.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&#39;mydata.rds&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="import-data.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&#39;mydata.rds&#39;</span>)</span></code></pre></div>
 <pre><code>##           V1         V2         V3
 ## 1 variable 1 variable 2 variable 3
 ## 2         10       beer       TRUE

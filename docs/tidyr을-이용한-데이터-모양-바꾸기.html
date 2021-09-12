@@ -332,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>각 관측값(observation)은 행으로 구성됩니다.</li>
 <li>각 타입의 관측치는 테이블을 구성합니다.</li>
 </ol>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-203"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-201"></span>
 <img src="images/tidy_data.png" alt="tidy 데이터 요건" width="70%" />
 <p class="caption">
 그림 16.1: tidy 데이터 요건
@@ -342,9 +342,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="세로로-긴-데이터-만들기" class="section level2" number="16.1">
 <h2><span class="header-section-number">16.1</span> 세로로 긴 데이터 만들기</h2>
 <p>먼저 가로로 긴(Wide) 데이터를 세로로 길게 만드는데는 <code>gather()</code> 함수가 사용됩니다. 이 함수는 여러 열을 key-value 페어로 변형해줍니다.</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb440-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb440-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-3" aria-hidden="true" tabindex="-1"></a>table4a</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb438-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb438-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb438-3" aria-hidden="true" tabindex="-1"></a>table4a</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   country     `1999` `2000`
 ## * &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
@@ -352,9 +352,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Brazil       37737  80488
 ## 3 China       212258 213766</code></pre>
 <p>세 국가의 1999, 2000년 데이터가 있습니다. 이 중 country를 제외한 연도별 데이터를 세로로 길게 만들도록 하겠습니다.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">=</span> table4a <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> years, <span class="at">value =</span> cases, <span class="sc">-</span>country)</span>
-<span id="cb442-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb442-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(long)</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">=</span> table4a <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> years, <span class="at">value =</span> cases, <span class="sc">-</span>country)</span>
+<span id="cb440-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb440-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb440-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(long)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country     years  cases
 ##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
@@ -512,9 +512,9 @@ China
 <div id="가로로-긴-데이터-만들기" class="section level2" number="16.2">
 <h2><span class="header-section-number">16.2</span> 가로로 긴 데이터 만들기</h2>
 <p><code>gather()</code> 함수와 반대로, <code>spread()</code> 함수를 이요할 경우 세로로 긴 데이터를 가로로 길게 만들 수 있습니다. 위의 데이터에 year 열에 있는 항목들을 열 이름으로, cases 열에 있는 항목들을 가로로 길게 되돌려야 합니다.</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb444-1" aria-hidden="true" tabindex="-1"></a>back2wide <span class="ot">=</span> long <span class="sc">%&gt;%</span> <span class="fu">spread</span>(years, cases)</span>
-<span id="cb444-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb444-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb444-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb444-3" aria-hidden="true" tabindex="-1"></a>back2wide</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-1" aria-hidden="true" tabindex="-1"></a>back2wide <span class="ot">=</span> long <span class="sc">%&gt;%</span> <span class="fu">spread</span>(years, cases)</span>
+<span id="cb442-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb442-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb442-3" aria-hidden="true" tabindex="-1"></a>back2wide</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   country     `1999` `2000`
 ##   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
@@ -525,7 +525,7 @@ China
 </div>
 <div id="하나의-열을-여러-열로-나누기" class="section level2" number="16.3">
 <h2><span class="header-section-number">16.3</span> 하나의 열을 여러 열로 나누기</h2>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb446-1" aria-hidden="true" tabindex="-1"></a>table3</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb444-1" aria-hidden="true" tabindex="-1"></a>table3</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country      year rate             
 ## * &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
@@ -536,8 +536,8 @@ China
 ## 5 China        1999 212258/1272915272
 ## 6 China        2000 213766/1280428583</code></pre>
 <p>rate 열에는 ###/#### 형태로 데이터가 들어가 있습니다. 이를 / 기준으로 앞과 뒤로 각각 나누어보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb448-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
-<span id="cb448-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb448-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb446-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb446-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb446-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   country      year cases  population
 ##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
@@ -548,8 +548,8 @@ China
 ## 5 China        1999 212258 1272915272
 ## 6 China        2000 213766 1280428583</code></pre>
 <p>rate 열이 “/”를 기준으로 cases와 population 열로 분리되었습니다.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb450-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
-<span id="cb450-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">remove =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb448-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb448-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb448-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">remove =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 5
 ##   country      year rate              cases  population
 ##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;     
@@ -564,7 +564,7 @@ China
 <div id="여러-열을-하나로-합치기" class="section level2" number="16.4">
 <h2><span class="header-section-number">16.4</span> 여러 열을 하나로 합치기</h2>
 <p><code>separate()</code> 함수와는 반대로, <code>unite()</code> 함수를 이용시 여러 열을 하나로 합칠 수 있습니다.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb452-1" aria-hidden="true" tabindex="-1"></a>table5</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb450-1" aria-hidden="true" tabindex="-1"></a>table5</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   country     century year  rate             
 ## * &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
@@ -575,8 +575,8 @@ China
 ## 5 China       19      99    212258/1272915272
 ## 6 China       20      00    213766/1280428583</code></pre>
 <p>century와 year 열을 하나로 합쳐보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb454-1" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">%&gt;%</span> </span>
-<span id="cb454-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb454-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(new, century, year, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb452-1" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">%&gt;%</span> </span>
+<span id="cb452-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb452-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(new, century, year, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country     new   rate             
 ##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
@@ -587,8 +587,8 @@ China
 ## 5 China       1999  212258/1272915272
 ## 6 China       2000  213766/1280428583</code></pre>
 <p>new 열에 지정한 데이터가 합쳐지게 됩니다.</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-1" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">%&gt;%</span> </span>
-<span id="cb456-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(new, century, year, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb454-1" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">%&gt;%</span> </span>
+<span id="cb454-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb454-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(new, century, year, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country     new   rate             
 ##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
@@ -605,15 +605,15 @@ China
 <div id="fill" class="section level3" number="16.5.1">
 <h3><span class="header-section-number">16.5.1</span> <code>fill()</code></h3>
 <p>많은 부분이 결측치로 비어 있으므로, 이를 채워줄 필요가 있습니다.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">=</span> <span class="fu">tribble</span>(</span>
-<span id="cb458-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> person,           <span class="sc">~</span> treatment, <span class="sc">~</span>response,</span>
-<span id="cb458-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</span>
-<span id="cb458-4"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA</span>,                 <span class="dv">2</span>,           <span class="dv">10</span>,</span>
-<span id="cb458-5"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-5" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA</span>,                 <span class="cn">NA</span>,           <span class="dv">9</span>,</span>
-<span id="cb458-6"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></span>
-<span id="cb458-7"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb458-8"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb458-9"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-9" aria-hidden="true" tabindex="-1"></a>treatment</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">=</span> <span class="fu">tribble</span>(</span>
+<span id="cb456-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> person,           <span class="sc">~</span> treatment, <span class="sc">~</span>response,</span>
+<span id="cb456-3"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</span>
+<span id="cb456-4"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA</span>,                 <span class="dv">2</span>,           <span class="dv">10</span>,</span>
+<span id="cb456-5"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-5" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NA</span>,                 <span class="cn">NA</span>,           <span class="dv">9</span>,</span>
+<span id="cb456-6"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></span>
+<span id="cb456-7"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb456-8"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb456-9"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb456-9" aria-hidden="true" tabindex="-1"></a>treatment</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   person           treatment response
 ##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
@@ -622,8 +622,8 @@ China
 ## 3 &lt;NA&gt;                    NA        9
 ## 4 Katherine Burke          1        4</code></pre>
 <p>treatment의 2번째와 3번째 행에 <code>NA</code> 데이터가 있어 이를 채워줄 필요가 있습니다.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb460-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> </span>
-<span id="cb460-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb460-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(person, treatment)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> </span>
+<span id="cb458-2"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb458-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(person, treatment)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   person           treatment response
 ##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
@@ -636,7 +636,7 @@ China
 <div id="replce_na" class="section level3" number="16.5.2">
 <h3><span class="header-section-number">16.5.2</span> <code>replce_na()</code></h3>
 <p>NA 데이터를 특정 값으로 변경할 수도 있습니다.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb462-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span> (<span class="at">person =</span> <span class="st">&quot;unknown&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb460-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span> (<span class="at">person =</span> <span class="st">&quot;unknown&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   person           treatment response
 ##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
@@ -645,7 +645,7 @@ China
 ## 3 unknown                 NA        9
 ## 4 Katherine Burke          1        4</code></pre>
 <p><code>replace_na()</code> 함수를 이용해 person 열의 NA 데이터를 <strong>unknown</strong>으로 변경하였습니다.</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb464-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span> (<span class="at">person =</span> <span class="st">&quot;unknown&quot;</span>, <span class="at">treatment =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="tidyr을-이용한-데이터-모양-바꾸기.html#cb462-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span> (<span class="at">person =</span> <span class="st">&quot;unknown&quot;</span>, <span class="at">treatment =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   person           treatment response
 ##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
